@@ -33,10 +33,5 @@ public class Variables {
         System.out.println("Height: " + height);
         System.out.println("Married: " + married);
 
-        //VariableMutation
-        
-
-
-
     }
 }
