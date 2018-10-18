@@ -28,7 +28,7 @@ public class ConditionalVariableMutation {
         boolean isBonus = false;
 
         if((credits >= 50) && isBonus == false){
-            c = c - 2;
+            c -= 2;
         }else if((credits < 50) && isBonus == false){
             c --;
         }
