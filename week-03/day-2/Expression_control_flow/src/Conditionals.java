@@ -61,7 +61,6 @@ public class Conditionals {
         }else if((girls + boys) < 20){
             System.out.println("Average party...");
         }
-
     }
 
 }

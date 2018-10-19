@@ -38,8 +38,5 @@ public class UserInput {
         int sum = number1 + number2 + number3 + number4 + number5;
         double avarage = sum / 5.;
         System.out.println("Sum: " + sum + ", Avarage: " + avarage);
-
-
-
     }
-    }
+}
