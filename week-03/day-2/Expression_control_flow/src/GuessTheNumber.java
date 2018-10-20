@@ -16,7 +16,6 @@ public class GuessTheNumber {
                 System.out.println("You found the number: " + number);
                 i = 99;
             }
-
         }
     }
 }

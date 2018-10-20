@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Loops2 {
+public class DrawTriangleAndDiagonal {
     public static void main(String[] args) {
         Scanner scannerInt = new Scanner(System.in);
 
