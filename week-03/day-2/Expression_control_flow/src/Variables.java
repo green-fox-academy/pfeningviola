@@ -38,8 +38,8 @@ public class Variables {
         double y = 8.6;
         double z = 4.7;
 
-        double surface = 2*((x*y)+(x*z)+(y*z));
-        double volume = x*y*z;
+        double surface = 2 *((x * y) + (x * z) + (y * z));
+        double volume = x * y * z;
         System.out.println("Surface Area: " + surface);
         System.out.println("Volume: " + volume);
 
@@ -49,9 +49,7 @@ public class Variables {
         int currentMinutes = 34;
         int currentSeconds = 42;
 
-        int remainingSeconds = (24*60*60) - ((currentHours*60*60) + (currentMinutes*60) + currentSeconds);
+        int remainingSeconds = (24 * 60 * 60) - ((currentHours * 60 * 60) + (currentMinutes * 60) + currentSeconds);
         System.out.println("Remaining seconds from the day: " + remainingSeconds);
-
-
     }
 }

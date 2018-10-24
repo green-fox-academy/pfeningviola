@@ -11,10 +11,8 @@ public class HelloMe {
                 "Couldn't put Humpty together again.");
 
         //HelloOthers
-        System.out.println("Hello Eszter!\n"+
-                "Hello Judit!\n"+
+        System.out.println("Hello Eszter!\n" +
+                "Hello Judit!\n" +
                 "Hello Erika!");
-
     }
-
 }

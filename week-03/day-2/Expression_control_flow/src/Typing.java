@@ -7,16 +7,15 @@ public class Typing {
         System.out.println(1.74);
 
         //TwoNumbers
-        System.out.println(13+22);
-        System.out.println(22-13);
-        System.out.println(22*13);
-        System.out.println(22/13.);
-        System.out.println(22/13);
-        System.out.println(22%13);
+        System.out.println(13 + 22);
+        System.out.println(22 - 13);
+        System.out.println(22 * 13);
+        System.out.println(22 / 13.);
+        System.out.println(22 / 13);
+        System.out.println(22 % 13);
 
         //CodingHours
-        System.out.println("Numbers of hours spent with coding: " + 17*5*6);
-        System.out.println("Percentage of coding hours: " + 30/52.*100 + "%");
-
+        System.out.println("Numbers of hours spent with coding: " + 17 * 5 * 6);
+        System.out.println("Percentage of coding hours: " + 30 / 52. * 100 + "%");
     }
 }

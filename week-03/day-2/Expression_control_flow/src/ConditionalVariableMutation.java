@@ -5,19 +5,19 @@ public class ConditionalVariableMutation {
         double a = 24;
         int out = 0;
 
-        if(a % 2 == 0){
-            out++;
+        if(a % 2 == 0) {
+            out ++;
         }
         System.out.println(out);
 
         //Ex. 2
         int b = 13;
         String out2 = "";
-        if(b > 20){
+        if(b > 20) {
             out2 = "More!";
-        }else if(b < 10){
+        } else if(b < 10) {
             out2 = "Less!";
-        }else{
+        } else {
             out2 = "Sweet!";
         }
         System.out.println(out2);
@@ -27,9 +27,9 @@ public class ConditionalVariableMutation {
         int credits = 100;
         boolean isBonus = false;
 
-        if((credits >= 50) && isBonus == false){
+        if((credits >= 50) && isBonus == false) {
             c -= 2;
-        }else if((credits < 50) && isBonus == false){
+        } else if ((credits < 50) && isBonus == false){
             c --;
         }
         System.out.println(c);
@@ -38,11 +38,11 @@ public class ConditionalVariableMutation {
         int d = 8;
         int time = 120;
         String out3 = "";
-        if((d % 4 == 0) && (time <= 200)){
+        if ((d % 4 == 0) && (time <= 200)) {
             out3 = "check";
-        }else if(time > 200){
+        } else if (time > 200) {
             out3 = "Time out";
-        }else{
+        } else {
             out3 = "Run Forest run!";
         }
         System.out.println(out3);

@@ -20,7 +20,7 @@ public class DrawDiamond {
             System.out.println();
         }
         space = 0;
-        for (int i =(rows/2); i < rows; i++){
+        for (int i =(rows / 2); i < rows; i++){
             for (int j = 0; j <= rows; j++) {
                 if ((j <= space / 2) || (j > (rows - (space / 2)))){
                     System.out.print(" ");
