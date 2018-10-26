@@ -12,6 +12,15 @@ public class SumChangeIncrementPrintElements {
         s[3] = 4;
         System.out.println(s[3]);
 
+        //Change Element 2
+        int[] s2 = {1, 2, 3, 8, 5, 6};
+        for (int g = 0; g < s2.length; g++) {
+            if (s2[g] == 8) {
+                s2[g] = 4;
+            }
+        }
+        System.out.println(s2[3]);
+
         //Increment Element
         int[] t = {1, 2, 3, 4, 5};
         t[2] ++;
