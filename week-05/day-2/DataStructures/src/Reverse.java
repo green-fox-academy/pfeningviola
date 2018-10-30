@@ -13,7 +13,7 @@ public class Reverse {
         }
         return correctText;
     }
-    
+
     //With char[]
     public static String reverse2(String text){
         char[] reversedLetters = text.toCharArray();
