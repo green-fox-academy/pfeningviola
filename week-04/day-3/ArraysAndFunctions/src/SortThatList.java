@@ -13,7 +13,7 @@ public class SortThatList {
             numbers[i] = scannerInt.nextInt();
         }
         boolean length = (howMany > 5);
-        
+
         bubble(numbers);
         advencedBubble(numbers, length);
     }
