@@ -9,7 +9,7 @@ public class AppendLetter {
         System.out.println(appendA(far));
     }
 
-    public static ArrayList appendA2(List list) {
+    public static ArrayList<String> appendA2(List list) {
         ArrayList<String> correctList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             correctList.add(i, (list.get(i) + "a"));

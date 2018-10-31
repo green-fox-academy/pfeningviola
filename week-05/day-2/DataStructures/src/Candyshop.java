@@ -10,7 +10,7 @@ public class Candyshop {
         System.out.println(sweets(arrayList));
     }
 
-    public static ArrayList sweets(ArrayList list) {
+    public static ArrayList<String> sweets(ArrayList list) {
         list.set(list.indexOf(2), "Croissant");
         list.set(list.indexOf(false), "Ice cream");
         return list;

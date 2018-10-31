@@ -7,7 +7,7 @@ public class SolarSystem {
         System.out.println(putSaturn(planetList));
     }
 
-    public static ArrayList putSaturn(ArrayList planets) {
+    public static ArrayList<String> putSaturn(ArrayList<String> planets) {
         planets.add(5, "Saturn");
         return planets;
     }

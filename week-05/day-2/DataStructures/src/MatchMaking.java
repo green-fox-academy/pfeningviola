@@ -8,7 +8,7 @@ public class MatchMaking {
         System.out.println(makingMatches(girls, boys));
     }
 
-    public static ArrayList makingMatches(ArrayList list1, ArrayList list2) {
+    public static ArrayList<String> makingMatches(ArrayList<String> list1, ArrayList<String> list2) {
         int matchesNumber = Math.min(list1.size(), list2.size());
         ArrayList<String> matches = new ArrayList<>();
         for (int i = 0; i < matchesNumber; i++) {
@@ -17,3 +17,4 @@ public class MatchMaking {
         return matches;
     }
 }
+
