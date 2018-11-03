@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Calculator {
     public static void main(String[] args) {
         Scanner operation = new Scanner(System.in);
-        System.out.println("Please type in the expression: ");
+        System.out.println("Please, type in the expression (the format of the expressions must be: {operation} {operand} {operand} and supported operations are +, -, *, /, %, for example: \"+ 3 3\"): ");
         String expression = operation.nextLine();
         System.out.println("Result: " + calculate(expression));
     }
