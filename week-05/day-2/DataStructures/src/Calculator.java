@@ -15,8 +15,10 @@ public class Calculator {
         String[] arrayParts = input.split(" ");
         ArrayList<String> expressionParts = new ArrayList<>();
         expressionParts.addAll(Arrays.asList(arrayParts));
+
         double operand1 = Double.parseDouble(expressionParts.get(1));
         double operand2 = Double.parseDouble(expressionParts.get(2));
+
         if (expressionParts.get(0).equals("+")){
             result = operand1 + operand2;
         } else if (expressionParts.get(0).equals("-")) {
