@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -8,9 +7,10 @@ public class HorizontalLines {
     public static void mainDraw(Graphics graphics) {
         ArrayList<Integer> xCoordinates = new ArrayList<>();
         ArrayList<Integer> yCoordinates = new ArrayList<>();
+
         for (int j = 0; j < 3; j++) {
-            xCoordinates.add(j,(int) (Math.random() * 270));
-            yCoordinates.add(j,(int) (Math.random() * 320));
+            xCoordinates.add(j,(int)(Math.random() * 270));
+            yCoordinates.add(j,(int)(Math.random() * 320));
         }
 
         for (int i = 0; i < xCoordinates.size(); i++) {
