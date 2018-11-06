@@ -6,9 +6,14 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class HorizontalLines {
     public static void mainDraw(Graphics graphics) {
-        ArrayList<Integer> xCoordinates = new ArrayList<>(Arrays.asList(60, 120, 230));
-        ArrayList<Integer> yCoordinates = new ArrayList<>(Arrays.asList(50, 280, 145));
-        for(int i = 0; i < xCoordinates.size(); i++) {
+        ArrayList<Integer> xCoordinates = new ArrayList<>();
+        ArrayList<Integer> yCoordinates = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            xCoordinates.add(j,(int) (Math.random() * 270));
+            yCoordinates.add(j,(int) (Math.random() * 320));
+        }
+
+        for (int i = 0; i < xCoordinates.size(); i++) {
             drawingHorizantalLines(graphics, xCoordinates.get(i), yCoordinates.get(i));
         }
     }

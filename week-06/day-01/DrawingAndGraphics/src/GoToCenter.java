@@ -7,8 +7,14 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GoToCenter {
     public static void mainDraw(Graphics graphics) {
-        ArrayList<Integer> xCoordinates = new ArrayList<>(Arrays.asList(0, 50, 70, 100, 200, 270));
-        ArrayList<Integer> yCoordinates = new ArrayList<>(Arrays.asList(60, 200, 320, 80, 170, 10));
+        ArrayList<Integer> xCoordinates = new ArrayList<>();
+        ArrayList<Integer> yCoordinates = new ArrayList<>();
+        
+        for (int j = 0; j < 3; j++) {
+            xCoordinates.add(j,(int) (Math.random() * 320));
+            yCoordinates.add(j,(int) (Math.random() * 320));
+        }
+
         for (int i = 0; i < xCoordinates.size(); i++) {
             lineDrawing(graphics, xCoordinates.get(i), yCoordinates.get(i));
         }
