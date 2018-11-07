@@ -8,7 +8,6 @@ public class JosephusProblem {
         int number = scannerInt.nextInt();
         System.out.println("The winning seat is: " + solvingJosephusProblem(number));
         System.out.println("The winning seat is: " + solvingJosephusProblem2(number));
-
     }
 
     public static int solvingJosephusProblem (int peopleNumber) {
@@ -21,7 +20,7 @@ public class JosephusProblem {
         for (int j = 0; j < peopleNumber; j++) {
             group.remove(indexToRemove);
 
-            if (group.size() == 1){
+            if (group.size() == 1) {
                 break;
             } else if (indexToRemove == group.size()) {
                 indexToRemove = 0;
