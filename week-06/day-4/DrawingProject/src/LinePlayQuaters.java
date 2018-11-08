@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Scanner;
 import javax.swing.*;
 
 import static java.lang.Math.sqrt;
@@ -6,10 +7,13 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class LinePlayQuaters {
     public static void mainDraw(Graphics graphics) {
-        int numQuarters = 64;
+        Scanner scannerInt = new Scanner(System.in);
+        System.out.println("How many quaters would you like to have? (It should be a square number): ");
+        int numQuarters = scannerInt.nextInt();
         int quoterStartX = 0;
         int quoterStartY = 0;
         int divisor = (int)sqrt(numQuarters);
+
         for (int i = 0; i < divisor; i++) {
             for(int j = 0; j < divisor; j++) {
                 drawingLinePlay(graphics, numQuarters, quoterStartX, quoterStartY, divisor);
