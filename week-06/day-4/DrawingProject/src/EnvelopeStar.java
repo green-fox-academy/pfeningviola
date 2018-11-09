@@ -8,7 +8,7 @@ public class EnvelopeStar {
         int startPointUp = (WIDTH / 2) - (14 * lineDistance);
         int startPointDown = (WIDTH / 2) + (14 * lineDistance);
         int startPointLeft = (HEIGHT / 2) - (14 * lineDistance);
-        
+
         drawingEnvelopeStar1(graphics, 160, startPointUp, lineDistance);
         drawingEnvelopeStar2(graphics, startPointLeft, 160, lineDistance);
 
