@@ -1,15 +1,11 @@
 import java.awt.*;
-import java.util.Scanner;
 import javax.swing.*;
-
 import static java.lang.Math.sqrt;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class LinePlayQuaters {
     public static void mainDraw(Graphics graphics) {
-        Scanner scannerInt = new Scanner(System.in);
-        System.out.println("How many quaters would you like to have? (It should be a square number): ");
-        int numQuarters = scannerInt.nextInt();
+        int numQuarters = 9;
         int quoterStartX = 0;
         int quoterStartY = 0;
         int divisor = (int)sqrt(numQuarters);
@@ -25,28 +21,31 @@ public class LinePlayQuaters {
     }
 
     public static void drawingLinePlay (Graphics g, int n, int upperLeftX, int upperLeftY, int div) {
-        g.setColor(Color.ORANGE);
+
         int startXCoord = upperLeftX + (WIDTH / (n / div) / 8);
         int startYCoord = upperLeftY;
         int endXCoord = upperLeftX + (WIDTH / (n / div));
         int endYCoord = upperLeftY + (HEIGHT / (n / div) / 16);
 
-        for (int i = 0; i < 14; i++) {
-            g.drawLine(startXCoord, startYCoord, endXCoord, endYCoord);
-            startXCoord += (WIDTH / (n / div) / 16);
-            endYCoord += (WIDTH / (n / div) / 16);
-        }
-
-        g.setColor(Color.GREEN);
-        startXCoord = upperLeftX;
-        startYCoord = upperLeftY + (HEIGHT / (n / div) / 8);
-        endXCoord = upperLeftX + (WIDTH / (n / div) / 16);
-        endYCoord = upperLeftY + (HEIGHT / (n / div));
-
-        for (int j = 0; j < 14; j++) {
-            g.drawLine(startXCoord, startYCoord, endXCoord, endYCoord);
-            startYCoord += (WIDTH / (n / div) / 16);
-            endXCoord += (WIDTH / (n / div) / 16);
+        for (int h = 0; h < 28; h++) {
+            if (h < 14) {
+                g.setColor(Color.ORANGE);
+                g.drawLine(startXCoord, startYCoord, endXCoord, endYCoord);
+                startXCoord += (WIDTH / (n / div) / 16);
+                endYCoord += (WIDTH / (n / div) / 16);
+            } else if (h == 14) {
+                startXCoord = upperLeftX;
+                startYCoord = upperLeftY + (HEIGHT / (n / div) / 8);
+                endXCoord = upperLeftX + (WIDTH / (n / div) / 16);
+                endYCoord = upperLeftY + (HEIGHT / (n / div));
+                g.setColor(Color.GREEN);
+                g.drawLine(startXCoord, startYCoord, endXCoord, endYCoord);
+            } else {
+                startYCoord += (WIDTH / (n / div) / 16);
+                endXCoord += (WIDTH / (n / div) / 16);
+                g.setColor(Color.GREEN);
+                g.drawLine(startXCoord, startYCoord, endXCoord, endYCoord);
+            }
         }
     }
 
@@ -72,5 +71,3 @@ public class LinePlayQuaters {
         }
     }
 }
-
-
