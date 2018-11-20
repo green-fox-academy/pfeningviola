@@ -11,7 +11,6 @@ public class ReversedLines {
 
   public static void decryptReversedFile(String file){
     ArrayList<String> fileContent = new ArrayList<>();
-    ArrayList<String> reversedText = new ArrayList<>();
 
     try {
       fileContent = (ArrayList<String>) Files.readAllLines(Paths.get("src/" + file));
