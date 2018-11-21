@@ -16,7 +16,5 @@ public class CounterMain {
     System.out.println(myNumber2);
     myNumber2.reset();
     System.out.println(myNumber2);
-
-
   }
 }
