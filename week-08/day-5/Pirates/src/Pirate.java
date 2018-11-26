@@ -34,9 +34,9 @@ public class Pirate {
       }
     }
   }
+
    public void die() {
     this.alive = false;
-    this.awake = false;
    }
 
    public void brawl (Pirate otherPirate) {
@@ -44,10 +44,8 @@ public class Pirate {
     if (this.checkAliveAndAwake() && otherPirate.checkAliveAndAwake()) {
       if (whoWin == 0){
         this.alive = false;
-        this.awake = false;
       } else if (whoWin == 1) {
         otherPirate.alive = false;
-        otherPirate.awake = false;
       } else {
         this.awake = false;
         otherPirate.awake = false;
@@ -99,7 +97,7 @@ public class Pirate {
   @Override
   public String toString() {
     return "Pirate{" +
-        "rumLevel=" + rumLevel +
+        "Amount of drunk rum: " + rumLevel +
         ", captain=" + captain +
         ", alive=" + alive +
         ", awake=" + awake +
