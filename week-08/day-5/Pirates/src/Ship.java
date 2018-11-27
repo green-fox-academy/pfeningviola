@@ -7,10 +7,15 @@ public class Ship {
   private int numberOfAlivePirates;
   private int numberOfAwakePirates;
 
+  public Ship() {
+    this.crew = new ArrayList<>();
+    this.fillShip();
+  }
 
   public Ship(String name) {
     this.nameOfShip = name;
     this.crew = new ArrayList<>();
+    this.fillShip();
   }
 
   public void fillShip() {
@@ -127,6 +132,7 @@ public class Ship {
   public String toString() {
     return ("The crew of the " + nameOfShip + " ship consists of the captain and  " + crewSize + " pirates.\n" +
         "Number of alive pirates is: " + numberOfAlivePirates + "\nNumber of awake pirates: " + numberOfAwakePirates +
-        "\nThe captain drank: " + crew.get(0).getRumLevel() + " units rum \nHis status is (awake and alive): " + crew.get(0).checkAliveAndAwake() + "\n");
+        "\nThe captain drank: " + crew.get(0).getRumLevel() + " units rum \nThe captain is alive: " + crew.get(0).checkAlive() +
+        "\nThe captain is awake: " + crew.get(0).checkAwake() + "\n");
   }
 }

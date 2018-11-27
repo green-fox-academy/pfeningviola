@@ -18,7 +18,8 @@ public class BattleApp {
     }
 
     santaMaria.getCrew().get(0).howsItGoingMate();
-    System.out.println(santaMaria.getCrew().get(0).checkAliveAndAwake());
+    System.out.println(santaMaria.getCrew().get(0).checkAwake());
+    System.out.println(santaMaria.getCrew().get(0).checkAlive());
     santaMaria.getCrew().get(0).die();
     System.out.println(santaMaria);
     System.out.println("-------------------------");

@@ -19,13 +19,13 @@ public class Pirate {
   }
 
   public void drinkSomeRum() {
-    if (checkAliveAndAwake()) {
+    if (checkAlive() && checkAwake()) {
       this.rumLevel++;
     }
   }
 
   public void howsItGoingMate() {
-    if (checkAliveAndAwake()) {
+    if (checkAlive() && checkAwake()) {
       if (rumLevel < 5) {
         System.out.println("Pour me anudder!");
       } else {
@@ -41,7 +41,7 @@ public class Pirate {
 
    public void brawl (Pirate otherPirate) {
     int whoWin = (int)(Math.random() * 3);
-    if (this.checkAliveAndAwake() && otherPirate.checkAliveAndAwake()) {
+    if (this.checkAlive() && this.checkAwake() && otherPirate.checkAlive() && checkAwake()) {
       if (whoWin == 0){
         this.alive = false;
       } else if (whoWin == 1) {
@@ -53,13 +53,21 @@ public class Pirate {
     }
    }
 
-   public boolean checkAliveAndAwake() {
+   public boolean checkAlive() {
      if (!this.alive) {
        System.out.println("He's died.");
-     } else if (!this.awake) {
-       System.out.println("He's passed out!");
      }
-     return (this.awake && this.alive);
+     return this.alive;
+   }
+
+   public boolean checkAwake() {
+    if (checkAlive()) {
+      if (!this.awake) {
+        System.out.println("He's passed out!");
+      }
+      this.awake = false;
+    }
+     return this.awake;
    }
 
   public int getRumLevel() {
