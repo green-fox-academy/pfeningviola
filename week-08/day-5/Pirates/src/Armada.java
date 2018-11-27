@@ -28,25 +28,6 @@ public class Armada {
     }
     return this.armada.size() > 0;
   }
-    //for (int i = 0; i < this.armadaSize; i++) {
-      //for (int j = 0; j < otherArmada.armada.size(); j++) {
-        //if () {
-
-          //j--;
-         // if (j < 0) {
-         //   j = 0;
-         // }
-       // } else {
-         // this.armada.remove(i);
-         // i--;
-        //  if (i < 0) {
-        //    i = 0;
-         // }
-       // }
-     // }
-    //}
-
-  //}
 
   public ArrayList<Ship> getArmada() {
     return armada;

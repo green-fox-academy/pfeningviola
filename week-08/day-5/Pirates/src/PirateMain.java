@@ -1,4 +1,5 @@
 public class PirateMain {
+
   public static void main(String[] args) {
     Pirate captain = new Pirate(true);
     Pirate pirate1 = new Pirate();
@@ -24,6 +25,5 @@ public class PirateMain {
 
     pirate1.die();
     pirate1.drinkSomeRum();
-
   }
 }

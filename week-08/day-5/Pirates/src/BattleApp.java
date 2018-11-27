@@ -1,5 +1,6 @@
 public class BattleApp {
   public static void main(String[] args) {
+
     Ship santaMaria = new Ship("Santa Maria");
     Ship blackPearl = new Ship("Black Pearl");
     santaMaria.fillShip();
@@ -27,5 +28,4 @@ public class BattleApp {
     System.out.println(santaMaria);
     System.out.println(blackPearl);
   }
-
 }
