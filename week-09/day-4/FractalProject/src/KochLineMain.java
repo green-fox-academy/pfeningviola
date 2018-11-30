@@ -5,23 +5,33 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class KochLineMain {
   public static void mainDraw(Graphics graphics) {
-    int limit = 4;
-    int length = 600;
+    int limit = 5;
     int startX = 0;
     int startY = 300;
     int endX = 600;
     int endY = 300;
-    drawSnowflake(startX, startY, endX, endY, length, limit, graphics);
+    drawKochLine(startX, startY, endX, endY, limit, graphics);
 
   }
 
-  public static void drawSnowflake(int startX, int startY, int endX, int endY, int length, int limit, Graphics graphics) {
-    Lines line = new Lines(startX, startY, endX, endY, length, graphics);
-    if (limit > 0) {
-      drawSnowflake(startX, startY, startX + (length / 3), startY, length / 3, limit - 1, graphics);
-      drawSnowflake(startX + (length / 3), startY, (startX + (length / 3) + (length / 6)), (int)(startY - (((length / 3 * sqrt(3)) / 2))), length / 3, limit - 1, graphics);
-      drawSnowflake((startX + (length / 3) + (length / 6)), (int)(startY - (((length / 3 * sqrt(3)) / 2))), startX + (2 * length / 3), startY, length / 3, limit - 1, graphics);
-      drawSnowflake(startX + (2 * length / 3), startY, startX + length, startY, length / 3, limit - 1, graphics);
+  public static void drawKochLine(int startX, int startY, int endX, int endY, int limit, Graphics graphics) {
+
+    if (limit == 1) {
+      Lines line = new Lines(startX, startY, endX, endY, graphics);
+    } else {
+      int dX = endX - startX;
+      int dY = endY - startY;
+      int x2 = startX + (dX / 3);
+      int y2 = startY +  (dY / 3);
+      int x3 = (int)((startX + (endX - startX) / 2) - ((sqrt(3) / 6) * (startY - endY)));
+      int y3 = (int)((startY + (endY - startY) / 2) - ((sqrt(3) / 6 ) * (endX - startX)));
+      int x4 = startX + dX * 2 / 3;
+      int y4 = startY + dY * 2 / 3;
+
+      drawKochLine(startX, startY, x2, y2, limit - 1, graphics);
+      drawKochLine(x2, y2, x3, y3, limit - 1, graphics);
+      drawKochLine(x3, y3, x4, y4, limit - 1, graphics);
+      drawKochLine(x4, y4, endX, endY, limit - 1, graphics);
     }
   }
 

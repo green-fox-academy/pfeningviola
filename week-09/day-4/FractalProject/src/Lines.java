@@ -9,12 +9,11 @@ public class Lines {
   Graphics graphics;
 
 
-  public Lines (int startX, int startY, int endX, int endY, int length, Graphics graphics) {
+  public Lines (int startX, int startY, int endX, int endY, Graphics graphics) {
     this.startX = startX;
     this.startY = startY;
     this.endX = endX;
     this.endY = endY;
-    this.length = length;
     this.graphics = graphics;
     drawLine(graphics, startX, startY, endX, endY);
   }
@@ -22,7 +21,4 @@ public class Lines {
   public static void drawLine (Graphics graphics, int startX, int startY, int endX, int endY){
     graphics.drawLine(startX, startY, endX, endY);
   }
-
-
-
 }
