@@ -28,11 +28,20 @@ public class KochLineMain {
       int x4 = startX + dX * 2 / 3;
       int y4 = startY + dY * 2 / 3;
 
+      setColor(graphics);
       drawKochLine(startX, startY, x2, y2, limit - 1, graphics);
       drawKochLine(x2, y2, x3, y3, limit - 1, graphics);
       drawKochLine(x3, y3, x4, y4, limit - 1, graphics);
       drawKochLine(x4, y4, endX, endY, limit - 1, graphics);
     }
+  }
+
+  public static void setColor(Graphics graphics){
+    int r = (int)(Math.random() * 255);
+    int g = (int)(Math.random() * 255);
+    int b = (int)(Math.random() * 255);
+
+    graphics.setColor(new Color(r, g, b));
   }
 
   static int WIDTH = 600;
