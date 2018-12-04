@@ -2,17 +2,17 @@ public class Plant {
   private String color;
   private String plantType;
   private double waterLevel;
-  private double absorbtionPart;
+  private double absorptionPart;
   private int needsWaterLevel;
 
   public Plant(String color, double waterLevel) {
     this.color = color;
     this.waterLevel = waterLevel;
-    this.absorbtionPart = 1;
+    this.absorptionPart = 1;
   }
 
   public void watering(int waterAmount) {
-    waterLevel += (waterAmount * absorbtionPart);
+    waterLevel += (waterAmount * absorptionPart);
   }
 
   public boolean checkIfNeedsWater() {
@@ -27,8 +27,8 @@ public class Plant {
     }
   }
 
-  public void setAbsorbtionPart(double absorbtionPart) {
-    this.absorbtionPart = absorbtionPart;
+  public void setAbsorptionPart(double absorptionPart) {
+    this.absorptionPart = absorptionPart;
   }
 
   public void setNeedsWaterLevel(int needsWaterLevel) {

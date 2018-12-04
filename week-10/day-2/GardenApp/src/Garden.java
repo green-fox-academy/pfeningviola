@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class Garden {
   ArrayList<Plant> plants;
-  int numberOfDirstyPlants;
+  int numberOfThirstyPlants;
 
   public Garden(){
     this.plants = new ArrayList<>();
-    this.numberOfDirstyPlants = 0;
+    this.numberOfThirstyPlants = 0;
   }
 
   public void add(Plant plant){
@@ -14,21 +14,22 @@ public class Garden {
   }
 
   public void waterTheGarden(int waterAmount) {
-    countDirstyPlants();
+    countThirstyPlants();
     for (int i = 0; i < plants.size(); i++) {
       if (plants.get(i).checkIfNeedsWater()) {
-        plants.get(i).watering(waterAmount / numberOfDirstyPlants);
+        plants.get(i).watering(waterAmount / numberOfThirstyPlants);
       }
     }
   }
 
-  public int countDirstyPlants() {
+  public int countThirstyPlants() {
+    numberOfThirstyPlants = 0;
     for (int i = 0; i < plants.size(); i++) {
       if (plants.get(i).checkIfNeedsWater()) {
-        numberOfDirstyPlants++;
+        numberOfThirstyPlants++;
       }
     }
-    return numberOfDirstyPlants;
+    return numberOfThirstyPlants;
   }
 
   @Override
