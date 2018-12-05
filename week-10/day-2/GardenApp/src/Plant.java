@@ -11,7 +11,7 @@ public class Plant {
     this.absorptionPart = 1;
   }
 
-  public void watering(int waterAmount) {
+  public void water(int waterAmount) {
     waterLevel += (waterAmount * absorptionPart);
   }
 

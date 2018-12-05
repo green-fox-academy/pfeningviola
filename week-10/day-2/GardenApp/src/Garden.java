@@ -17,7 +17,7 @@ public class Garden {
     countThirstyPlants();
     for (int i = 0; i < plants.size(); i++) {
       if (plants.get(i).checkIfNeedsWater()) {
-        plants.get(i).watering(waterAmount / numberOfThirstyPlants);
+        plants.get(i).water(waterAmount / numberOfThirstyPlants);
       }
     }
   }
