@@ -12,9 +12,37 @@ public class Aircraft {
     allDamage = 0;
   }
 
+  public int fight() {
+    int demageOfFight = actualNumberOfAmmo * baseDamage;
+    allDamage += demageOfFight;
+    return demageOfFight;
+  }
+
+  public int refill(int numberOfStoredAmmos) {
+    int numberOfMissingAmos = countMissingAmmos();
+    if (numberOfMissingAmos < numberOfStoredAmmos) {
+      actualNumberOfAmmo = maxNumberOfAmmo;
+      return numberOfStoredAmmos - numberOfMissingAmos;
+    } else {
+      actualNumberOfAmmo += numberOfStoredAmmos;
+      return 0;
+     }
+  }
+
+  public int countMissingAmmos() {
+    return maxNumberOfAmmo - actualNumberOfAmmo;
+  }
 
   public String getType() {
     return type;
+  }
+
+  public String getStatus() {
+    return "Type " + type + ", Ammo: " + actualNumberOfAmmo + ", Base Damage: " + baseDamage + ", All Damage: " + allDamage;
+  }
+
+  public boolean isPriority() {
+    return priority;
   }
 
   public void setType(String type) {
@@ -35,10 +63,6 @@ public class Aircraft {
 
   public void setActualNumberOfAmmo(int actualNumberOfAmmo) {
     this.actualNumberOfAmmo = actualNumberOfAmmo;
-  }
-
-  public boolean isPriority() {
-    return priority;
   }
 
   public void setPriority(boolean priority) {
