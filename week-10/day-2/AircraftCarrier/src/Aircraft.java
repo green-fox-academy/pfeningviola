@@ -6,16 +6,20 @@ public class Aircraft {
   private int baseDamage;
   private int allDamage;
 
-  public Aircraft(String type) {
+  public Aircraft(String type, int maxNumberOfAmmo, int baseDamage, boolean priority) {
     this.type = type;
+    this.maxNumberOfAmmo = maxNumberOfAmmo;
+    this.baseDamage = baseDamage;
+    this.priority = priority;
     actualNumberOfAmmo = 0;
     allDamage = 0;
   }
 
   public int fight() {
-    int demageOfFight = actualNumberOfAmmo * baseDamage;
-    allDamage += demageOfFight;
-    return demageOfFight;
+    int damageOfFight = actualNumberOfAmmo * baseDamage;
+    allDamage += damageOfFight;
+    actualNumberOfAmmo = 0;
+    return damageOfFight;
   }
 
   public int refill(int numberOfStoredAmmos) {
