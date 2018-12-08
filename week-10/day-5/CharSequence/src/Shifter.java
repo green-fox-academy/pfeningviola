@@ -1,8 +1,10 @@
-public class Gnirts implements CharSequence {
+public class Shifter implements CharSequence {
   private String text;
+  private int shiftNumber;
 
-  public Gnirts(String text) {
+  public Shifter(String text, int number) {
     this.text = text;
+    this.shiftNumber = number;
   }
 
   @Override
@@ -14,16 +16,16 @@ public class Gnirts implements CharSequence {
   @Override
   public char charAt(int index) {
     char[] textCharArray = text.toCharArray();
-    return textCharArray[textCharArray.length - index - 1];
+    return textCharArray[index + shiftNumber];
   }
 
   @Override
   public CharSequence subSequence(int start, int end) {
     char[] textCharArray = text.toCharArray();
-    String subSequence = "";
+    String solution = "";
     for (int i = 0; i < end - start; i++) {
-      subSequence += textCharArray[textCharArray.length - end + i];
+      solution += textCharArray[start + shiftNumber + i];
     }
-    return subSequence;
+    return solution;
   }
 }
