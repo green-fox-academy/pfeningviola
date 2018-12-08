@@ -1,7 +1,7 @@
 package main.java.music;
 
 public abstract class StringedInstrument extends Instrument {
-  int numberOfStrings;
+  protected int numberOfStrings;
 
   public StringedInstrument(String name, int numberOfStrings){
     super(name);
