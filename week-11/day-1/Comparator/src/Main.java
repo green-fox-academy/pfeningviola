@@ -17,5 +17,17 @@ public class Main {
 
     Collections.sort(dominoes);
     System.out.println(dominoes);
+
+    ArrayList<Todo> todos = new ArrayList<>();
+    todos.add(new Todo("Get milk"));
+    todos.add(new Todo("Stand up"));
+    todos.add(new Todo("Remove the obstacles"));
+    todos.add(new Todo("Eat lunch"));
+
+    todos.get(1).complete();
+    todos.get(3).complete();
+
+    Collections.sort(todos);
+    System.out.println(todos);
   }
 }

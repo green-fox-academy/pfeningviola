@@ -27,7 +27,7 @@ public class Domino implements Comparable<Domino> {
       result = Integer.compare(this.right, other.right);
     }
     return result;
-    
+
     //Solution 2.
     //if (this.left < other.left) {
     //  return -1;
