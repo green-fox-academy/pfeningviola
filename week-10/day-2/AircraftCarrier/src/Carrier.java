@@ -40,6 +40,32 @@ public class Carrier {
     }
   }
 
+  public void fill2() {
+    fillTheList(makeFillingList(true));
+    fillTheList(makeFillingList(false));
+  }
+
+  public void fillTheList(ArrayList<Aircraft> listToFill) {
+    for (int i = 0; i < listToFill.size(); i++) {
+      if (checkIfStorageEmpty()) {
+        System.out.println("The storage is empty!");
+        break;
+      } else {
+        ammoStorage = listToFill.get(i).refill(ammoStorage);
+      }
+    }
+  }
+
+  public ArrayList<Aircraft> makeFillingList (boolean isPriority) {
+    ArrayList<Aircraft> fillingList = new ArrayList<>();
+    for (int i = 0; i < carrier.size(); i++) {
+      if ((carrier.get(i).isPriority() == isPriority) && (!carrier.get(i).isFull())) {
+        fillingList.add(carrier.get(i));
+      }
+    }
+    return fillingList;
+  }
+
   public boolean checkIfStorageEmpty() {
     return ammoStorage == 0;
   }

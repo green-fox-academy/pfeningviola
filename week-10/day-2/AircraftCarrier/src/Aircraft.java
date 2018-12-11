@@ -37,6 +37,10 @@ public class Aircraft {
     return maxNumberOfAmmo - actualNumberOfAmmo;
   }
 
+  public boolean isFull(){
+    return actualNumberOfAmmo == maxNumberOfAmmo;
+  }
+
   public String getType() {
     return type;
   }

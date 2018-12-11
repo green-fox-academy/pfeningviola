@@ -19,7 +19,7 @@ public class Main {
       white.add(new F35());
     }
 
-    white.fill();
+    white.fill2();
     black.fight(white);
     System.out.println(black.getStatus());
     System.out.println(white.getStatus());
