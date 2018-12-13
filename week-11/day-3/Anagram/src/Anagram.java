@@ -3,6 +3,12 @@ import java.util.Arrays;
 public class Anagram {
 
   public boolean isAnagram(String text1, String text2) {
+    if (text1 == null) {
+      return false;
+    }
+    if (text2 == null) {
+      return false;
+    }
     char[] sortedLetters1 = sortCharArray(text1);
     char[] sortedLetters2 = sortCharArray(text2);
 
@@ -24,6 +30,11 @@ public class Anagram {
   }
 
   public char[] createCharArray(String text) {
-    return text.toLowerCase().toCharArray();
+    if (text == null) {
+      char[] result = null;
+      return result;
+    } else {
+      return text.toLowerCase().toCharArray();
+    }
   }
 }
