@@ -1,6 +1,8 @@
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -56,6 +58,28 @@ public class ExtensionTest {
   }
 
   @Test
+  public void testMaxOfThree_second() {
+    int a = 2;
+    int b = 5;
+    int c = 4;
+    int expectedResult = 5;
+
+    int result = extension.maxOfThree(a, b, c);
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
+  public void testMaxOfThreeWithNegativeNumbers() {
+    int a = -5;
+    int b = -2;
+    int c = -4;
+    int expectedResult = -2;
+
+    int result = extension.maxOfThree(a, b, c);
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
   public void testMedian_four() {
     assertEquals(5, extension.median(Arrays.asList(7,5,3,5)));
   }
@@ -63,6 +87,26 @@ public class ExtensionTest {
   @Test
   public void testMedian_five() {
     assertEquals(3, extension.median(Arrays.asList(1,2,3,4,5)));
+  }
+
+  @Test
+  public void testMedianWithUnorderedList() {
+    List<Integer> numbers = new ArrayList(Arrays.asList(7, 1, 8, 5));
+    int expectedResult = 6;
+
+    int result = extension.median(numbers);
+
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
+  public void testMedianWithNull() {
+    List<Integer> numbers = null;
+    int expectedResult = 0;
+
+    int result = extension.median(numbers);
+
+    assertEquals(expectedResult, result);
   }
 
   @Test
@@ -83,5 +127,25 @@ public class ExtensionTest {
   @Test
   public void testTranslate_lagopus() {
     assertEquals("lavagovopuvus", extension.translate("lagopus"));
+  }
+
+  @Test
+  public void testTranslate_koala() {
+    String word = "koala";
+    String expectedResult = "kovoavalava";
+
+    String result = extension.translate(word);
+
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
+  public void testTranslateWithNull() {
+    String word = null;
+    String expectedResult = null;
+
+    String result = extension.translate(word);
+
+    assertEquals(expectedResult, result);
   }
 }
