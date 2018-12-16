@@ -12,6 +12,15 @@ public class SharpieTest {
   }
 
   @Test
+  public void testConstructor() {
+    Sharpie test = new Sharpie("yellow", 2.0f);
+
+    assertEquals("yellow", test.getColor());
+    assertEquals(2.0f, test.getWidth(), 2.0f - test.getWidth());
+    assertEquals(100, test.getInkAmount(), 100 - test.getInkAmount());
+  }
+
+  @Test
   public void testUseOnce() {
     float expectedResult = 99;
 

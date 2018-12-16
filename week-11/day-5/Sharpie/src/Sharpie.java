@@ -21,4 +21,12 @@ public class Sharpie {
   public float getInkAmount() {
     return inkAmount;
   }
+
+  public String getColor() {
+    return color;
+  }
+
+  public float getWidth() {
+    return width;
+  }
 }
