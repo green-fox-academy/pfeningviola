@@ -9,13 +9,13 @@ public class Extension {
 
   public int maxOfThree(int a, int b, int c) {
     int max = 0;
-    if (a > b) {
+    if ((a > b) && (a > c)) {
       max = a;
     }
-    if (a < c) {
+    if ((a < c) && (b < c)) {
       max = c;
     }
-    if (b > c) {
+    if ((b > c) && ( b > a)) {
       max = b;
     }
       return max;
