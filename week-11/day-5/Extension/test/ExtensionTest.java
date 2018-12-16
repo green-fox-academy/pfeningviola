@@ -81,22 +81,32 @@ public class ExtensionTest {
 
   @Test
   public void testMedian_four() {
-    assertEquals(5, extension.median(Arrays.asList(7,5,3,5)));
+    List<Integer> numbers = new ArrayList(Arrays.asList(7, 5, 3, 5));
+    float expectedResult = 5;
+
+    float result = extension.median(numbers);
+
+    assertEquals(expectedResult, result, expectedResult - result);
   }
 
   @Test
   public void testMedian_five() {
-    assertEquals(3, extension.median(Arrays.asList(1,2,3,4,5)));
+    List<Integer> numbers = new ArrayList(Arrays.asList(1, 2, 3, 4, 5));
+    float expectedResult = 3;
+
+    float result = extension.median(numbers);
+
+    assertEquals(expectedResult, result, expectedResult - result);
   }
 
   @Test
   public void testMedianWithUnorderedList() {
     List<Integer> numbers = new ArrayList(Arrays.asList(7, 1, 8, 5));
-    int expectedResult = 6;
+    float expectedResult = 6;
 
-    int result = extension.median(numbers);
+    float result = extension.median(numbers);
 
-    assertEquals(expectedResult, result);
+    assertEquals(expectedResult, result, expectedResult - result);
   }
 
   @Test
@@ -104,9 +114,19 @@ public class ExtensionTest {
     List<Integer> numbers = null;
     int expectedResult = 0;
 
-    int result = extension.median(numbers);
+    float result = extension.median(numbers);
 
-    assertEquals(expectedResult, result);
+    assertEquals(expectedResult, result, expectedResult - result);
+  }
+
+  @Test
+  public void testMedianWithEmptyList() {
+    List<Integer> numbers = new ArrayList<>(Arrays.asList());
+    int expectedResult = 0;
+
+    float result = extension.median(numbers);
+
+    assertEquals(expectedResult, result, expectedResult - result);
   }
 
   @Test
@@ -140,9 +160,19 @@ public class ExtensionTest {
   }
 
   @Test
+  public void testTranslate_ooo() {
+    String word = "ooo";
+    String expectedResult = "ovoovoovo";
+
+    String result = extension.translate(word);
+
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
   public void testTranslateWithNull() {
     String word = null;
-    String expectedResult = null;
+    String expectedResult = "";
 
     String result = extension.translate(word);
 
