@@ -5,12 +5,28 @@ public class TodoList implements Serializable {
   private ArrayList<Todo> todoList;
 
   public TodoList() {
-    todoList = new ArrayList<>();
+    //if (new File("todo.txt").length() > 0) {
+      //this.todoList = readFromFile().getTodoList();
+    //} else {
+      this.todoList = new ArrayList<>();
+    //}
   }
 
   public void add(String todo) {
+    if (new File("todo.txt").length() > 0) {
+      this.todoList = readFromFile().getTodoList();
+    }
     this.todoList.add(new Todo(todo));
     writeToFile(this);
+  }
+
+  public void list(){
+    if (new File("todo.txt").length() > 0) {
+      this.todoList = readFromFile().getTodoList();
+      System.out.println(this.toString());
+    } else {
+      System.out.println("No todos for today! :)");
+    }
   }
 
   public void writeToFile(TodoList tasks) {
@@ -33,7 +49,7 @@ public class TodoList implements Serializable {
     TodoList tasks = new TodoList();
     try {
       FileInputStream fileInputStream
-          = new FileInputStream("todo.txt");
+          = new FileInputStream(fileName);
       ObjectInputStream objectInputStream
           = new ObjectInputStream(fileInputStream);
       tasks = (TodoList) objectInputStream.readObject();
@@ -41,7 +57,7 @@ public class TodoList implements Serializable {
     } catch (IOException e){
       System.out.println("Unable to read from the file!");
     } catch (ClassNotFoundException cnf) {
-      System.out.println("Unable to read from the file!");
+      System.out.println("The file has a problem");
     }
     return tasks;
   }

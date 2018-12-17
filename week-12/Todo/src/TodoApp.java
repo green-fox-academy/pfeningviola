@@ -9,6 +9,10 @@ public class TodoApp {
       myList.add(args[1]);
       System.out.println(myList);
     }
+
+    if (args[0].equals("-l")) {
+      myList.list();
+    }
   }
 
   public static void printMessageIfArgsEmpty() {
