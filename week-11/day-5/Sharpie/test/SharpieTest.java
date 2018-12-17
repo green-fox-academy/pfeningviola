@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -6,8 +7,8 @@ import static org.junit.Assert.*;
 public class SharpieTest {
   private static Sharpie sharpie;
 
-  @BeforeClass
-  public static void init() {
+  @Before
+  public void init() {
     sharpie = new Sharpie("red", 1.5f);
   }
 
