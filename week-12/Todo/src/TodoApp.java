@@ -6,8 +6,12 @@ public class TodoApp {
     }
 
     if (args[0].equals("-a")){
-      myList.add(args[1]);
-      System.out.println(myList);
+      if (args.length == 1) {
+        System.out.println("Unable to add: no task provided");
+      } else {
+        myList.add(args[1]);
+        System.out.println(myList);
+      }
     }
 
     if (args[0].equals("-l")) {
