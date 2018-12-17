@@ -29,6 +29,17 @@ public class TodoList implements Serializable {
     }
   }
 
+  public void remove (int number) {
+    int indexToRemove = number - 1;
+    this.todoList = readFromFile().getTodoList();
+    if (todoList.size() >= number) {
+      this.todoList.remove(indexToRemove);
+      writeToFile(this);
+    } else {
+      System.out.println("Unable to remove: index is out of bound");
+    }
+  }
+
   public void writeToFile(TodoList tasks) {
     String fileName = "todo.txt";
     try {

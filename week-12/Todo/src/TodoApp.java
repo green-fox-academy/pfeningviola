@@ -17,6 +17,16 @@ public class TodoApp {
     if (args[0].equals("-l")) {
       myList.list();
     }
+
+    if (args[0].equals("-r")){
+      if (args.length == 1) {
+        System.out.println("Unable to remove: no index provided");
+      } else {
+        myList.remove(Integer.parseInt(args[1]));
+        System.out.println(myList);
+      }
+    }
+
   }
 
   public static void printMessageIfArgsEmpty() {
