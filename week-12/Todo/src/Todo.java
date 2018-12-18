@@ -9,6 +9,10 @@ public class Todo implements Serializable {
     this.completed = false;
   }
 
+  public void setCompleted() {
+    this.completed = true;
+  }
+
   public String getDescription() {
     return description;
   }
@@ -21,9 +25,7 @@ public class Todo implements Serializable {
     return completed;
   }
 
-  public void setCompleted(boolean completed) {
-    this.completed = completed;
-  }
+
 
   @Override
   public String toString() {

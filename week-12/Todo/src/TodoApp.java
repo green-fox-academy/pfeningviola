@@ -1,35 +1,33 @@
 public class TodoApp {
   public static void main(String[] args) {
     TodoList myList = new TodoList();
+    ArgumentCheck checker = new ArgumentCheck();
     if (args.length == 0) {
-      printMessageIfArgsEmpty();
-    }
+      printUsage();
 
-    if (args[0].equals("-a")){
-      if (args.length == 1) {
-        System.out.println("Unable to add: no task provided");
-      } else {
-        myList.add(args[1]);
-        System.out.println(myList);
-      }
-    }
+    } else if (args.length > 2) {
+      System.out.println("The given argument is not valid.");
+      printUsage();
 
-    if (args[0].equals("-l")) {
-      myList.list();
-    }
+    } else if (args[0].equals("-a")){
+        checker.checkArgumentA(args, myList);
 
-    if (args[0].equals("-r")){
-      if (args.length == 1) {
-        System.out.println("Unable to remove: no index provided");
-      } else {
-        myList.remove(Integer.parseInt(args[1]));
-        System.out.println(myList);
-      }
-    }
+    } else if (args[0].equals("-l")) {
+      checker.checkArgumentL(args, myList);
 
+    } else if (args[0].equals("-r")) {
+      checker.checkArgumentR(args, myList);
+
+    } else if (args[0].equals("-c")) {
+      checker.checkArgumentC(args, myList);
+
+    } else {
+      System.out.println("Unsupported argument");
+      printUsage();
+    }
   }
 
-  public static void printMessageIfArgsEmpty() {
+  public static void printUsage() {
     String usage = "Command Line Todo application\n" +
         "=============================\n" +
         "\n" +
