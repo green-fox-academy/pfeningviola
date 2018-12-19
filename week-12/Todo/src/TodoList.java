@@ -9,13 +9,13 @@ public class TodoList implements Serializable {
   }
 
   public void add(String todo) {
-    this.todoList = FileIOTask.readFromFile().getTodoList();
+    this.todoList = FileIOTask.readFromFile2().getTodoList();
     this.todoList.add(new Todo(todo));
-    FileIOTask.writeToFile(this);
+    FileIOTask.writeToFile2(this);
   }
 
   public void list(){
-    this.todoList = FileIOTask.readFromFile().getTodoList();
+    this.todoList = FileIOTask.readFromFile2().getTodoList();
     if (todoList.isEmpty()) {
       System.out.println("No todos for today! :)");
     } else {
@@ -25,16 +25,16 @@ public class TodoList implements Serializable {
 
   public void remove (int number) {
     int indexToRemove = number - 1;
-    this.todoList = FileIOTask.readFromFile().getTodoList();
+    this.todoList = FileIOTask.readFromFile2().getTodoList();
     this.todoList.remove(indexToRemove);
-    FileIOTask.writeToFile(this);
+    FileIOTask.writeToFile2(this);
   }
 
   public void changeStatus(int number) {
     int indexToChange = number - 1;
-    this.todoList = FileIOTask.readFromFile().getTodoList();
+    this.todoList = FileIOTask.readFromFile2().getTodoList();
     this.todoList.get(indexToChange).setCompleted();
-    FileIOTask.writeToFile(this);
+    FileIOTask.writeToFile2(this);
   }
 
 

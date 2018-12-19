@@ -9,6 +9,11 @@ public class Todo implements Serializable {
     this.completed = false;
   }
 
+  public Todo(String description, boolean isCompleted) {
+    this.description = description;
+    this.completed = isCompleted;
+  }
+
   public void setCompleted() {
     this.completed = true;
   }
