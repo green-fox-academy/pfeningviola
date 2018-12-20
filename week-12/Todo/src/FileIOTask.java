@@ -7,8 +7,7 @@ import java.util.List;
 
 public abstract class FileIOTask {
 
-  public static void writeToFile(TodoList tasks) {
-    String fileName = "todo.txt";
+  public static void writeToFile(TodoList tasks, String fileName) {
     try {
       FileOutputStream fileOutputStream
           = new FileOutputStream(fileName);
@@ -22,8 +21,7 @@ public abstract class FileIOTask {
     }
   }
 
-  public static TodoList readFromFile(){
-    String fileName = "todo.txt";
+  public static TodoList readFromFile(String fileName){
     TodoList tasks = new TodoList();
     try {
       FileInputStream fileInputStream
@@ -40,8 +38,8 @@ public abstract class FileIOTask {
     return tasks;
   }
 
-  public static void writeToFile2(TodoList tasks) {
-    Path filePath = Paths.get("./todo.txt");
+  public static void writeToFile2(TodoList tasks, String fileName) {
+    Path filePath = Paths.get(fileName);
     List<String> newList = new ArrayList<>();
     for (Todo task : tasks.getTodoList()) {
       newList.add(task.getDescription() + ";" + task.isCompleted());
@@ -53,8 +51,8 @@ public abstract class FileIOTask {
     }
   }
 
-  public static TodoList readFromFile2() {
-    Path filePath = Paths.get("./todo.txt");
+  public static TodoList readFromFile2(String fileName) {
+    Path filePath = Paths.get(fileName);
     List<String> lines = new ArrayList<>();
     TodoList myList = new TodoList();
     try {
