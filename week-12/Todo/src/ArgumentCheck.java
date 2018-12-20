@@ -9,16 +9,16 @@ public class ArgumentCheck {
       System.out.println("The given argument is not valid.");
       printUsage();
 
-    } else if (arguments[0].equals("-a")) {
+    } else if ((arguments[0].equals("-a")) || (arguments[0].equals("-add"))) {
       checkArgumentA(arguments, myList);
 
-    } else if (arguments[0].equals("-l")) {
+    } else if ((arguments[0].equals("-l")) || (arguments[0].equals("-list"))) {
       checkArgumentL(arguments, myList);
 
-    } else if (arguments[0].equals("-r")) {
+    } else if ((arguments[0].equals("-r")) || (arguments[0].equals("-remove"))){
       checkArgumentR(arguments, myList);
 
-    } else if (arguments[0].equals("-c")) {
+    } else if ((arguments[0].equals("-c")) || (arguments[0].equals("-complete"))) {
       checkArgumentC(arguments, myList);
 
     } else {
@@ -79,10 +79,10 @@ public class ArgumentCheck {
         "=============================\n" +
         "\n" +
         "Command line arguments:\n" +
-        " -l   Lists all the tasks\n" +
-        " -a   Adds a new task\n" +
-        " -r   Removes a task\n" +
-        " -c   Completes a task";
+        " -l / -list   Lists all the tasks\n" +
+        " -a / -add   Adds a new task\n" +
+        " -r / -remove  Removes a task\n" +
+        " -c / -complete  Completes a task";
     System.out.println(usage);
   }
 }
