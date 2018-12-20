@@ -17,6 +17,21 @@ public class TodoList implements Serializable {
 
   public void list(){
     this.todoList = FileIOTask.readFromFile2(FILENAME).getTodoList();
+    TodoList listOfUncompletedTasks = new TodoList();
+    if (todoList.isEmpty()) {
+      System.out.println("No todos for today! :)");
+    } else {
+      for (int i = 0; i < todoList.size(); i++) {
+        if (!this.todoList.get(i).isCompleted()) {
+          listOfUncompletedTasks.getTodoList().add(this.todoList.get(i));
+        }
+      }
+      System.out.println(listOfUncompletedTasks.toString());
+    }
+  }
+
+  public void listAll(){
+    this.todoList = FileIOTask.readFromFile2(FILENAME).getTodoList();
     if (todoList.isEmpty()) {
       System.out.println("No todos for today! :)");
     } else {

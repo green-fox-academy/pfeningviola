@@ -1,0 +1,3 @@
+Go walk;false
+Do homework;true
+Buy milk;false

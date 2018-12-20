@@ -12,6 +12,9 @@ public class ArgumentCheck {
     } else if ((arguments[0].equals("-a")) || (arguments[0].equals("-add"))) {
       checkArgumentA(arguments, myList);
 
+    } else if ((arguments[0].equals("-la")) || (arguments[0].equals("-listAll"))) {
+      checkArgumentLa(arguments, myList);
+
     } else if ((arguments[0].equals("-l")) || (arguments[0].equals("-list"))) {
       checkArgumentL(arguments, myList);
 
@@ -39,6 +42,14 @@ public class ArgumentCheck {
   public void checkArgumentL(String[] args, TodoList myList) {
     if (args.length == 1) {
       myList.list();
+    } else {
+      System.out.println("Unsupported argument");
+    }
+  }
+
+  public void checkArgumentLa(String[] args, TodoList myList) {
+    if (args.length == 1) {
+      myList.listAll();
     } else {
       System.out.println("Unsupported argument");
     }
@@ -80,6 +91,7 @@ public class ArgumentCheck {
         "\n" +
         "Command line arguments:\n" +
         " -l / -list   Lists all the tasks\n" +
+        " -la / -lisAll Lists the undone tasks\n" +
         " -a / -add   Adds a new task\n" +
         " -r / -remove  Removes a task\n" +
         " -c / -complete  Completes a task";
