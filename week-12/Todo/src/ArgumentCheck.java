@@ -5,10 +5,6 @@ public class ArgumentCheck {
     if (arguments.length == 0) {
       printUsage();
 
-    } else if (arguments.length > 2) {
-      System.out.println("The given argument is not valid.");
-      printUsage();
-
     } else if ((arguments[0].equals("-a")) || (arguments[0].equals("-add"))) {
       checkArgumentA(arguments, myList);
 
@@ -34,7 +30,9 @@ public class ArgumentCheck {
     if (args.length == 1) {
       System.out.println("Unable to add: no task provided");
     } else {
-      myList.add(args[1]);
+      for (int i = 1; i < args.length; i++) {
+        myList.add(args[i]);
+      }
       System.out.println(myList);
     }
   }
@@ -44,6 +42,7 @@ public class ArgumentCheck {
       myList.list();
     } else {
       System.out.println("Unsupported argument");
+      printUsage();
     }
   }
 
@@ -52,6 +51,7 @@ public class ArgumentCheck {
       myList.listAll();
     } else {
       System.out.println("Unsupported argument");
+      printUsage();
     }
   }
 
@@ -60,7 +60,9 @@ public class ArgumentCheck {
       System.out.println("Unable to remove: no index provided");
     } else {
       try {
-        myList.remove(Integer.parseInt(args[1]));
+        for (int i = 1; i < args.length; i++) {
+          myList.remove(Integer.parseInt(args[i]));
+        }
         System.out.println(myList);
       } catch (IndexOutOfBoundsException out) {
         System.out.println("Unable to remove: index is out of bound");
@@ -75,7 +77,9 @@ public class ArgumentCheck {
       System.out.println("Unable to check: no index provided");
     } else {
       try {
-        myList.changeStatus(Integer.parseInt(args[1]));
+        for (int i = 1; i < args.length; i++) {
+          myList.changeStatus(Integer.parseInt(args[i]));
+        }
         System.out.println(myList);
       } catch (IndexOutOfBoundsException out) {
         System.out.println("Unable to check: index is out of bound");
@@ -90,11 +94,11 @@ public class ArgumentCheck {
         "=============================\n" +
         "\n" +
         "Command line arguments:\n" +
-        " -l / -list   Lists all the tasks\n" +
-        " -la / -lisAll Lists the undone tasks\n" +
-        " -a / -add   Adds a new task\n" +
-        " -r / -remove  Removes a task\n" +
-        " -c / -complete  Completes a task";
+        " -l / -list   Lists the undone tasks\n" +
+        " -la / -lisAll Lists all the tasks\n" +
+        " -a / -add   Adds new tasks\n" +
+        " -r / -remove  Removes tasks\n" +
+        " -c / -complete  Completes tasks";
     System.out.println(usage);
   }
 }

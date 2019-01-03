@@ -1,3 +1,4 @@
-Go walk;false
 Do homework;true
-Buy milk;false
+Learn English;false
+Buy choclate;true
+Go swimming;true
