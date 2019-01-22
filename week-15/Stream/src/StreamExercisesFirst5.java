@@ -46,7 +46,7 @@ public class StreamExercisesFirst5 {
         .filter(number -> number % 2 != 0)
         .mapToInt(x -> x)
         .summaryStatistics();
-    double sumOfOddNumbers = statsOddNumbers2.getSum();
+    long sumOfOddNumbers = statsOddNumbers2.getSum();
     System.out.println("Sum of the odd numbers: " + sumOfOddNumbers);
   }
 }
