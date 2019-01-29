@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Sign up form</title>
+    <meta name="keywords" content="sign up, form, html">
+    <meta name="description" content="Sign Up Form">
+    <link rel="stylesheet" type="text/css" href="signUpForm_style.css"/>
+</head>
+
+<body>
+    <div class = "box">
+        <form action="https://newsletter-ws.herokuapp.com/register" method="POST" class="signUp"></form>
+            <div class="signUp">
+                <h2>Sign Up</h1>                           
+            </div>
+
+            <div class = "or">
+                <span>OR</span>
+            </div> 
+        
+            <div class = "data-box">                
+                <input id = "username" name= "username" type = "text" placeholder = "Username" autofocus required/>                                                           
+                <input id = "email" name = "email" type = "email" placeholder = "E-mail" required/>                                          
+                <input id = "password" name = "password" type = "password" placeholder = "Password" required/>                                       
+                <input id = "re-password" name = "re-password" type = "password" placeholder = "Retype password" required/>           
+            </div>
+
+            <div class = "link-button">
+                <a href="http://www.facebook.com" class="fb btn">Login with Facebook</a>
+                <a href="http://www.twitter.com" class="twitter btn">Login with Twitter</a>
+                <a href="http://www.google.com" class="google btn">Login with Google+</a>
+            </div>   
+
+            <div class="sign-button">
+                <button>SIGN ME UP</button>
+            </div>
+        </form>
+    </div>
+</body>
