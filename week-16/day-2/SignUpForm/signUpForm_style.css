@@ -36,7 +36,6 @@ input,
   text-decoration: none; /* remove underline from anchors */
 }
 
-input:hover,
 .btn:hover {
   opacity: 1;
 }
@@ -71,16 +70,13 @@ button {
   cursor: pointer;
 }
 
-.form-row button:hover {
-  background-color: #696969;
+.sign-button:hover {
+    opacity: 0.75;
 }
 
-.form-row button:active {
-  background-color: #000000;
-}
 .fb {
     background-color: #3B5998;
-    color: white;
+    color: white;    
 }
   
 .twitter {
@@ -103,7 +99,7 @@ button {
     position: absolute;
     top: 130px;
     left: 52%;
-    width: 50%;
+    width: 30%;
     margin: auto;
     padding: 0 30px;
     margin-top: 6px;
