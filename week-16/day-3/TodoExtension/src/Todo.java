@@ -14,6 +14,7 @@ public class Todo implements Serializable {
     this.completed = false;
     idCounter++;
     this.id = idCounter;
+    this.completedAt = LocalDateTime.now();
     this.createdAt = LocalDateTime.now();
   }
 
@@ -24,11 +25,20 @@ public class Todo implements Serializable {
 //    this.id = idCounter;
 //  }
 
-  public Todo(int id, String description, boolean isCompleted, LocalDateTime createdAt) {
+  public Todo(int id, String description, boolean isCompleted, LocalDateTime createdAt, LocalDateTime completedAt) {
     this.description = description;
     this.completed = isCompleted;
     this.id = id;
     this.createdAt = createdAt;
+    this.completedAt = completedAt;
+  }
+
+  public LocalDateTime getCompletedAt() {
+    return completedAt;
+  }
+
+  public void setCompletedAt(LocalDateTime completedAt) {
+    this.completedAt = completedAt;
   }
 
   public LocalDateTime getCreatedAt() {
