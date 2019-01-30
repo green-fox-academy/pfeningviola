@@ -3,7 +3,6 @@ import java.time.LocalDateTime;
 
 public class Todo implements Serializable {
   private String description;
-  private boolean completed;
   private int id;
   private static int idCounter = 0;
   private LocalDateTime createdAt;
@@ -11,11 +10,10 @@ public class Todo implements Serializable {
 
   public Todo(String description) {
     this.description = description;
-    this.completed = false;
     idCounter++;
     this.id = idCounter;
-    this.completedAt = LocalDateTime.now();
     this.createdAt = LocalDateTime.now();
+    this.completedAt = null;
   }
 
 //  public Todo(String description, boolean isCompleted) {
@@ -25,12 +23,19 @@ public class Todo implements Serializable {
 //    this.id = idCounter;
 //  }
 
-  public Todo(int id, String description, boolean isCompleted, LocalDateTime createdAt, LocalDateTime completedAt) {
+  public Todo(int id, String description, LocalDateTime createdAt, LocalDateTime completedAt) {
     this.description = description;
-    this.completed = isCompleted;
     this.id = id;
     this.createdAt = createdAt;
     this.completedAt = completedAt;
+  }
+
+  public boolean isCompleted() {
+    boolean completedTask = false;
+    if (completedAt != null && completedAt.isBefore(LocalDateTime.now())){
+      completedTask = true;
+    }
+    return completedTask;
   }
 
   public LocalDateTime getCompletedAt() {
@@ -65,10 +70,6 @@ public class Todo implements Serializable {
     Todo.idCounter = idCounter;
   }
 
-  public void setCompleted() {
-    this.completed = true;
-  }
-
   public String getDescription() {
     return description;
   }
@@ -77,12 +78,10 @@ public class Todo implements Serializable {
     this.description = description;
   }
 
-  public boolean isCompleted() {
-    return completed;
-  }
+
 
   @Override
   public String toString() {
-    return (completed ? "[x] " : "[ ] ") + description;
+    return (isCompleted() ? "[x] " : "[ ] ") + description;
   }
 }

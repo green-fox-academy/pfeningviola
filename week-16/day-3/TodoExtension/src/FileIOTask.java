@@ -43,7 +43,7 @@ public abstract class FileIOTask {
     Path filePath = Paths.get(fileName);
     List<String> newList = new ArrayList<>();
     for (Todo task : tasks.getTodoList()) {
-      newList.add(task.getId() + ";" + task.getDescription() + ";" + task.isCompleted() + ";" + task.getCreatedAt() + ";" + task.getCompletedAt());
+      newList.add(task.getId() + ";" + task.getDescription() + ";" + task.getCreatedAt() + ";" + task.getCompletedAt());
     }
     try {
       Files.write(filePath, newList);
@@ -65,7 +65,11 @@ public abstract class FileIOTask {
     for (String line : lines) {
       String[] splittedLine = line.split(";");
       if (splittedLine.length > 1) {
-        myList.getTodoList().add(new Todo(Integer.parseInt(splittedLine[0]), splittedLine[1], Boolean.parseBoolean(splittedLine[2]), LocalDateTime.parse(splittedLine[3]), LocalDateTime.parse(splittedLine[4])));
+        if (!splittedLine[3].equals("null")) {
+          myList.getTodoList().add(new Todo(Integer.parseInt(splittedLine[0]), splittedLine[1], LocalDateTime.parse(splittedLine[2]), LocalDateTime.parse(splittedLine[3])));
+        } else {
+          myList.getTodoList().add(new Todo(Integer.parseInt(splittedLine[0]), splittedLine[1], LocalDateTime.parse(splittedLine[2]), null));
+        }
       }
     }
     controlIDCounter(myList);
