@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public abstract class FileIOTask {
     Path filePath = Paths.get(fileName);
     List<String> newList = new ArrayList<>();
     for (Todo task : tasks.getTodoList()) {
-      newList.add(task.getId() + ";" + task.getDescription() + ";" + task.isCompleted());
+      newList.add(task.getId() + ";" + task.getDescription() + ";" + task.isCompleted() + ";" + task.getCreatedAt());
     }
     try {
       Files.write(filePath, newList);
@@ -64,7 +65,7 @@ public abstract class FileIOTask {
     for (String line : lines) {
       String[] splittedLine = line.split(";");
       if (splittedLine.length > 1) {
-        myList.getTodoList().add(new Todo(Integer.parseInt(splittedLine[0]), splittedLine[1], Boolean.parseBoolean(splittedLine[1])));
+        myList.getTodoList().add(new Todo(Integer.parseInt(splittedLine[0]), splittedLine[1], Boolean.parseBoolean(splittedLine[2]), LocalDateTime.parse(splittedLine[3])));
       }
     }
     controlIDCounter(myList);

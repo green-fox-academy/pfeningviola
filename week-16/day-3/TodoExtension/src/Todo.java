@@ -1,29 +1,42 @@
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class Todo implements Serializable {
   private String description;
   private boolean completed;
   private int id;
   private static int idCounter = 0;
+  private LocalDateTime createdAt;
+  private LocalDateTime completedAt;
 
   public Todo(String description) {
     this.description = description;
     this.completed = false;
     idCounter++;
     this.id = idCounter;
+    this.createdAt = LocalDateTime.now();
   }
 
-  public Todo(String description, boolean isCompleted) {
-    this.description = description;
-    this.completed = isCompleted;
-    idCounter++;
-    this.id = idCounter;
-  }
+//  public Todo(String description, boolean isCompleted) {
+//    this.description = description;
+//    this.completed = isCompleted;
+//    idCounter++;
+//    this.id = idCounter;
+//  }
 
-  public Todo(int id, String description, boolean isCompleted) {
+  public Todo(int id, String description, boolean isCompleted, LocalDateTime createdAt) {
     this.description = description;
     this.completed = isCompleted;
     this.id = id;
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
   }
 
   public int getId() {

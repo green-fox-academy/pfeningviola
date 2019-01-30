@@ -1,3 +1,2 @@
-1;Buy milk;false
-3;Run 5 km;false
-4;Make a cake;true
+1;Buy milk;true;2019-01-30T12:46:36.432
+2;Go walk;false;2019-01-30T12:46:41.373
