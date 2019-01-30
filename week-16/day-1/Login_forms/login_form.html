@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Fancy table</title>
+    <title>Login form</title>
     <meta name="keywords" content="login, form, html">
     <meta name="description" content="Login Form">
     <link rel="stylesheet" type="text/css" href="login_form_style.css"/>
@@ -17,19 +17,19 @@
         <form action='' method='get' class='login-form'>
             <div class="form-row">
                 <label for="full-name">USERNAME</label>
-                <input id="full-name" name="full-name" type="text" autofocus required/>
+                <input id="full-name" name="full-name" type="text" autofocus required minlength="3"/>
             </div>
 
             <div class="form-row">
                 <label for="password">PASSWORD</label>
                 <div class = "input_icon">             
-                    <input id="password" name="password" type="text" required/>
+                    <input id="password" name="password" type="password" required/>
                     <img id="icon" src="./sight-icon-16.jpg" alt = "Sight icon">
                 </div>
                 <span class = forgot_password><a href = "https://help.myspace.com/hc/en-us/articles/201956084-Forgot-Password">Forgot Password?</a></span>
             </div>
             <div class="form-row">
-                <button>Login</button>
+                <button type="submit">Login</button>
             </div>
         </form>
     </div>
