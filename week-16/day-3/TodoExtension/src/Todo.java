@@ -40,15 +40,15 @@ public class Todo implements Serializable {
     Duration time = completionTime();
     long days =  time.getSeconds() / (3600 * 24);
     long hours = (time.getSeconds() % (3600 * 24)) / 3600;
-    long seconds = (time.getSeconds() % (3600 * 24)) / 60;
+    long minutes = ((time.getSeconds() % (3600 * 24)) / 60) % 60;
 
     return String.format("%d days, %d hours, %d minutes",
-        days, hours, seconds);
+        days, hours, minutes);
   }
 
   public boolean isCompleted() {
     boolean completedTask = false;
-    if (completedAt != null && completedAt.isBefore(LocalDateTime.now())){
+    if (completedAt != null && completedAt.isBefore(LocalDateTime.now(Clock.systemUTC()))){
       completedTask = true;
     }
     return completedTask;

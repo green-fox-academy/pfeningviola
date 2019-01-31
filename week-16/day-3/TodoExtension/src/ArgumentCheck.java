@@ -20,6 +20,9 @@ public class ArgumentCheck {
     } else if ((arguments[0].equals("-c")) || (arguments[0].equals("-complete"))) {
       checkArgumentC(arguments, myList);
 
+    } else if ((arguments[0].equals("-u")) || (arguments[0].equals("-update"))) {
+      checkArgumentU(arguments, myList);
+
     } else {
       System.out.println("Unsupported argument");
       printUsage();
@@ -89,6 +92,20 @@ public class ArgumentCheck {
     }
   }
 
+  public void checkArgumentU(String[] args, TodoList myList) {
+    if (args.length == 1) {
+      System.out.println("Unable to update: no id provided");
+    } else if (args.length == 2) {
+      System.out.println("Unable to update: no task description provided");
+    } else {
+      try {
+        myList.update(Integer.parseInt(args[1]), args[2]);
+      } catch (NumberFormatException letters) {
+        System.out.println("Unable to update: id is not a number");
+      }
+    }
+  }
+
   public static void printUsage() {
     String usage = "Command Line Todo application\n" +
         "=============================\n" +
@@ -98,7 +115,8 @@ public class ArgumentCheck {
         " -la / -lisAll Lists all the tasks\n" +
         " -a / -add   Adds new tasks\n" +
         " -r / -remove  Removes tasks\n" +
-        " -c / -complete  Completes tasks";
+        " -c / -complete  Completes tasks\n" +
+        " -u / -update Update the task's description based on it's id";
     System.out.println(usage);
   }
 }

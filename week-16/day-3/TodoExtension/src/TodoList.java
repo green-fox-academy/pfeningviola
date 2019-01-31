@@ -55,6 +55,27 @@ public class TodoList implements Serializable {
     FileIOTask.writeToFile2(this, FILENAME);
   }
 
+  public void update(int id, String newDescription) {
+    this.todoList = FileIOTask.readFromFile2(FILENAME).getTodoList();
+    int indexToUpdate = findIndexForID(id);
+    if (indexToUpdate == -1) {
+      System.out.println("The given ID is not found");
+    } else {
+      this.todoList.get(indexToUpdate).setDescription(newDescription);
+    }
+    FileIOTask.writeToFile2(this, FILENAME);
+  }
+
+  public int findIndexForID(int id) {
+    int index = -1;
+    for (Todo task : todoList) {
+      if (task.getId() == id) {
+        index = todoList.indexOf(task);
+      }
+    }
+    return index;
+  }
+
 
   public ArrayList<Todo> getTodoList() {
     return todoList;
