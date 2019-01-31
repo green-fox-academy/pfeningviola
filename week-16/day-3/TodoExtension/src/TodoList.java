@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -50,7 +51,7 @@ public class TodoList implements Serializable {
   public void changeStatus(int number) {
     int indexToChange = number - 1;
     this.todoList = FileIOTask.readFromFile2(FILENAME).getTodoList();
-    this.todoList.get(indexToChange).setCompletedAt(LocalDateTime.now());
+    this.todoList.get(indexToChange).setCompletedAt(LocalDateTime.now(Clock.systemUTC()));
     FileIOTask.writeToFile2(this, FILENAME);
   }
 

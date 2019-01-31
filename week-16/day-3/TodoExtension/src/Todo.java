@@ -1,4 +1,6 @@
 import java.io.Serializable;
+import java.time.Clock;
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 public class Todo implements Serializable {
@@ -12,7 +14,7 @@ public class Todo implements Serializable {
     this.description = description;
     idCounter++;
     this.id = idCounter;
-    this.createdAt = LocalDateTime.now();
+    this.createdAt = LocalDateTime.now(Clock.systemUTC());
     this.completedAt = null;
   }
 
@@ -28,6 +30,20 @@ public class Todo implements Serializable {
     this.id = id;
     this.createdAt = createdAt;
     this.completedAt = completedAt;
+  }
+
+  public Duration completionTime() {
+    return Duration.between(createdAt, completedAt);
+  }
+
+  public String completionTimeToString() {
+    Duration time = completionTime();
+    long days =  time.getSeconds() / (3600 * 24);
+    long hours = (time.getSeconds() % (3600 * 24)) / 3600;
+    long seconds = (time.getSeconds() % (3600 * 24)) / 60;
+
+    return String.format("%d days, %d hours, %d minutes",
+        days, hours, seconds);
   }
 
   public boolean isCompleted() {
@@ -78,10 +94,8 @@ public class Todo implements Serializable {
     this.description = description;
   }
 
-
-
   @Override
   public String toString() {
-    return (isCompleted() ? "[x] " : "[ ] ") + description;
+    return (isCompleted() ? "[x] " : "[ ] ") + description + " (id: "  + id + ")" + (isCompleted() ? " completed in " + completionTimeToString() : "");
   }
 }
