@@ -36,9 +36,13 @@ public class AccountController {
 
   @GetMapping("/showwithking")
   public String showAccountsWithKing(Model model) {
-    model.addAttribute("listaccounts", accountList);
+    model.addAttribute("listOfAccounts", accountList);
     return "accountswithking";
   }
 
-
+  @GetMapping("/showbadandgoodguys/withswitch")
+  public String showBadAndGoodWithSwitch(Model model) {
+    model.addAttribute("accountList", accountList);
+    return "accountsbybadandgood";
+  }
 }

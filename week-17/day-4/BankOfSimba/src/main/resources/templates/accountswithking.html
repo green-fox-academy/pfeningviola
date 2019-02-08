@@ -18,7 +18,7 @@
             <th>Is the King?</th>
         </tr>
         </thead>
-        <tbody th:each="account : ${listaccounts}">
+        <tbody th:each="account : ${listOfAccounts}">
             <tr th:style="${account.king} ? 'color:#800000; font-weight:bold'">
                 <td th:text="${accountStat.index} + 1"></td>
                 <td th:text="${account.name}"></td>
