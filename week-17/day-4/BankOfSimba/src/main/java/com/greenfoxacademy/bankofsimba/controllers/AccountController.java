@@ -45,4 +45,10 @@ public class AccountController {
     model.addAttribute("accountList", accountList);
     return "accountsbybadandgood";
   }
+
+  @GetMapping("/showbadandgoodguys/withoutswitch")
+  public String showBadAndGoodWithoutSwitch(Model model) {
+    model.addAttribute("accountList", accountList);
+    return "accountswithoutswitch";
+  }
 }

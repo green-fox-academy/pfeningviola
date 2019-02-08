@@ -1,6 +1,7 @@
 package com.greenfoxacademy.bankofsimba.models;
 
 public class BankAccount {
+  public static final String CURRENCY = "Zebra";
   private String name;
   private String animalType;
   private int balance;

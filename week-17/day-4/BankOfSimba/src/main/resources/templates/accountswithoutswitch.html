@@ -26,10 +26,7 @@
             <td th:text="${#numbers.formatDecimal(account.balance, 1, 2, 'POINT')}"></td>
             <td th:text="${account.animalType}"></td>
             <td th:text="${account.king} ? 'YES' : 'NO'"></td>
-            <td th:switch="${account.goodCharacter}">
-                <span th:case="true">Good One</span>
-                <span th:case="false">Bad Guy</span>
-            </td>
+            <td th:text="${account.goodCharacter} ? 'Good One' : 'Bad Guy'"></td>
         </tr>
         </tbody>
     </table>
