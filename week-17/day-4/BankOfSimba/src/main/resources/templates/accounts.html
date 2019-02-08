@@ -11,6 +11,7 @@
                 <caption>Accounts of the Bank Of Simba</caption>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Name</th>
                         <th>Balance</th>
                         <th>Type of Animal</th>
@@ -18,8 +19,9 @@
                 </thead>
                 <tbody th:each="account : ${accountList}">
                     <tr>
+                        <td th:text="${accountStat.index} + 1"></td>
                         <td th:text="${account.name}"></td>
-                        <td th:text="${account.balance}"></td>
+                        <td th:text="${#numbers.formatDecimal(account.balance, 1, 2, 'POINT')}"></td>
                         <td th:text="${account.animalType}"></td>
                     </tr>
                 </tbody>

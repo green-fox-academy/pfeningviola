@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Accounts Showing the King</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+
+<div>
+    <table>
+        <caption>Accounts of the Bank Of Simba</caption>
+        <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Balance</th>
+            <th>Type of Animal</th>
+            <th>Is the King?</th>
+        </tr>
+        </thead>
+        <tbody th:each="account : ${listaccounts}">
+            <tr th:style="${account.king} ? 'color:#800000; font-weight:bold'">
+                <td th:text="${accountStat.index} + 1"></td>
+                <td th:text="${account.name}"></td>
+                <td th:text="${#numbers.formatDecimal(account.balance, 1, 2, 'POINT')}"></td>
+                <td th:text="${account.animalType}"></td>
+                <td th:text="${account.king} ? 'YES' : 'NO'"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
