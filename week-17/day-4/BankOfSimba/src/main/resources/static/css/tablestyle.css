@@ -1,0 +1,84 @@
+body{
+    font-family: Garamond, sans-serif;
+    background-color: gainsboro;
+}
+
+.logo_title{
+    font-size: 24px;
+    font-weight: bold;
+    margin:0;
+}
+
+div{
+    margin:auto;
+    width: 70%;
+    padding: 20px;
+    background-color: #006600;
+}
+
+caption {
+    padding: 10px;
+    font-size:24px;
+    font-weight: bold;
+    color:white;
+}
+
+table {
+    padding: 10px 30px 30px 30px;
+    margin: auto;
+    border-collapse: separate;
+    background-color: lightgrey;
+    border-radius: 5px;
+}
+
+th:first-child {
+    border-top-left-radius: 5px;
+}
+th:last-child {
+    border-top-right-radius: 5px;
+}
+tr:last-child td:first-child {
+    border-bottom-left-radius:5px;
+}
+tr:last-child td:last-child {
+    border-bottom-right-radius:5px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    color:#505050;
+    font-size: 18px;
+}
+
+th {
+    background-color: #001a00;
+    border-bottom: 1px;
+    font-size: 20px;
+    color: white;
+    text-align: left;
+}
+
+.king{
+    color: gold;
+    font-weight: bold;
+}
+
+tr:nth-child(even){
+    background-color: whitesmoke;
+
+}
+tr:nth-child(odd){
+    background-color: gainsboro;
+}
+
+a{
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    padding: 20px;
+    text-decoration: none;
+}

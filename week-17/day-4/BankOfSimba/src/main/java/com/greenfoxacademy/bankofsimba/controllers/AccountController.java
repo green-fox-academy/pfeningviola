@@ -47,8 +47,13 @@ public class AccountController {
   }
 
   @GetMapping("/showbadandgoodguys/withoutswitch")
-  public String showBadAndGoodWithoutSwitch(Model model) {
+  public String renderBadAndGoodWithoutSwitch(Model model) {
     model.addAttribute("accountList", accountList);
     return "accountswithoutswitch";
+  }
+
+  @GetMapping("/balanceraising")
+  public String renderRaiseTheBalance(Model model) {
+    return "balanceraising";
   }
 }

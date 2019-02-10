@@ -55,4 +55,8 @@ public class BankAccount {
   public void setGoodCharacter(boolean goodCharacter) {
     this.goodCharacter = goodCharacter;
   }
+
+  public static String getCURRENCY() {
+    return CURRENCY;
+  }
 }

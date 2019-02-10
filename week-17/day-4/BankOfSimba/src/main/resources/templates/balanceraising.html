@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Raise the Balance</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/formstyle.css}"/>
+</head>
+<body>
+<h2>Raise the Balance!</h2>
+<form th:action="@{balanceraising}" method="post">
+    <div class="input-row">
+        <label for="animal-name">Whose balance would you like to raise?</label>
+        <input type="text" id="animal-name" name="animal-name" required/>
+    </div>
+    <div class="button">
+        <input type="submit" value="Raise" />
+    </div>
+
+</form>
+
+</body>
+</html>
