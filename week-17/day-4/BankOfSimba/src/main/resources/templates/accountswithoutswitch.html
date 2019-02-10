@@ -25,7 +25,7 @@
         </tr>
         </thead>
         <tbody th:each="account : ${accountList}">
-        <tr th:style="${account.king} ? 'color:red; font-weight:bold'">
+        <tr th:style="${account.king} ? 'color:red; font-weight:bold'" th:class="${account.king} ? 'king'">
             <td th:text="${accountStat.index} + 1"></td>
             <td th:text="${account.name}"></td>
             <td th:text="${#numbers.formatDecimal(account.balance, 1, 2, 'POINT')}"></td>
@@ -35,7 +35,7 @@
         </tr>
         </tbody>
     </table>
-    <a th:href="'/balanceraising'">Raise the Balance!</a>
+    <a th:href="'/balanceraising'">Raise the Balance</a>
 </div>
 </body>
 </html>

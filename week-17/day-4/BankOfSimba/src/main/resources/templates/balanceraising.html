@@ -6,17 +6,18 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/formstyle.css}"/>
 </head>
 <body>
-<h2>Raise the Balance!</h2>
+<h2>Raise the Balance:</h2>
 <form th:action="@{balanceraising}" method="post">
-    <div class="input-row">
+    <div class="select-options">
         <label for="animal-name">Whose balance would you like to raise?</label>
-        <input type="text" id="animal-name" name="animal-name" required/>
+        <select id="animal-name" name="animal-name">
+            <option th:each="account : ${accountList}" th:value="${account.name}" th:text="${account.name}"></option>
+        </select>
     </div>
     <div class="button">
         <input type="submit" value="Raise" />
     </div>
-
+    <a href="/createaccount"><h2>Or create a new account</h2></a>
 </form>
-
 </body>
 </html>

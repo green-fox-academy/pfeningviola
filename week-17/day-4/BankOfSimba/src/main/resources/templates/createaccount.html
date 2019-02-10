@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Raise the Balance</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/formstyle.css}"/>
+</head>
+<body>
+<body>
+<h2>Create a new account:</h2>
+<form th:action="@{createaccount}" method="post">
+    <div class="create-account">
+        <input type="text" name="name" placeholder="Name" required/>
+        <input type="number" name="balance" placeholder="Balance" required/>
+        <input type="text" name="type" placeholder="Type" required/>
+        <label for="king">He/she is the King?</label>
+        <select id="king" name="king">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <label for="bad-or-good">He/she is bad or good one?</label>
+        <select id="bad-or-good" name="goodone">
+            <option value="true">Good one</option>
+            <option value="false">Bad guy</option>
+        </select>
+    </div>
+    <div class="button">
+        <input type="submit" value="Create" />
+    </div>
+</form>
+</body>
+</html>

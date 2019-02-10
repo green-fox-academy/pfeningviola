@@ -4,6 +4,8 @@ import com.greenfoxacademy.bankofsimba.models.BankAccount;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 
@@ -54,6 +56,42 @@ public class AccountController {
 
   @GetMapping("/balanceraising")
   public String renderRaiseTheBalance(Model model) {
+    model.addAttribute("accountList", accountList);
     return "balanceraising";
+  }
+
+  @PostMapping("/balanceraising")
+  public String raiseBalance(@ModelAttribute(value = "animal-name") String name){
+    incrementTheBalance(name);
+
+    return "redirect:/showbadandgoodguys/withoutswitch";
+  }
+
+  @GetMapping("/createaccount")
+  public String renderCreateAccount() {
+    return "createaccount";
+  }
+
+  @PostMapping("/createaccount")
+  public String addNewAccount(@ModelAttribute(value = "name") String newName,
+                              @ModelAttribute(value = "balance") int balance,
+                              @ModelAttribute(value = "type") String type,
+                              @ModelAttribute(value = "king") String king,
+                              @ModelAttribute(value = "goodone") String good){
+
+      accountList.add(new BankAccount(newName, balance, type, Boolean.parseBoolean(king), Boolean.parseBoolean(good)));
+    return "redirect:/showbadandgoodguys/withoutswitch";
+  }
+
+  public void incrementTheBalance(String name) {
+    for (BankAccount account : accountList) {
+      if (account.getName().equalsIgnoreCase(name)) {
+        if (account.isKing()) {
+          account.setBalance(account.getBalance() + 100);
+        } else {
+          account.setBalance(account.getBalance() + 10);
+        }
+      }
+    }
   }
 }
