@@ -1,19 +1,27 @@
 body{
     font-family: Garamond, sans-serif;
-    background-color: gainsboro;
+    background-image: url(../img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .logo_title{
     font-size: 24px;
     font-weight: bold;
-    margin:0;
+    color: #660000;
+}
+
+img{
+    float: left;
+    width: 50px;
+    height: 50px;
 }
 
 div{
     margin:auto;
     width: 70%;
     padding: 20px;
-    background-color: #006600;
 }
 
 caption {
@@ -27,7 +35,7 @@ table {
     padding: 10px 30px 30px 30px;
     margin: auto;
     border-collapse: separate;
-    background-color: lightgrey;
+    background-color: #ff9933;
     border-radius: 5px;
 }
 
@@ -55,15 +63,15 @@ td {
 }
 
 th {
-    background-color: #001a00;
+    background-color: #800000;
     border-bottom: 1px;
     font-size: 20px;
     color: white;
     text-align: left;
 }
 
-.king{
-    color: gold;
+.king td{
+    color: #cc6600;
     font-weight: bold;
 }
 
@@ -72,17 +80,20 @@ tr:nth-child(even){
 
 }
 tr:nth-child(odd){
-    background-color: gainsboro;
+    background-color: #ffe0b3;
+}
+
+.link {
+    padding: 10px;
 }
 
 a{
     font-size: 20px;
     color: white;
     font-weight: bold;
-    padding: 20px;
     text-decoration: none;
     margin-top: 20px;
 }
 a:hover{
-    color: #80ff80;
+    color: #ffe0b3;
 }

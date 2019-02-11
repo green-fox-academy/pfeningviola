@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="logo">
-    <img id="logo_img" src="../static/img/logo.jpg" th:src="@{img/logo.jpg}" alt = "Bank logo"/>
+    <img id="logo_img" src="../static/img/logo.jpg" th:src="@{/img/logo.jpg}" alt = "Bank logo"/>
     <p class="logo_title">Bank Of Simba</p>
 </div>
 
@@ -24,8 +24,8 @@
             <th>Bad or Good</th>
         </tr>
         </thead>
-        <tbody th:each="account : ${accountList}">
-        <tr th:style="${account.king} ? 'color:red; font-weight:bold'" th:class="${account.king} ? 'king'">
+        <tbody>
+        <tr th:each="account : ${accountList}" th:class="${account.king} ? 'king'">
             <td th:text="${accountStat.index} + 1"></td>
             <td th:text="${account.name}"></td>
             <td th:text="${#numbers.formatDecimal(account.balance, 1, 2, 'POINT')}"></td>
@@ -35,7 +35,12 @@
         </tr>
         </tbody>
     </table>
-    <a th:href="'/balanceraising'">Raise the Balance</a>
+    <div class="link">
+        <a th:href="'/balanceraising'">Donate</a>
+    </div>
+    <div class="link">
+        <a th:href="'/createaccount'">Create new account</a>
+    </div>
 </div>
 </body>
 </html>
