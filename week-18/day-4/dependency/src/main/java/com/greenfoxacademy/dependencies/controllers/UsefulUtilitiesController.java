@@ -37,4 +37,25 @@ public class UsefulUtilitiesController {
     }
     return "emailvalidator";
   }
+
+  @GetMapping("/useful/encoder")
+  public String renderCesearEncoder(Model model, @RequestParam(required = false) String text, Integer number){
+    if (text != null) {
+      model.addAttribute("encodedText", utilityService.caesar(text, number));
+    } else {
+      model.addAttribute("error", "There is no text to encode.");
+    }
+    return "ceasarencoder";
+  }
+
+  @GetMapping("/useful/decoder")
+  public String renderCesearDecoder(Model model, @RequestParam(required = false) String text, Integer number){
+    if (text != null) {
+      model.addAttribute("decodedText", utilityService.caesar(text, number * -1));
+    } else {
+      model.addAttribute("error", "There is no text to decode.");
+    }
+    return "ceasardecoder";
+  }
+
 }

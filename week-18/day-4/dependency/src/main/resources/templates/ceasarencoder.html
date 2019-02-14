@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ceaser Encoder</title>
+</head>
+<body>
+<div th:if="${error}" th:text="${error}"></div>
+<div th:unless="${error}">
+    <h1 th:text="'The encoded text is: ' + ${encodedText}"></h1>
+</div>
+<a href="/useful">Back</a>
+</body>
+</html>
