@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UsefulUtilitiesController {
@@ -24,5 +25,16 @@ public class UsefulUtilitiesController {
   public String renderColoredBackground(Model model) {
     model.addAttribute("backgroundColor", utilityService.randomColor());
     return "coloredbackground";
+  }
+
+  @GetMapping("/useful/email")
+  public String renderEmailValidation(Model model, @RequestParam(name="email", required = false) String email) {
+    if (email != null) {
+      model.addAttribute("checkValidEmail", utilityService.checkValidEmail(email));
+      model.addAttribute("email", email);
+    } else {
+      model.addAttribute("error", "No given email in the link");
+    }
+    return "emailvalidator";
   }
 }

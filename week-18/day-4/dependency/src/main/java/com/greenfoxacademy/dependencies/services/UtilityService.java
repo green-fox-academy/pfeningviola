@@ -24,6 +24,10 @@ public class UtilityService {
     return colors.get(random.nextInt(colors.size()));
   }
 
+  public boolean checkValidEmail(String email) {
+    return (email.contains("@") && (email.contains(".")));
+  }
+
   public ArrayList<String> getColors() {
     return colors;
   }
