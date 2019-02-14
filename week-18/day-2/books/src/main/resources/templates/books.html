@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
 </head>
 <body>
+    <div th:if="${books.isEmpty()}">There is no author></div>
     <div class="container" th:each="book : ${books}">
         <h2 th:text="${book.id} + ' ' + ${book.author} + ': ' + ${book.title} + ' (' + ${book.releaseYear} + ') '"></h2>
     </div>
