@@ -7,7 +7,9 @@
 </head>
 <body>
 <div class="container-fluid">
-    <h1>Greenfox Academy</h1>
+    <h1>Greenfox Academy
+        <small class="text-muted" th:text="'Number of students: ' + ${studentsnumber}"></small>
+    </h1>
     <h3>The available links:</h3>
     <div class="links">
         <span>To list all students</span>

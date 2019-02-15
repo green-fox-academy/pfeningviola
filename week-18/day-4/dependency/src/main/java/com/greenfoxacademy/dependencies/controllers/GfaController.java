@@ -17,25 +17,27 @@ public class GfaController {
   }
 
   @GetMapping("/gfa")
-  public String renderMainGFAPage(){
+  public String renderMainGFAPage(Model model){
+    model.addAttribute("studentsnumber", studentService.count());
     return "gfa";
   }
 
   @GetMapping("gfa/list")
   public String renderAllStudents(Model model){
     model.addAttribute("students", studentService.findAll());
+    model.addAttribute("studentsnumber", studentService.count());
     return "gfa-students";
   }
 
   @GetMapping("/gfa/add")
-  public String renderNewStudent(){
+  public String renderNewStudent(Model model){
+    model.addAttribute("studentsnumber", studentService.count());
     return "gfa-add-student";
   }
 
   @GetMapping("/gfa/save")
-  public String renderAddNewStudent(Model model, @RequestParam String name) {
+  public String renderAddNewStudent(@RequestParam String name) {
     studentService.save(name);
-    model.addAttribute("students", studentService.findAll());
-    return "gfa-students";
+    return "redirect:/gfa/list";
   }
 }

@@ -7,7 +7,9 @@
 </head>
 <body>
 <div class="container-fluid">
-    <h1>Greenfox Academy</h1>
+    <h1>Greenfox Academy
+        <small class="text-muted" th:text="'Number of students: ' + ${studentsnumber}"></small>
+    </h1>
     <h3>Students:</h3>
     <div th:each="student : ${students}">
         <p th:text="${student}" style="color:dodgerblue"></p>
