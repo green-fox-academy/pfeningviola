@@ -27,7 +27,7 @@ public class FoxHashMapRepository implements FoxRepository {
   public Fox findByName(String name){
     return foxList.get(name);
   }
-  
+
   public void setFoxList(HashMap<String, Fox> foxList) {
     this.foxList = foxList;
   }

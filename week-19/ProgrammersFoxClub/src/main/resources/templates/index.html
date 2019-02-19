@@ -6,17 +6,26 @@
 </head>
 <body>
     <div class="navigation-bar">
-        <a href="/information">Information</a>
+        <ul>
+            <li><a th:href="'/?name=' + ${fox.name}">Information</a></li>
+            <li><a th:href="'/nutritionStore?name=' + ${fox.name}">Nutrition Store</a></li>
+            <li><a th:href="'/trickCenter?name=' + ${fox.name}">Trick Center</a></li>
+            <li><a th:href="'/actionHistory?name=' + ${fox.name}">Action History</a></li>
+        </ul>
     </div>
+
     <div class="user-img">
-        <img th:src="@{/img/greenfox.png}" alt = "User image"/>
+        <img src="../static/img/greenfox.png" th:src="@{/img/greenfox.png}" alt = "User image"/>
     </div>
     <div class="user-info">
-        <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.lastFood} + ' and ' + ${fox.lastDrink} + '. He knows ' + ${fox.knownTricks.size()} + ' tricks.'"></p>
+        <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.food} + ' and ' + ${fox.drink} + '. He knows ' + ${fox.knownTricks.size()} + ' tricks.'"></p>
     </div>
     <div class="tricks">
         <h2>Known tricks:</h2>
-        <p th:if="${fox.knownTricks.isEmpty()}">You know no tricks. Go and learn some.</p>
+        <p th:if="${fox.knownTricks.isEmpty()}">
+            <span>You know no tricks.</span>
+            <a href="/trickCenter">Go and learn some.</a>
+        </p>
         <ul th:unless="${fox.knownTricks.isEmpty()}">
             <li th:each="${fox.knownTricks}"></li>
         </ul>

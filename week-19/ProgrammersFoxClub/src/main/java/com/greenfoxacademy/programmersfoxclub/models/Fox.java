@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Fox {
   private String name;
-  private String lastFood;
-  private String lastDrink;
+  private String food;
+  private String drink;
   private ArrayList<String> knownTricks;
 
   public Fox(String name) {
     this.name = name;
-    this.lastFood = "steak";
-    this.lastDrink = "orange juice";
+    this.food = "steak";
+    this.drink = "orange juice";
     this.knownTricks = new ArrayList<>();
   }
 
@@ -23,20 +23,20 @@ public class Fox {
     this.name = name;
   }
 
-  public String getLastFood() {
-    return lastFood;
+  public String getFood() {
+    return food;
   }
 
-  public void setLastFood(String lastFood) {
-    this.lastFood = lastFood;
+  public void setFood(String food) {
+    this.food = food;
   }
 
-  public String getLastDrink() {
-    return lastDrink;
+  public String getDrink() {
+    return drink;
   }
 
-  public void setLastDrink(String lastDrink) {
-    this.lastDrink = lastDrink;
+  public void setDrink(String drink) {
+    this.drink = drink;
   }
 
   public ArrayList<String> getKnownTricks() {

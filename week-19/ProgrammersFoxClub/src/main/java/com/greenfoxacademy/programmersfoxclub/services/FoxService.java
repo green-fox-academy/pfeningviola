@@ -24,4 +24,14 @@ public class FoxService {
     Fox fox = foxRepository.findByName(name);
     return fox;
   }
+
+  public Fox findByName(String name){
+    return foxRepository.findByName(name);
+  }
+
+  public void changeNutrition(String name, String food, String drink) {
+    Fox fox = findByName(name);
+    fox.setFood(food);
+    fox.setDrink(drink);
+  }
 }
