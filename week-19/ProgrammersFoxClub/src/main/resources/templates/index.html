@@ -11,5 +11,15 @@
     <div class="user-img">
         <img th:src="@{/img/greenfox.png}" alt = "User image"/>
     </div>
+    <div class="user-info">
+        <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.lastFood} + ' and ' + ${fox.lastDrink} + '. He knows ' + ${fox.knownTricks.size()} + ' tricks.'"></p>
+    </div>
+    <div class="tricks">
+        <h2>Known tricks:</h2>
+        <p th:if="${fox.knownTricks.isEmpty()}">You know no tricks. Go and learn some.</p>
+        <ul th:unless="${fox.knownTricks.isEmpty()}">
+            <li th:each="${fox.knownTricks}"></li>
+        </ul>
+    </div>
 </body>
 </html>
