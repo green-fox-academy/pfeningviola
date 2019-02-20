@@ -4,6 +4,7 @@ import com.greenfoxacademy.programmersfoxclub.models.Fox;
 import com.greenfoxacademy.programmersfoxclub.models.PossibleDrink;
 import com.greenfoxacademy.programmersfoxclub.models.PossibleFood;
 import com.greenfoxacademy.programmersfoxclub.services.FoxService;
+import com.greenfoxacademy.programmersfoxclub.services.NutritionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -16,10 +17,12 @@ import java.util.ArrayList;
 public class MainController {
 
   private FoxService foxService;
+  private NutritionService nutritionService;
 
   @Autowired
-  public MainController(FoxService foxService){
+  public MainController(FoxService foxService, NutritionService nutritionService){
     this.foxService = foxService;
+    this.nutritionService = nutritionService;
   }
 
   @GetMapping("/")
@@ -53,10 +56,10 @@ public class MainController {
   }
 
   @PostMapping("nutritionStore")
-  public String changeNutritionOfFox(@RequestParam(value="name") String name,
-                                     @RequestParam(value="food") String food,
-                                     @RequestParam(value="drink") String drink){
-    foxService.changeNutrition(name, food, drink);
+  public String changeNutritionOfFox(@ModelAttribute(value="name") String name,
+                                     @ModelAttribute(value="food") String food,
+                                     @ModelAttribute(value="drink") String drink){
+    nutritionService.changeNutrition(name, food, drink);
     return "redirect:/?name=" + name;
   }
 }
