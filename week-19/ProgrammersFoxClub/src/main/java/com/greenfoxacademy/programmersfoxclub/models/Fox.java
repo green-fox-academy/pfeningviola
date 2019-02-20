@@ -7,12 +7,14 @@ public class Fox {
   private String food;
   private String drink;
   private ArrayList<String> knownTricks;
+  private ArrayList<Action> actionHistory;
 
   public Fox(String name) {
     this.name = name;
     this.food = "steak";
     this.drink = "orange juice";
     this.knownTricks = new ArrayList<>();
+    this.actionHistory = new ArrayList<>();
   }
 
   public String getName() {
@@ -39,11 +41,19 @@ public class Fox {
     this.drink = drink;
   }
 
-  public ArrayList<String> getKnownTricks() {
+  public ArrayList<String> findAllKnownTricks() {
     return knownTricks;
   }
 
   public void setKnownTricks(ArrayList<String> knownTricks) {
     this.knownTricks = knownTricks;
+  }
+
+  public ArrayList<Action> findAllActionHistory() {
+    return actionHistory;
+  }
+
+  public void setActionHistory(ArrayList<Action> actionHistory) {
+    this.actionHistory = actionHistory;
   }
 }

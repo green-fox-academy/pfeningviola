@@ -18,16 +18,22 @@
         <img src="../static/img/greenfox.png" th:src="@{/img/greenfox.png}" alt = "User image"/>
     </div>
     <div class="user-info">
-        <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.food} + ' and ' + ${fox.drink} + '. He knows ' + ${fox.knownTricks.size()} + ' tricks.'"></p>
+        <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.food} + ' and ' + ${fox.drink} + '. He knows ' + ${fox.findAllKnownTricks().size()} + ' tricks.'"></p>
     </div>
-    <div class="tricks">
+    <div class="list">
         <h2>Known tricks:</h2>
-        <p th:if="${fox.knownTricks.isEmpty()}">
+        <p th:if="${fox.findAllKnownTricks().isEmpty()}">
             <span>You know no tricks.</span>
             <a th:href="'/trickCenter?name=' + ${fox.name}">Go and learn some.</a>
         </p>
-        <ul th:unless="${fox.knownTricks.isEmpty()}">
-            <li th:each="trick : ${fox.knownTricks}" th:text="${trick}"></li>
+        <ul th:unless="${fox.findAllKnownTricks().isEmpty()}">
+            <li th:each="trick : ${fox.findAllKnownTricks()}" th:text="${trick}"></li>
+        </ul>
+    </div>
+    <div class="list" th:unless="${fox.findAllActionHistory().isEmpty()}">
+        <h2>Action history:</h2>
+        <ul>
+            <li th:each="action : ${fox.findAllActionHistory()}" th:text="${action.actionTime} + ' : ' + ${action.actionDescription}"></li>
         </ul>
     </div>
 </body>

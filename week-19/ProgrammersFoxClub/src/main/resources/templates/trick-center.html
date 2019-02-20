@@ -14,14 +14,17 @@
     </ul>
 </div>
 <div class="form">
-    <form action="/trickCenter" method="post">
-        <input type="hidden" name="name" th:value="${fox.name}"/>
-        <label for="trick">Tricks</label>
-        <select id="trick" name="trick">
-            <option th:each="trick : ${tricksToLearn}" th:value="${trick}" th:text="${trick}"></option>
-        </select>
-        <input type="submit" value="Learn"/>
-    </form>
+    <div th:if="${tricksToLearn.isEmpty()}" th:text="'Yuhuuu! You have learn all of the tricks!'"></div>
+    <div th:unless="${tricksToLearn.isEmpty()}">
+        <form action="/trickCenter" method="post">
+            <input type="hidden" name="name" th:value="${fox.name}"/>
+            <label for="trick">Tricks</label>
+            <select id="trick" name="trick">
+                <option th:each="trick : ${tricksToLearn}" th:value="${trick}" th:text="${trick}"></option>
+            </select>
+            <input type="submit" value="Learn"/>
+        </form>
+    </div>
 </div>
 </body>
 </html>

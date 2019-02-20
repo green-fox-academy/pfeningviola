@@ -79,4 +79,12 @@ public class MainController {
     trickService.learnTrick(name, trick);
     return "redirect:/?name=" + name;
   }
+
+  @GetMapping("/actionHistory")
+  public String renderActionHistory(@RequestParam String name, Model model) {
+    Fox fox = foxService.findByName(name);
+    model.addAttribute("fox", fox);
+
+    return "action-history";
+  }
 }
