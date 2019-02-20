@@ -24,10 +24,10 @@
         <h2>Known tricks:</h2>
         <p th:if="${fox.knownTricks.isEmpty()}">
             <span>You know no tricks.</span>
-            <a href="/trickCenter">Go and learn some.</a>
+            <a th:href="'/trickCenter?name=' + ${fox.name}">Go and learn some.</a>
         </p>
         <ul th:unless="${fox.knownTricks.isEmpty()}">
-            <li th:each="${fox.knownTricks}"></li>
+            <li th:each="trick : ${fox.knownTricks}" th:text="${trick}"></li>
         </ul>
     </div>
 </body>
