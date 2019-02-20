@@ -13,6 +13,10 @@
             <input id="name" name="name" type="text" required autofocus/>
             <input type="submit" value="GO"/>
         </form>
+        <div th:if="${noUser}">
+            <span th:text="${noUser}"></span>
+            <a href="/create">Add it as a new one!</a>
+        </div>
     </div>
 </body>
 </html>

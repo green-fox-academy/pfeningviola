@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Fox</title>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome to Programmer Fox Club!</h1>
+    <p>Please provide a name, so you can create your pet!</p>
+    <form action="/create" method="post">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required autofocus/>
+        <input type="submit" value="CREATE"/>
+    </form>
+    <div th:if="${alreadyExistingUser}">
+        <span th:text="${alreadyExistingUser}"></span>
+    </div>
+    <a href="/">Back to Welcome Page</a>
+</div>
+</body>
+</html>

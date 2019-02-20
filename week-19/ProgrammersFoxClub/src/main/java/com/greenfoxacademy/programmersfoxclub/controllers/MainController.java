@@ -26,10 +26,14 @@ public class MainController {
   }
 
   @GetMapping("/")
-  public String renderUserPage(Model model, @RequestParam String name) {
-    Fox fox = foxService.findByName(name);
-    model.addAttribute("fox", fox);
-    return "index";
+  public String renderUserPage(Model model, @RequestParam(required = false) String name) {
+    if (name == null) {
+      return "welcome";
+    } else {
+      Fox fox = foxService.findByName(name);
+      model.addAttribute("fox", fox);
+      return "index";
+    }
   }
 
   @GetMapping("/login")
@@ -38,9 +42,29 @@ public class MainController {
   }
 
   @PostMapping("/login")
-  public String login(@RequestParam String name){
-    foxService.login(name);
-    return "redirect:/?name=" + name;
+  public String login(@RequestParam String name, Model model){
+    if (foxService.checkExistUser(name)) {
+      return "redirect:/?name=" + name;
+    } else {
+      model.addAttribute("noUser", "You have provided a name that has not been used before.");
+      return "login";
+    }
+  }
+
+  @GetMapping("/create")
+  public String renderCreatePage(){
+    return "create";
+  }
+
+  @PostMapping("/create")
+  public String createFox(@ModelAttribute(value = "name") String name, Model model){
+    if (foxService.checkExistUser(name)){
+      model.addAttribute("alreadyExistingUser", "With this name already exists a fox. Choose other name!");
+      return "create";
+    } else {
+      foxService.createFox(name);
+      return "redirect:/?name=" + name;
+    }
   }
 
   @GetMapping("/nutritionStore")

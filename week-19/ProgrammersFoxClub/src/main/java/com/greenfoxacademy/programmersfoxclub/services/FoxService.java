@@ -16,13 +16,15 @@ public class FoxService {
     this.foxRepository = foxRepository;
   }
 
-  public Fox login(String name){
+  public boolean checkExistUser(String name){
+    return foxRepository.findAll().containsKey(name);
+  }
+
+  public void createFox(String name){
     if (!foxRepository.findAll().containsKey(name)) {
       Fox newFox = new Fox(name);
       foxRepository.save(newFox);
     }
-    Fox fox = foxRepository.findByName(name);
-    return fox;
   }
 
   public Fox findByName(String name){
