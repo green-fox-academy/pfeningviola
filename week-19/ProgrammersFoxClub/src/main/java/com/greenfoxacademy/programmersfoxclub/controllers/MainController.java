@@ -1,13 +1,10 @@
 package com.greenfoxacademy.programmersfoxclub.controllers;
 
 import com.greenfoxacademy.programmersfoxclub.models.Fox;
-import com.greenfoxacademy.programmersfoxclub.models.PossibleDrink;
-import com.greenfoxacademy.programmersfoxclub.models.PossibleFood;
 import com.greenfoxacademy.programmersfoxclub.services.FoxService;
 import com.greenfoxacademy.programmersfoxclub.services.NutritionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,8 +43,8 @@ public class MainController {
   @GetMapping("/nutritionStore")
   public String feedFox(@RequestParam String name, Model model){
     Fox fox = foxService.findByName(name);
-    ArrayList<String> possibleFood = new PossibleFood().getPossibleFood();
-    ArrayList<String> possibleDrink = new PossibleDrink().getPossibleDrink();
+    ArrayList<String> possibleFood = nutritionService.findAllFood();
+    ArrayList<String> possibleDrink = nutritionService.findAllDrink();
 
     model.addAttribute("fox", fox);
     model.addAttribute("possibleFood", possibleFood);
