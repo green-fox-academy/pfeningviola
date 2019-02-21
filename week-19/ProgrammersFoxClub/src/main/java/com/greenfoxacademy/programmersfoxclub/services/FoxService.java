@@ -20,9 +20,9 @@ public class FoxService {
     return foxRepository.findAll().containsKey(name);
   }
 
-  public void createFox(String name){
+  public void createFox(String name, String filename){
     if (!foxRepository.findAll().containsKey(name)) {
-      Fox newFox = new Fox(name);
+      Fox newFox = new Fox(name, filename);
       foxRepository.save(newFox);
     }
   }

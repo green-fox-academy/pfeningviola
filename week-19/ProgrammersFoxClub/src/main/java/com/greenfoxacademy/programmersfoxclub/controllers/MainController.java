@@ -57,12 +57,12 @@ public class MainController {
   }
 
   @PostMapping("/create")
-  public String createFox(@ModelAttribute(value = "name") String name, Model model){
+  public String createFox(@ModelAttribute(value = "name") String name, @ModelAttribute(value = "filename") String filename, Model model){
     if (foxService.checkExistUser(name)){
       model.addAttribute("alreadyExistingUser", "With this name already exists a fox. Choose other name!");
       return "create";
     } else {
-      foxService.createFox(name);
+      foxService.createFox(name, filename);
       return "redirect:/?name=" + name;
     }
   }

@@ -15,7 +15,7 @@
     </div>
 
     <div class="user-img">
-        <img src="../static/img/greenfox.png" th:src="@{/img/greenfox.png}" alt = "User image"/>
+        <img th:src="${fox.filename}" alt = "User image" height="200px" width="200px"/>
     </div>
     <div class="user-info">
         <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.food} + ' and ' + ${fox.drink} + '. He knows ' + ${fox.findAllKnownTricks().size()} + ' tricks.'"></p>
