@@ -27,16 +27,51 @@ public class NutritionService {
     ArrayList<Action> actionHistory = fox.findAllActionHistory();
     actionHistory.add(new Action(LocalDateTime.now(), "Food has been changed from: " + fox.getFood() + " to: " + food));
     fox.setFood(food);
+    if (!nutritionRepository.findAllFood().contains(food.toLowerCase())){
+      ArrayList<String> specialFood = fox.findAllSpecialFood();
+      specialFood.add(food);
+      fox.setSpecialFood(specialFood);
+    }
     actionHistory.add(new Action(LocalDateTime.now(), "Drink has been changed from: " + fox.getDrink() + " to: " + drink));
     fox.setDrink(drink);
+    if (!nutritionRepository.findAllDrink().contains(drink.toLowerCase())){
+      ArrayList<String> specialDrink = fox.findAllSpecialDrink();
+      specialDrink.add(drink);
+      fox.setSpecialDrink(specialDrink);
+    }
     fox.setActionHistory(actionHistory);
   }
 
-  public ArrayList<String> findAllDrink() {
+  public ArrayList<String> findAllFood(String name) {
+    ArrayList<String> specialFood = foxRepository.findByName(name).findAllSpecialFood();
+    ArrayList<String> basicFood = findBasicFood();
+
+    return findAllOption(specialFood, basicFood);
+  }
+
+  public ArrayList<String> findAllDrink(String name) {
+    ArrayList<String> specialDrink = foxRepository.findByName(name).findAllSpecialDrink();
+    ArrayList<String> basicDrink = findBasicDrink();
+
+    return findAllOption(specialDrink, basicDrink);
+  }
+
+  public ArrayList<String> findAllOption(ArrayList<String> specialList, ArrayList<String> basicList){
+    ArrayList<String> allOption = new ArrayList<>();
+    allOption.addAll(basicList);
+    for (String element : specialList){
+      if (!basicList.contains(element.toLowerCase())){
+        allOption.add(element.toLowerCase());
+      }
+    }
+    return allOption;
+  }
+
+  public ArrayList<String> findBasicDrink() {
     return nutritionRepository.findAllDrink();
   }
 
-  public ArrayList<String> findAllFood() {
+  public ArrayList<String> findBasicFood() {
     return nutritionRepository.findAllFood();
   }
 }

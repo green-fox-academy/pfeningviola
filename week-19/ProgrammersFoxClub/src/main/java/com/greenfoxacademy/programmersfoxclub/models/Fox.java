@@ -9,6 +9,8 @@ public class Fox {
   private ArrayList<String> knownTricks;
   private ArrayList<Action> actionHistory;
   private String filename;
+  private ArrayList<String> specialFood;
+  private ArrayList<String> specialDrink;
 
   public Fox(String name, String filename) {
     this.name = name;
@@ -17,6 +19,8 @@ public class Fox {
     this.drink = "orange juice";
     this.knownTricks = new ArrayList<>();
     this.actionHistory = new ArrayList<>();
+    this.specialFood = new ArrayList<>();
+    this.specialDrink = new ArrayList<>();
   }
 
   public String getName() {
@@ -65,5 +69,21 @@ public class Fox {
 
   public void setFilename(String filename) {
     this.filename = filename;
+  }
+
+  public ArrayList<String> findAllSpecialFood() {
+    return specialFood;
+  }
+
+  public void setSpecialFood(ArrayList<String> specialFood) {
+    this.specialFood = specialFood;
+  }
+
+  public ArrayList<String> findAllSpecialDrink() {
+    return specialDrink;
+  }
+
+  public void setSpecialDrink(ArrayList<String> specialDrink) {
+    this.specialDrink = specialDrink;
   }
 }

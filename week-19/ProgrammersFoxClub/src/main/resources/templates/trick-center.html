@@ -13,6 +13,9 @@
         <li><a th:href="'/actionHistory?name=' + ${fox.name}">Action History</a></li>
     </ul>
 </div>
+<div class="user-img">
+    <img th:src="${fox.filename}" alt = "User image" height="200px" width="200px"/>
+</div>
 <div class="form">
     <div th:if="${tricksToLearn.isEmpty()}" th:text="'Yuhuuu! You have learn all of the tricks!'"></div>
     <div th:unless="${tricksToLearn.isEmpty()}">

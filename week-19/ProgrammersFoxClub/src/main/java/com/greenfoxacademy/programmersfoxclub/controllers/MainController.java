@@ -70,8 +70,8 @@ public class MainController {
   @GetMapping("/nutritionStore")
   public String feedFox(@RequestParam String name, Model model){
     Fox fox = foxService.findByName(name);
-    ArrayList<String> possibleFood = nutritionService.findAllFood();
-    ArrayList<String> possibleDrink = nutritionService.findAllDrink();
+    ArrayList<String> possibleFood = nutritionService.findAllFood(name);
+    ArrayList<String> possibleDrink = nutritionService.findAllDrink(name);
 
     model.addAttribute("fox", fox);
     model.addAttribute("possibleFood", possibleFood);

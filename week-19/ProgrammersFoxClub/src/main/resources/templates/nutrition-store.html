@@ -13,7 +13,11 @@
             <li><a th:href="'/actionHistory?name=' + ${fox.name}">Action History</a></li>
         </ul>
     </div>
+    <div class="user-img">
+        <img th:src="${fox.filename}" alt = "User image" height="200px" width="200px"/>
+    </div>
     <div class="form">
+        <h2>Choose food and drink from the menu to your fox:</h2>
         <form action="/nutritionStore" method="post">
             <input type="hidden" name="name" th:value="${fox.name}"/>
             <label for="food">Food</label>
@@ -25,6 +29,17 @@
                 <option th:each="drink : ${possibleDrink}" th:value="${drink}" th:selected="${fox.drink.equals(drink)}" th:text="${drink}"></option>
             </select>
             <input type="submit" value="Change"/>
+        </form>
+    </div>
+    <div class="form">
+        <h2>Or give your special choice:</h2>
+        <form action="/nutritionStore" method="post">
+            <input type="hidden" name="name" th:value="${fox.name}"/>
+            <label for="food2">Food</label>
+            <input type="text" id="food2" name="food" required/>
+            <label for="drink2">Drink</label>
+            <input type="text" id="drink2" name="drink" required/>
+            <input type="submit" value="CHANGE"/>
         </form>
     </div>
 </body>
