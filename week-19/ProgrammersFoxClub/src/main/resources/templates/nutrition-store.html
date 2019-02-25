@@ -2,45 +2,120 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Nutrition Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/costum.css}">
 </head>
-<body>
-    <div class="navigation-bar">
-        <ul>
-            <li><a th:href="'/?name=' + ${fox.name}">Information</a></li>
-            <li><a th:href="'/nutritionStore?name=' + ${fox.name}">Nutrition Store</a></li>
-            <li><a th:href="'/trickCenter?name=' + ${fox.name}">Trick Center</a></li>
-            <li><a th:href="'/actionHistory?name=' + ${fox.name}">Action History</a></li>
-        </ul>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="../static/img/codingfox.png" th:src="@{/img/codingfox.png}" alt = "User image" style="height:50px; width:auto;"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span class="navbar-brand">Programmer Fox Club</span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="'/?name=' + ${fox.name}">Information
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/nutritionStore?name=' + ${fox.name}">Nutrition Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/trickCenter?name=' + ${fox.name}">Trick Center</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/actionHistory?name=' + ${fox.name}">Action History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Log Out</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="user-img">
-        <img th:src="${fox.filename}" alt = "User image" height="200px" width="200px"/>
+</nav>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-3">
+            <div class="w-75" >
+                <br>
+                <img th:src="${fox.filename}" alt = "User image" class="w-100" style="height: auto;"/>
+            </div>
+            <div class="pt-3 mx-auto">
+                <a th:href="'/image?name=' + ${fox.name}" class="text-decoration-none text-secondary">Change your image</a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <br>
+            <p class="h2">Choose food and drink from the menu to your fox:</p>
+            <form action="/nutritionStore" method="post">
+                <div class="form-group row mt-5">
+                    <input type="hidden" name="name" th:value="${fox.name}"/>
+                    <div class="col-sm-1">
+                        <label for="food" class="h5">Food</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <select id="food" name="food" class="form-control">
+                            <option th:each="food : ${possibleFood}" th:value="${food}" th:selected="${fox.food.equals(food)}" th:text="${food}" ></option>
+                    </select>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <label for="drink" class="h5">Drink</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <select id="drink" name="drink" class="form-control">
+                            <option th:each="drink : ${possibleDrink}" th:value="${drink}" th:selected="${fox.drink.equals(drink)}" th:text="${drink}"></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="submit" value="CHANGE" class="btn btn-secondary"/>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="form">
-        <h2>Choose food and drink from the menu to your fox:</h2>
-        <form action="/nutritionStore" method="post">
-            <input type="hidden" name="name" th:value="${fox.name}"/>
-            <label for="food">Food</label>
-            <select id="food" name="food">
-                <option th:each="food : ${possibleFood}" th:value="${food}" th:selected="${fox.food.equals(food)}" th:text="${food}" ></option>
-            </select>
-            <label for="drink">Drink</label>
-            <select id="drink" name="drink">
-                <option th:each="drink : ${possibleDrink}" th:value="${drink}" th:selected="${fox.drink.equals(drink)}" th:text="${drink}"></option>
-            </select>
-            <input type="submit" value="Change"/>
-        </form>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            <p class="h4 text-secondary">Or give your special choice:</p>
+            <form action="/nutritionStore" method="post">
+                    <div class="form-group row mt-5">
+                        <input type="hidden" name="name" th:value="${fox.name}"/>
+                        <div class="col-sm-1">
+                            <label for="food2" class="h5">Food</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="food2" name="food" required/>
+                        </div>
+                        <div class="col-sm-1">
+                            <label for="drink2" class="h5">Drink</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="drink2" name="drink" required/>
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="submit" value="CHANGE" class="btn btn-secondary"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+<footer class="page-footer bg-dark text-white fixed-bottom">
+    <div class="container">
+        <div class="footer-copyright text-center ">
+            <span class="align-middle"><small >© 2018 Copyright: Viola Pfening</small></span>
+        </div>
     </div>
-    <div class="form">
-        <h2>Or give your special choice:</h2>
-        <form action="/nutritionStore" method="post">
-            <input type="hidden" name="name" th:value="${fox.name}"/>
-            <label for="food2">Food</label>
-            <input type="text" id="food2" name="food" required/>
-            <label for="drink2">Drink</label>
-            <input type="text" id="drink2" name="drink" required/>
-            <input type="submit" value="CHANGE"/>
-        </form>
-    </div>
+</footer>
 </body>
 </html>

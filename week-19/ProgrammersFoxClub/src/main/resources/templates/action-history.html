@@ -2,28 +2,73 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Action History</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/costum.css}">
 </head>
-<body>
-    <div class="navigation-bar">
-        <ul>
-            <li><a th:href="'/?name=' + ${fox.name}">Information</a></li>
-            <li><a th:href="'/nutritionStore?name=' + ${fox.name}">Nutrition Store</a></li>
-            <li><a th:href="'/trickCenter?name=' + ${fox.name}">Trick Center</a></li>
-            <li><a th:href="'/actionHistory?name=' + ${fox.name}">Action History</a></li>
-        </ul>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="../static/img/codingfox.png" th:src="@{/img/codingfox.png}" alt = "User image" style="height:50px; width:auto;"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span class="navbar-brand">Programmer Fox Club</span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="'/?name=' + ${fox.name}">Information
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/nutritionStore?name=' + ${fox.name}">Nutrition Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/trickCenter?name=' + ${fox.name}">Trick Center</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/actionHistory?name=' + ${fox.name}">Action History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Log Out</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="user-img">
-        <img th:src="${fox.filename}" alt = "User image" height="200px" width="200px"/>
+</nav>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-3">
+            <div class="w-75" >
+                <br>
+                <img th:src="${fox.filename}" alt = "User image" class="w-100" style="height: auto;"/>
+            </div>
+            <div class="pt-3 mx-auto">
+                <a th:href="'/image?name=' + ${fox.name}" class="text-decoration-none text-secondary">Change your image</a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <br>
+            <p class="h2">Action history:</p>
+            <p th:if="${fox.findAllActionHistory().isEmpty()}" class="h4 text-secondary text-center mt-5">There was no action yet.</p>
+            <ul th:unless="${fox.findAllActionHistory().isEmpty()}" class="mt-5">
+                <li th:each="action : ${fox.findAllActionHistory()}" th:text="${action.actionTime} + ' : ' + ${action.actionDescription}" class="text-secondary"></li>
+            </ul>
+        </div>
     </div>
-    <div class="list">
-        <h2>Action history:</h2>
-        <p th:if="${fox.findAllActionHistory().isEmpty()}">
-            <span>There was no action yet.</span>
-        </p>
-        <ul th:unless="${fox.findAllActionHistory().isEmpty()}">
-            <li th:each="action : ${fox.findAllActionHistory()}" th:text="${action.actionTime} + ' : ' + ${action.actionDescription}"></li>
-        </ul>
+</div>
+<footer class="page-footer bg-dark text-white fixed-bottom">
+    <div class="container">
+        <div class="footer-copyright text-center ">
+            <span class="align-middle"><small >© 2018 Copyright: Viola Pfening</small></span>
+        </div>
     </div>
+</footer>
 </body>
 </html>

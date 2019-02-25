@@ -25,19 +25,25 @@ public class NutritionService {
   public void changeNutrition(String name, String food, String drink) {
     Fox fox = foxRepository.findByName(name);
     ArrayList<Action> actionHistory = fox.findAllActionHistory();
-    actionHistory.add(new Action(LocalDateTime.now(), "Food has been changed from: " + fox.getFood() + " to: " + food));
-    fox.setFood(food);
-    if (!nutritionRepository.findAllFood().contains(food.toLowerCase())){
-      ArrayList<String> specialFood = fox.findAllSpecialFood();
-      specialFood.add(food);
-      fox.setSpecialFood(specialFood);
+
+    if ((food != null) && (!food.equals(""))) {
+      actionHistory.add(new Action(LocalDateTime.now(), "Food has been changed from: " + fox.getFood() + " to: " + food));
+      fox.setFood(food);
+      if (!nutritionRepository.findAllFood().contains(food.toLowerCase())) {
+        ArrayList<String> specialFood = fox.findAllSpecialFood();
+        specialFood.add(food);
+        fox.setSpecialFood(specialFood);
+      }
     }
-    actionHistory.add(new Action(LocalDateTime.now(), "Drink has been changed from: " + fox.getDrink() + " to: " + drink));
-    fox.setDrink(drink);
-    if (!nutritionRepository.findAllDrink().contains(drink.toLowerCase())){
-      ArrayList<String> specialDrink = fox.findAllSpecialDrink();
-      specialDrink.add(drink);
-      fox.setSpecialDrink(specialDrink);
+
+    if ((drink != null) && (!drink.equals(""))) {
+      actionHistory.add(new Action(LocalDateTime.now(), "Drink has been changed from: " + fox.getDrink() + " to: " + drink));
+      fox.setDrink(drink);
+      if (!nutritionRepository.findAllDrink().contains(drink.toLowerCase())) {
+        ArrayList<String> specialDrink = fox.findAllSpecialDrink();
+        specialDrink.add(drink);
+        fox.setSpecialDrink(specialDrink);
+      }
     }
     fox.setActionHistory(actionHistory);
   }

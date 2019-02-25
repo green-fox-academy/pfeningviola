@@ -59,6 +59,18 @@ public class Fox {
     return actionHistory;
   }
 
+  public ArrayList<Action> findLast5Action(){
+    if (actionHistory.size() <= 5){
+      return actionHistory;
+    } else {
+      ArrayList<Action> last5Action = new ArrayList<>();
+      for (int i = actionHistory.size() - 5; i < actionHistory.size(); i++) {
+        last5Action.add(actionHistory.get(i));
+      }
+      return last5Action;
+    }
+  }
+
   public void setActionHistory(ArrayList<Action> actionHistory) {
     this.actionHistory = actionHistory;
   }

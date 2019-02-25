@@ -111,4 +111,18 @@ public class MainController {
 
     return "action-history";
   }
+
+  @GetMapping("/image")
+  public String renderImageChangingPage(@RequestParam String name, Model model) {
+    Fox fox = foxService.findByName(name);
+    model.addAttribute("fox", fox);
+    return "change-image";
+  }
+
+  @PostMapping("/image")
+  public String changeImage(@ModelAttribute(value = "name") String name,
+                            @ModelAttribute(value = "filename") String filename){
+    foxService.changeImage(name, filename);
+    return "redirect:/?name=" + name;
+  }
 }

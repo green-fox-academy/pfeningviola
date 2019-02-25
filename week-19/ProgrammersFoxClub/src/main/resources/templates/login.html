@@ -2,21 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login - Programmer Fox Club</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/costum.css}">
 </head>
 <body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-        <h1>Welcome to Programmer Fox Club!</h1>
-        <p>Please provide a name, so you can associate it to your pet!</p>
-        <form action="/login" method="post">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" required autofocus/>
-            <input type="submit" value="GO"/>
-        </form>
-        <div th:if="${noUser}">
-            <span th:text="${noUser}"></span>
-            <a href="/create">Add it as a new one!</a>
+        <a class="navbar-brand" href="/">
+            <img src="../static/img/codingfox.png" th:src="@{/img/codingfox.png}" alt = "User image" style="height:50px; width:auto;"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span class="navbar-brand">Programmer Fox Club</span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="'/login'">Login
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/create'">Register</a>
+                </li>
+            </ul>
         </div>
     </div>
+</nav>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-3 m-auto">
+            <div class="w-100">
+                <img th:src="@{/img/codingfox.png}" alt = "User image" class="w-100" style="height: auto;"/>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <br>
+            <h1 class="text-center">Welcome in Programmer Fox Club!</h1>
+            <div>
+                <br>
+                <p class="h4 text-secondary text-center">Please provide a name, so you can associate it to your pet!</p>
+                <br>
+                <form action="/login" method="post">
+                    <div class="form-group row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-2">
+                            <label for="name" class="h5">Name</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="name" name="name" type="text" required autofocus/>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="submit" value="GO" class="btn btn-secondary w-100"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            <div th:if="${noUser}">
+                <p class="text-center">
+                    <span class="text-dark" th:text="${noUser}"></span>
+                    <a href="/create" class="text-decoration-none text-secondary">Add it as a new one!</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="page-footer bg-dark text-white fixed-bottom">
+    <div class="container">
+        <div class="footer-copyright text-center ">
+            <span class="align-middle"><small >© 2018 Copyright: Viola Pfening</small></span>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

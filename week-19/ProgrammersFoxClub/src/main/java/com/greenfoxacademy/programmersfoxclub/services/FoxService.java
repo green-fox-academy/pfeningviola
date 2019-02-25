@@ -36,4 +36,9 @@ public class FoxService {
     fox.setFood(food);
     fox.setDrink(drink);
   }
+
+  public void changeImage(String name, String filename){
+    Fox fox = findByName(name);
+    fox.setFilename(filename);
+  }
 }

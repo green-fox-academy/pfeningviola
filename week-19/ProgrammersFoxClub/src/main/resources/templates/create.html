@@ -2,59 +2,131 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Create New Fox</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}">
 </head>
 <body>
-<div class="container">
-    <h1>Welcome to Programmer Fox Club!</h1>
-    <p>Please provide a name, so you can create your pet!</p>
-    <form action="/create" method="post">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required autofocus/>
-        <div>
-            <h2>Choose the image of your fox:</h2>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="../static/img/codingfox.png" th:src="@{/img/codingfox.png}" alt = "User image" style="height:50px; width:auto;"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span class="navbar-brand">Programmer Fox Club</span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="'/login'">Login
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/create'">Register</a>
+                </li>
+            </ul>
         </div>
-        <div>
-            <input type="radio" name="filename" id="greenfox" value="/img/greenfox.png" class="input-hidden"/>
-            <label for="greenfox">
-                <img src="../static/img/greenfox.png" th:src="@{/img/greenfox.png}" alt="Green Fox"/>
-            </label>
-
-            <input type="radio" name="filename" id="redfox" value="/img/redfox.png" class="input-hidden"/>
-            <label for="redfox">
-                <img src="../static/img/redfox.png" th:src="@{/img/redfox.png}" alt="Red Fox" height="200px" width="200px"/>
-            </label>
-
-            <input type="radio" name="filename" id="yellowfox" value="/img/yellowfox.png" class="input-hidden"/>
-            <label for="yellowfox">
-                <img src="../static/img/yellowfox.png" th:src="@{/img/yellowfox.png}" alt="Yellow Fox" height="200px" width="200px"/>
-            </label>
-        </div>
-        <div>
-            <input type="radio" name="filename" id="arcticfox" value="/img/arcticfox.png" class="input-hidden"/>
-            <label for="arcticfox">
-                <img src="../static/img/arcticfox.png" th:src="@{/img/arcticfox.png}" alt="Arctic Fox" height="200px" width="200px"/>
-            </label>
-
-            <input type="radio" name="filename" id="indianfox" value="/img/indianfox.png" class="input-hidden"/>
-            <label for="indianfox">
-                <img src="../static/img/indianfox.png" th:src="@{/img/indianfox.png}" alt="Indian Fox" height="200px" width="200px"/>
-            </label>
-
-            <input type="radio" name="filename" id="bluefox" value="/img/bluefox.png" class="input-hidden"/>
-            <label for="bluefox">
-                <img src="../static/img/bluefox.png" th:src="@{/img/bluefox.png}" alt="Blue Fox" height="200px" width="200px"/>
-            </label>
-
-        </div>
-        <div>
-            <input type="submit" value="CREATE"/>
-        </div>
-    </form>
-    <div th:if="${alreadyExistingUser}">
-        <span th:text="${alreadyExistingUser}"></span>
     </div>
-    <a href="/">Back to Welcome Page</a>
+</nav>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-3 m-auto">
+            <div class="w-100">
+                <img th:src="@{/img/codingfox.png}" alt = "User image" class="w-100" style="height: auto;"/>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <br>
+            <h1 class="text-center">Welcome in Programmer Fox Club!</h1>
+            <div>
+                <br>
+                <p class="h4 text-secondary text-center">Please provide a name, so you can create your pet:</p>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <form action="/create" method="post">
+                <div class="form-group row">
+                    <div class="col-sm-4 ml-5"></div>
+                        <div class="col-sm-2">
+                            <label for="name" class="h5">Name</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="name" name="name" type="text" required autofocus/>
+                        </div>
+
+                </div>
+                <div th:if="${alreadyExistingUser}">
+                    <p class="text-danger text-center" th:text="${alreadyExistingUser}"></p>
+                </div>
+                <div class="form-group row">
+                    <p class="h4 text-secondary">... and choose the image of your fox:</p>
+                </div>
+                <div class="form-group row">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" aria-pressed="false">
+                        <div class="col-sm-2 form-check">
+                            <label for="greenfox" class="btn btn-light form-check-label">
+                                <input style="position: absolute;left:-9999px;" class="form-check-input" type="radio" name="filename" id="greenfox" value="/img/greenfox.png" autocomplete="off" checked />
+                                <img src="../static/img/greenfox.png" th:src="@{/img/greenfox.png}" alt="Green Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
+
+                            </label>
+                        </div>
+
+                        <div class="col-sm-2 form-check">
+                            <label for="redfox" class="btn btn-light form-check-label">
+                                <img src="../static/img/redfox.png" th:src="@{/img/redfox.png}" alt="Red Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
+                                <input class="form-check-input" type="radio" name="filename" id="redfox" value="/img/redfox.png" style="position: absolute;left:-9999px;" autocomplete="off"/>                            </label>
+                        </div>
+
+                        <div class="col-sm-2 form-check">
+                            <label for="yellowfox" class="btn btn-light form-check-label">
+                                <img src="../static/img/yellowfox.png" th:src="@{/img/yellowfox.png}" alt="Yellow Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
+                                <input class="form-check-input" type="radio" name="filename" id="yellowfox" value="/img/yellowfox.png" style="position: absolute;left:-9999px;" autocomplete="off"/>
+                            </label>
+                        </div>
+
+                    <div class="col-sm-2 form-check">
+                        <label for="arcticfox" class="btn btn-light form-check-label">
+                            <img src="../static/img/arcticfox.png" th:src="@{/img/arcticfox.png}" alt="Arctic Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
+                            <input class="form-check-input" type="radio" name="filename" id="arcticfox" value="/img/arcticfox.png" style="position: absolute;left:-9999px;" autocomplete="off"/>
+                        </label>
+                    </div>
+
+                    <div class="col-sm-2 form-check">
+                        <label for="indianfox" class="btn btn-light form-check-label">
+                            <img src="../static/img/indianfox.png" th:src="@{/img/indianfox.png}" alt="Indian Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
+                            <input class="form-check-input" type="radio" name="filename" id="indianfox" value="/img/indianfox.png" style="position: absolute;left:-9999px;" autocomplete="off"/>
+                        </label>
+                    </div>
+
+                    <div class="col-sm-2 form-check">
+                        <label for="bluefox" class="btn btn-light form-check-label">
+                            <img src="../static/img/bluefox.png" th:src="@{/img/bluefox.png}" alt="Blue Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
+                            <input class="form-check-input" type="radio" name="filename" id="bluefox" value="/img/bluefox.png" style="position: absolute;left:-9999px;" autocomplete="off"/>
+                        </label>
+                    </div>
+                </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-9 m-auto">
+                        <input type="submit" value="CREATE" class="btn btn-secondary w-100"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+<footer class="page-footer bg-dark text-white fixed-bottom">
+    <div class="container">
+        <div class="footer-copyright text-center ">
+            <span class="align-middle"><small >© 2018 Copyright: Viola Pfening</small></span>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

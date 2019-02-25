@@ -2,18 +2,79 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Welcome in Programmer Fox Club</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/costum.css}">
 </head>
 <body>
-    <h1>Welcome in Programmer Fox Club!</h1>
-    <div>
-        <p>This is a game, where you can take care your own fox.</p>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="../static/img/codingfox.png" th:src="@{/img/codingfox.png}" alt = "User image" style="height:50px; width:auto;"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span class="navbar-brand">Programmer Fox Club</span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="'/login'">Login
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/create'">Register</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div>
-        <span>Do you already have a fox?</span><a href="/login">Let's take care him!></a>
+</nav>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-3 m-auto">
+            <div class="w-100">
+                <img th:src="@{/img/codingfox.png}" alt = "User image" class="w-100" style="height: auto;"/>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <br>
+            <h1 class="text-center">Welcome in Programmer Fox Club!</h1>
+            <div>
+                <br>
+                <p class="h4 text-center text-secondary">This is a game, where you can take care of your own fox.</p>
+                <br>
+            </div>
+        </div>
     </div>
-    <div>
-        <span>Here you can create your own fox.</span><a href="/create">Let's play!</a>
+    <div class="row mt-5">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+            <p class="h4">Do you already have a fox?</p>
+        </div>
+        <div class="col-sm-5">
+                <a href="/login" class="btn btn-secondary w-50" role="button">Let's take care him!</a>
+        </div>
+        <br>
+        <br>
     </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+            <p class="h4">Here you can create your own fox.</p>
+        </div>
+        <div class="col-sm-5">
+            <a href="/create" class="btn btn-secondary w-50" role="button">Let's play!</a>
+        </div>
+    </div>
+</div>
+<footer class="page-footer bg-dark text-white fixed-bottom">
+    <div class="container">
+        <div class="footer-copyright text-center ">
+            <span class="align-middle"><small >© 2018 Copyright: Viola Pfening</small></span>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

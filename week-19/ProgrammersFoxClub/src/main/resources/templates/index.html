@@ -2,39 +2,90 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Programmer Fox Club</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/costum.css}">
 </head>
-<body>
-    <div class="navigation-bar">
-        <ul>
-            <li><a th:href="'/?name=' + ${fox.name}">Information</a></li>
-            <li><a th:href="'/nutritionStore?name=' + ${fox.name}">Nutrition Store</a></li>
-            <li><a th:href="'/trickCenter?name=' + ${fox.name}">Trick Center</a></li>
-            <li><a th:href="'/actionHistory?name=' + ${fox.name}">Action History</a></li>
-        </ul>
-    </div>
+<body class="bg-light">
 
-    <div class="user-img">
-        <img th:src="${fox.filename}" alt = "User image" height="200px" width="200px"/>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="../static/img/codingfox.png" th:src="@{/img/codingfox.png}" alt = "User image" style="height:50px; width:auto;"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span class="navbar-brand">Programmer Fox Club</span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="'/?name=' + ${fox.name}">Information
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/nutritionStore?name=' + ${fox.name}">Nutrition Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/trickCenter?name=' + ${fox.name}">Trick Center</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/actionHistory?name=' + ${fox.name}">Action History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Log Out</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="user-info">
-        <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.food} + ' and ' + ${fox.drink} + '. He knows ' + ${fox.findAllKnownTricks().size()} + ' tricks.'"></p>
+</nav>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-3">
+            <div class="w-75" >
+                <br>
+                <img th:src="${fox.filename}" alt = "User image" class="w-100" style="height: auto;"/>
+            </div>
+            <div class="pt-3" >
+             <a th:href="'/image?name=' + ${fox.name}" class="text-decoration-none text-secondary mx-auto">Change your image</a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="user-info">
+                <br>
+                <p class="h2 text-center" th:text="'This is ' + ${fox.name} + '.'"></p>
+                <br>
+                <p class="h4 text-center text-secondary" th:text="'Currently living on ' + ${fox.food} + ' and ' + ${fox.drink} + '. He knows ' + ${fox.findAllKnownTricks().size()} + ' tricks.'"></p>
+                <br>
+            </div>
+            <div class="list">
+                <h2>Known tricks:</h2>
+                <p class="text-justify" th:if="${fox.findAllKnownTricks().isEmpty()}">
+                    <span>You know no tricks.</span>
+                    <a class="text-decoration-none text-secondary" th:href="'/trickCenter?name=' + ${fox.name}">Go and learn some.</a>
+                </p>
+                <ul th:unless="${fox.findAllKnownTricks().isEmpty()}">
+                    <li th:each="trick : ${fox.findAllKnownTricks()}" th:text="${trick}" class="h5"></li>
+                </ul>
+            </div>
+            <div class="list" th:unless="${fox.findAllActionHistory().isEmpty()}">
+                <h2>Action history:</h2>
+                <ul>
+                <li th:each="action : ${fox.findLast5Action()}" th:text="${action.actionTime} + ' : ' + ${action.actionDescription}" class="text-secondary"></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="list">
-        <h2>Known tricks:</h2>
-        <p th:if="${fox.findAllKnownTricks().isEmpty()}">
-            <span>You know no tricks.</span>
-            <a th:href="'/trickCenter?name=' + ${fox.name}">Go and learn some.</a>
-        </p>
-        <ul th:unless="${fox.findAllKnownTricks().isEmpty()}">
-            <li th:each="trick : ${fox.findAllKnownTricks()}" th:text="${trick}"></li>
-        </ul>
+</div>
+<footer class="page-footer bg-dark text-white fixed-bottom">
+    <div class="container">
+        <div class="footer-copyright text-center ">
+            <span class="align-middle"><small >© 2018 Copyright: Viola Pfening</small></span>
+        </div>
     </div>
-    <div class="list" th:unless="${fox.findAllActionHistory().isEmpty()}">
-        <h2>Action history:</h2>
-        <ul>
-            <li th:each="action : ${fox.findAllActionHistory()}" th:text="${action.actionTime} + ' : ' + ${action.actionDescription}"></li>
-        </ul>
-    </div>
+</footer>
 </body>
 </html>
