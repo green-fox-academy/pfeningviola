@@ -1,6 +1,7 @@
 package com.greenfoxacademy.programmersfoxclub.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Fox {
   private String name;
@@ -61,12 +62,15 @@ public class Fox {
 
   public ArrayList<Action> findLast5Action(){
     if (actionHistory.size() <= 5){
-      return actionHistory;
+      ArrayList<Action> reversedList = actionHistory;
+      Collections.reverse(reversedList);
+      return reversedList;
     } else {
       ArrayList<Action> last5Action = new ArrayList<>();
       for (int i = actionHistory.size() - 5; i < actionHistory.size(); i++) {
         last5Action.add(actionHistory.get(i));
       }
+      Collections.reverse(last5Action);
       return last5Action;
     }
   }
