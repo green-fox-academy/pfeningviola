@@ -33,12 +33,14 @@ public class MainController {
       Fox fox = foxService.findByName(name);
       model.addAttribute("fox", fox);
       String foxName = fox.getName();
-      if(fox.isAlive()) {
-        return "index";
-      } else {
+      if (!fox.isAlive()){
         foxService.findAll().remove(name);
         model.addAttribute("foxName", foxName);
         return "dead-fox";
+      } else if ((fox.isAlive()) && (!fox.isLearningState())) {
+        return "index";
+      } else {
+        return "redirect:/trickCenter?name=" + name;
       }
     }
   }
@@ -82,19 +84,17 @@ public class MainController {
   public String feedFox(@RequestParam String name, Model model){
     Fox fox = foxService.findByName(name);
     model.addAttribute("fox", fox);
-    String foxName = fox.getName();
 
-    if (fox.isAlive()) {
+    if (!fox.isAlive()) {
+      return "redirect:/?name=" + name;
+    } else if (fox.isLearningState()){
+      return "redirect:/trickCenter?name=" + name;
+    } else {
       ArrayList<String> possibleFood = nutritionService.findAllFood(name);
       ArrayList<String> possibleDrink = nutritionService.findAllDrink(name);
       model.addAttribute("possibleFood", possibleFood);
       model.addAttribute("possibleDrink", possibleDrink);
       return "nutrition-store";
-
-    } else {
-      foxService.findAll().remove(name);
-      model.addAttribute("foxName", foxName);
-      return "dead-fox";
     }
   }
 
@@ -110,38 +110,45 @@ public class MainController {
   public String renderTrickCenter(@RequestParam String name, Model model) {
     Fox fox = foxService.findByName(name);
     model.addAttribute("fox", fox);
-    String foxName = fox.getName();
 
-    if (fox.isAlive()) {
+    if (!fox.isAlive()) {
+      return "redirect:/?name=" + name;
+    } else if (fox.isLearningState()){
+      if (foxService.findByName(name).findAllKnownTricks().size() > 0) {
+        String actualLearningTrick = foxService.findByName(name).findAllKnownTricks().get(foxService.findByName(name).findAllKnownTricks().size() - 1);
+        model.addAttribute("actualLearningTrick", actualLearningTrick);
+      }
+      return "learning";
+    } else {
       ArrayList<String> tricksToLearn = trickService.findTricksToLearn(name);
       model.addAttribute("tricksToLearn", tricksToLearn);
       return "trick-center";
-    } else {
-      foxService.findAll().remove(name);
-      model.addAttribute("foxName", foxName);
-      return "dead-fox";
     }
   }
 
   @PostMapping("/trickCenter")
   public String learnTrick(@ModelAttribute(value="name") String name,
                            @ModelAttribute(value="trick") String trick){
+    Fox fox = foxService.findByName(name);
     trickService.learnTrick(name, trick);
-    return "redirect:/?name=" + name;
+    if (fox.isLearningState()){
+      return "redirect:/trickCenter?name=" + name;
+    } else {
+      return "redirect:/?name=" + name;
+    }
   }
 
   @GetMapping("/actionHistory")
   public String renderActionHistory(@RequestParam String name, Model model) {
     Fox fox = foxService.findByName(name);
     model.addAttribute("fox", fox);
-    String foxName = fox.getName();
 
-    if (fox.isAlive()) {
-      return "action-history";
+    if (!fox.isAlive()) {
+      return "redirect:/?name=" + name;
+    } else if (fox.isLearningState()){
+      return "redirect:/trickCenter?name=" + name;
     } else {
-      foxService.findAll().remove(name);
-      model.addAttribute("foxName", foxName);
-      return "dead-fox";
+      return "action-history";
     }
   }
 
@@ -149,14 +156,13 @@ public class MainController {
   public String renderImageChangingPage(@RequestParam String name, Model model) {
     Fox fox = foxService.findByName(name);
     model.addAttribute("fox", fox);
-    String foxName = fox.getName();
 
-    if (fox.isAlive()) {
-      return "change-image";
+    if (!fox.isAlive()) {
+      return "redirect:/?name=" + name;
+    } else if (fox.isLearningState()){
+      return "redirect:/trickCenter?name=" + name;
     } else {
-      foxService.findAll().remove(name);
-      model.addAttribute("foxName", foxName);
-      return "dead-fox";
+      return "change-image";
     }
   }
 

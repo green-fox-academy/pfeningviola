@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -22,12 +22,21 @@
             <span class="navbar-brand">Programmer Fox Club</span>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="'/login'">Login
+                    <a class="nav-link" th:href="'/?name=' + ${fox.name}">Information
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="'/create'">Register</a>
+                    <a class="nav-link" th:href="'/nutritionStore?name=' + ${fox.name}">Nutrition Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/trickCenter?name=' + ${fox.name}">Trick Center</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/actionHistory?name=' + ${fox.name}">Action History</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Log Out</a>
                 </li>
             </ul>
         </div>
@@ -35,19 +44,26 @@
 </nav>
 <div class="container">
     <div class="row mt-5">
-        <div class="col-sm-12 m-auto">
-            <br>
-            <p class="h2 text-center" th:text="${foxName} + ' died of starvation.'"></p>
-            <div>
-                <img src="../static/img/deadfox.jpg" th:src="@{/img/deadfox.jpg}" alt = "Dead fox image" style="height:300px; width:auto;" class="rounded mx-auto d-block"/>
-            </div>
+        <div class="col-sm-3">
+            <div class="w-75" >
                 <br>
-            <div class="text-center">
-                <a href="/" class="h4 text-secondary">Restart the game!</a>
+                <img th:src="${fox.filename}" alt = "User image" class="w-100" style="height: auto;"/>
+            </div>
+            <div class="pt-3 mx-auto">
+                <a th:href="'/image?name=' + ${fox.name}" class="text-decoration-none text-secondary">Change your image</a>
             </div>
         </div>
-    </div>
-</div>
+        <div class="col-sm-9">
+            <br>
+            <div th:if="${fox.isHungry()}" class="alert alert-danger h4 text-center" role="alert" >
+                <span th:text="${fox.name} + ' is hungry. '"></span>
+                <a class="alert-link" th:href="'/nutritionStore?name=' + ${fox.name}">Feed him in the Nutrition Store!</a>
+            </div>
+            <p th:text="'Please wait until ' + ${fox.name} + ' picks up ' + ${actualLearningTrick} + '.'" class="h2 text-center"></p>
+            <div class="text-center mt-5">
+                <img src="../static/img/learning.jpg" th:src="@{/img/learning.jpg}" alt = "Fox is learning" style="height:200px; width:auto;" class="rounded mx-auto d-block"/>
+            </div>
+        </div>
 <footer class="page-footer bg-dark text-white fixed-bottom">
     <div class="container">
         <div class="footer-copyright text-center ">

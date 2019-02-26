@@ -16,6 +16,7 @@ public class Fox {
   private ArrayList<String> specialDrink;
   private int foodLevel;
   private int maxFoodLevel;
+  private boolean learningState;
 
   public Fox(String name, String filename) {
     this.name = name;
@@ -28,21 +29,7 @@ public class Fox {
     this.specialDrink = new ArrayList<>();
     this.foodLevel = 10;
     this.maxFoodLevel = 20;
-    decreaseFoodLevel();
-  }
-
-  public void decreaseFoodLevel(){
-    Timer timer = new Timer();
-
-    timer.schedule( new TimerTask() {
-      public void run() {
-        if (foodLevel > 0) {
-          foodLevel--;
-        } else {
-          timer.cancel();
-        }
-      }
-    }, 10*1000, 10*1000);
+    this.learningState = false;
   }
 
   public boolean isAlive(){
@@ -150,5 +137,13 @@ public class Fox {
 
   public void setMaxFoodLevel(int maxFoodLevel) {
     this.maxFoodLevel = maxFoodLevel;
+  }
+
+  public boolean isLearningState() {
+    return learningState;
+  }
+
+  public void setLearningState(boolean learningState) {
+    this.learningState = learningState;
   }
 }

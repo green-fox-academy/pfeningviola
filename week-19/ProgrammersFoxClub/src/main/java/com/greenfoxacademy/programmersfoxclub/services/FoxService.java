@@ -12,10 +12,12 @@ import java.util.HashMap;
 public class FoxService {
 
   private FoxRepository foxRepository;
+  private NutritionTimerService nutritionTimerService;
 
   @Autowired
-  public FoxService(FoxHashMapRepository foxRepository) {
+  public FoxService(FoxHashMapRepository foxRepository, NutritionTimerService nutritionTimerService) {
     this.foxRepository = foxRepository;
+    this.nutritionTimerService = nutritionTimerService;
   }
 
   public boolean checkExistUser(String name){
@@ -26,6 +28,7 @@ public class FoxService {
     if (!foxRepository.findAll().containsKey(name)) {
       Fox newFox = new Fox(name, filename);
       foxRepository.save(newFox);
+      nutritionTimerService.decreaseFoodLevel(name);
     }
   }
 

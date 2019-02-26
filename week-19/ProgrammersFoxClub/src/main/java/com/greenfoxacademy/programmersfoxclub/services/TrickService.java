@@ -15,11 +15,13 @@ public class TrickService {
 
   private FoxHashMapRepository foxRepository;
   private TrickRepository trickRepository;
+  private TrickTimerService trickTimerService;
 
   @Autowired
-  public TrickService(FoxHashMapRepository foxRepository, TrickRepository trickRepository){
+  public TrickService(FoxHashMapRepository foxRepository, TrickRepository trickRepository, TrickTimerService trickTimerService){
     this.foxRepository = foxRepository;
     this.trickRepository = trickRepository;
+    this.trickTimerService = trickTimerService;
   }
 
   public ArrayList<String> findTricksToLearn(String name){
@@ -39,7 +41,10 @@ public class TrickService {
     Fox fox = foxRepository.findByName(name);
     ArrayList<String> knownTricks = fox.findAllKnownTricks();
     ArrayList<Action> actionHistory = fox.findAllActionHistory();
+
+    trickTimerService.learnTrickProcess(name);
     knownTricks.add(trick);
+    fox.setFoodLevel(fox.getFoodLevel() - 3);
     fox.setKnownTricks(knownTricks);
     actionHistory.add(new Action(LocalDateTime.now(), "Learned to: " + trick));
     fox.setActionHistory(actionHistory);
