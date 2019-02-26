@@ -64,7 +64,8 @@
                 <br>
                 <p class="h4 text-center text-secondary" th:text="'Satiety level: ' + ${fox.foodLevel} + ' / ' + ${fox.maxFoodLevel}"></p>
                 <div th:if="${fox.isHungry()}" class="alert alert-danger h4 text-center" role="alert" >
-                    <span th:text="${fox.name} + ' is hungry. '"></span>
+                        <img src="../static/img/hungry.png" th:src="@{/img/hungry.png}" alt = "Hungry icon" style="height:50px; width:auto;" class="mr-3"/>
+                        <span th:text="${fox.name} + ' is hungry. '"></span>
                     <a class="alert-link" th:href="'/nutritionStore?name=' + ${fox.name}">Feed him in the Nutrition Store!</a>
                 </div>
                 <br>

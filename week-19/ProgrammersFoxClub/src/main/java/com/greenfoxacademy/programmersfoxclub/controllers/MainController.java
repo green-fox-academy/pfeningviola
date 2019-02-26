@@ -1,6 +1,7 @@
 package com.greenfoxacademy.programmersfoxclub.controllers;
 
 import com.greenfoxacademy.programmersfoxclub.models.Fox;
+import com.greenfoxacademy.programmersfoxclub.repositories.ImageRepository;
 import com.greenfoxacademy.programmersfoxclub.services.FoxService;
 import com.greenfoxacademy.programmersfoxclub.services.NutritionService;
 import com.greenfoxacademy.programmersfoxclub.services.TrickService;
@@ -17,12 +18,14 @@ public class MainController {
   private FoxService foxService;
   private NutritionService nutritionService;
   private TrickService trickService;
+  private ImageRepository imageRepository;
 
   @Autowired
-  public MainController(FoxService foxService, NutritionService nutritionService, TrickService trickService){
+  public MainController(FoxService foxService, NutritionService nutritionService, TrickService trickService, ImageRepository imageRepository){
     this.foxService = foxService;
     this.nutritionService = nutritionService;
     this.trickService = trickService;
+    this.imageRepository =imageRepository;
   }
 
   @GetMapping("/")
@@ -61,7 +64,9 @@ public class MainController {
   }
 
   @GetMapping("/create")
-  public String renderCreatePage(){
+  public String renderCreatePage(Model model){
+    ArrayList<String> foxImages = imageRepository.findAllFoxImages();
+    model.addAttribute("foxImages", foxImages);
     return "create";
   }
 
@@ -69,6 +74,8 @@ public class MainController {
   public String createFox(@ModelAttribute(value = "name") String name, @ModelAttribute(value = "filename") String filename, Model model){
     if (foxService.checkExistUser(name)){
       model.addAttribute("alreadyExistingUser", "With this name already exists a fox. Choose other name!");
+      ArrayList<String> foxImages = imageRepository.findAllFoxImages();
+      model.addAttribute("foxImages", foxImages);
       return "create";
     } else {
       try {
@@ -155,6 +162,8 @@ public class MainController {
   @GetMapping("/image")
   public String renderImageChangingPage(@RequestParam String name, Model model) {
     Fox fox = foxService.findByName(name);
+    ArrayList<String> foxImages = imageRepository.findAllFoxImages();
+    model.addAttribute("foxImages", foxImages);
     model.addAttribute("fox", fox);
 
     if (!fox.isAlive()) {

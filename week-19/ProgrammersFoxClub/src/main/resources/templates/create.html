@@ -71,48 +71,15 @@
                 </div>
                 <div class="form-group row">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" aria-pressed="false">
-                        <div class="col-sm-2 form-check">
-                            <label for="greenfox" class="btn btn-light form-check-label">
-                                <input style="position: absolute;left:-9999px;" class="form-check-input" type="radio" name="filename" id="greenfox" value="/img/greenfox.png" autocomplete="off" checked />
-                                <img src="../static/img/greenfox3.png" th:src="@{/img/greenfox3.png}" alt="Green Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
-
-                            </label>
+                        <div th:each="image:${foxImages}">
+                            <div class="col-sm-2 form-check" >
+                                <label class="btn btn-light form-check-label">
+                                    <input style="position: absolute;left:-9999px;" class="form-check-input" type="radio" name="filename" th:value="${image}" autocomplete="off" th:checked="${image.equals(foxImages.get(0))}" />
+                                    <img th:src="${image}" alt="Green Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
+                                </label>
+                            </div>
                         </div>
-
-                        <div class="col-sm-2 form-check">
-                            <label for="redfox" class="btn btn-light form-check-label">
-                                <img src="../static/img/redfox.png" th:src="@{/img/redfox.png}" alt="Red Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
-                                <input class="form-check-input" type="radio" name="filename" id="redfox" value="/img/redfox.png" style="position: absolute;left:-9999px;" autocomplete="off"/>                            </label>
-                        </div>
-
-                        <div class="col-sm-2 form-check">
-                            <label for="yellowfox" class="btn btn-light form-check-label">
-                                <img src="../static/img/yellowfox.png" th:src="@{/img/yellowfox.png}" alt="Yellow Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
-                                <input class="form-check-input" type="radio" name="filename" id="yellowfox" value="/img/yellowfox.png" style="position: absolute;left:-9999px;" autocomplete="off"/>
-                            </label>
-                        </div>
-
-                    <div class="col-sm-2 form-check">
-                        <label for="arcticfox" class="btn btn-light form-check-label">
-                            <img src="../static/img/arcticfox.png" th:src="@{/img/arcticfox.png}" alt="Arctic Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
-                            <input class="form-check-input" type="radio" name="filename" id="arcticfox" value="/img/arcticfox.png" style="position: absolute;left:-9999px;" autocomplete="off"/>
-                        </label>
                     </div>
-
-                    <div class="col-sm-2 form-check">
-                        <label for="indianfox" class="btn btn-light form-check-label">
-                            <img src="../static/img/indianfox.png" th:src="@{/img/indianfox.png}" alt="Indian Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
-                            <input class="form-check-input" type="radio" name="filename" id="indianfox" value="/img/indianfox.png" style="position: absolute;left:-9999px;" autocomplete="off"/>
-                        </label>
-                    </div>
-
-                    <div class="col-sm-2 form-check">
-                        <label for="bluefox" class="btn btn-light form-check-label">
-                            <img src="../static/img/bluefox.png" th:src="@{/img/bluefox.png}" alt="Blue Fox" style="height:140px; width:auto; display:inline-block; cursor:pointer; padding:3px;"/>
-                            <input class="form-check-input" type="radio" name="filename" id="bluefox" value="/img/bluefox.png" style="position: absolute;left:-9999px;" autocomplete="off"/>
-                        </label>
-                    </div>
-                </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-9 m-auto">

@@ -58,6 +58,7 @@
         <div class="col-sm-9">
             <br>
             <div th:if="${fox.isHungry()}" class="alert alert-danger h4 text-center" role="alert" >
+                <img src="../static/img/hungry.png" th:src="@{/img/hungry.png}" alt = "Hungry icon" style="height:50px; width:auto;" class="mr-3"/>
                 <span th:text="${fox.name} + ' is hungry. '"></span>
                 <a class="alert-link" th:href="'/nutritionStore?name=' + ${fox.name}">Feed him in the Nutrition Store!</a>
             </div>
