@@ -15,6 +15,9 @@ public class FoxHashMapRepository implements FoxRepository {
 
   @Override
   public void save(Fox fox){
+    if (fox == null){
+      throw new IllegalArgumentException("The fox doesn't exist.");
+    }
     foxList.put(fox.getName(), fox);
   }
 

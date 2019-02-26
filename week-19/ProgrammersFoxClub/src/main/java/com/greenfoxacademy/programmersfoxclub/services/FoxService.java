@@ -6,6 +6,8 @@ import com.greenfoxacademy.programmersfoxclub.repositories.FoxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+
 @Service
 public class FoxService {
 
@@ -29,6 +31,10 @@ public class FoxService {
 
   public Fox findByName(String name){
     return foxRepository.findByName(name);
+  }
+
+  public HashMap<String, Fox> findAll(){
+    return foxRepository.findAll();
   }
 
   public void changeNutrition(String name, String food, String drink) {

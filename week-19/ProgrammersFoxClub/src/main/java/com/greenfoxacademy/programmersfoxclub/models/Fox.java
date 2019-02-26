@@ -2,6 +2,8 @@ package com.greenfoxacademy.programmersfoxclub.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Fox {
   private String name;
@@ -12,6 +14,8 @@ public class Fox {
   private String filename;
   private ArrayList<String> specialFood;
   private ArrayList<String> specialDrink;
+  private int foodLevel;
+  private int maxFoodLevel;
 
   public Fox(String name, String filename) {
     this.name = name;
@@ -22,6 +26,31 @@ public class Fox {
     this.actionHistory = new ArrayList<>();
     this.specialFood = new ArrayList<>();
     this.specialDrink = new ArrayList<>();
+    this.foodLevel = 10;
+    this.maxFoodLevel = 20;
+    decreaseFoodLevel();
+  }
+
+  public void decreaseFoodLevel(){
+    Timer timer = new Timer();
+
+    timer.schedule( new TimerTask() {
+      public void run() {
+        if (foodLevel > 0) {
+          foodLevel--;
+        } else {
+          timer.cancel();
+        }
+      }
+    }, 10*1000, 10*1000);
+  }
+
+  public boolean isAlive(){
+    return (foodLevel > 0);
+  }
+
+  public boolean isHungry(){
+    return ((foodLevel > 0) && (foodLevel <= 5));
   }
 
   public String getName() {
@@ -101,5 +130,25 @@ public class Fox {
 
   public void setSpecialDrink(ArrayList<String> specialDrink) {
     this.specialDrink = specialDrink;
+  }
+
+  public int getFoodLevel() {
+    return foodLevel;
+  }
+
+  public void setFoodLevel(int foodLevel) {
+    if (foodLevel > this.maxFoodLevel) {
+      this.foodLevel = this.maxFoodLevel;
+    } else {
+      this.foodLevel = foodLevel;
+    }
+  }
+
+  public int getMaxFoodLevel() {
+    return maxFoodLevel;
+  }
+
+  public void setMaxFoodLevel(int maxFoodLevel) {
+    this.maxFoodLevel = maxFoodLevel;
   }
 }

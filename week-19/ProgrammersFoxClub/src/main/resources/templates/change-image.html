@@ -45,6 +45,10 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-sm-12 m-auto">
+            <div th:if="${fox.isHungry()}" class="alert alert-danger h4 text-center" role="alert" >
+                <span th:text="${fox.name} + ' is hungry. '"></span>
+                <a class="alert-link" th:href="'/nutritionStore?name=' + ${fox.name}">Feed him in the Nutrition Store!</a>
+            </div>
             <h1 class="text-center">Choose a new image for your fox:</h1>
         </div>
     </div>

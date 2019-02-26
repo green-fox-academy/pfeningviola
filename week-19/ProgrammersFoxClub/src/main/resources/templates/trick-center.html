@@ -58,6 +58,10 @@
         <div class="col-sm-1"></div>
         <div class="col-sm-8">
             <br>
+            <div th:if="${fox.isHungry()}" class="alert alert-danger h4 text-center" role="alert" >
+                <span th:text="${fox.name} + ' is hungry. '"></span>
+                <a class="alert-link" th:href="'/nutritionStore?name=' + ${fox.name}">Feed him in the Nutrition Store!</a>
+            </div>
             <p class="h2">Learn a trick:</p>
             <div class="h4 text-success text-center" th:if="${tricksToLearn.isEmpty()}" th:text="'Yuhuuu! You have learn all of the tricks!'"></div>
             <div th:unless="${tricksToLearn.isEmpty()}">

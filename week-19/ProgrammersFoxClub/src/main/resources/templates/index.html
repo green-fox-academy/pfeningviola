@@ -58,11 +58,21 @@
         <div class="col-sm-9">
             <div class="user-info">
                 <br>
-                <p class="h2 text-center" th:text="'This is ' + ${fox.name} + '.'"></p>
+                <p class="h2 text-center" th:text="'This is ' + ${fox.name} + '.'"></div>
                 <br>
                 <p class="h4 text-center text-secondary" th:text="'Currently living on ' + ${fox.food} + ' and ' + ${fox.drink} + '. He knows ' + ${fox.findAllKnownTricks().size()} + ' tricks.'"></p>
                 <br>
+                <p class="h4 text-center text-secondary" th:text="'Satiety level: ' + ${fox.foodLevel} + ' / ' + ${fox.maxFoodLevel}"></p>
+                <div th:if="${fox.isHungry()}" class="alert alert-danger h4 text-center" role="alert" >
+                    <span th:text="${fox.name} + ' is hungry. '"></span>
+                    <a class="alert-link" th:href="'/nutritionStore?name=' + ${fox.name}">Feed him in the Nutrition Store!</a>
+                </div>
+                <br>
             </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
             <div class="list">
                 <h2>Known tricks:</h2>
                 <p class="text-justify" th:if="${fox.findAllKnownTricks().isEmpty()}">

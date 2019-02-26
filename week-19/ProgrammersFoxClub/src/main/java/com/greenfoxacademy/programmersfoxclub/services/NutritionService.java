@@ -46,6 +46,7 @@ public class NutritionService {
       }
     }
     fox.setActionHistory(actionHistory);
+    fox.setFoodLevel(fox.getFoodLevel() + 5);
   }
 
   public ArrayList<String> findAllFood(String name) {

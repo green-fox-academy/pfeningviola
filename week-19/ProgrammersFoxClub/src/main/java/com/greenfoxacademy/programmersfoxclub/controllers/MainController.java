@@ -32,7 +32,14 @@ public class MainController {
     } else {
       Fox fox = foxService.findByName(name);
       model.addAttribute("fox", fox);
-      return "index";
+      String foxName = fox.getName();
+      if(fox.isAlive()) {
+        return "index";
+      } else {
+        foxService.findAll().remove(name);
+        model.addAttribute("foxName", foxName);
+        return "dead-fox";
+      }
     }
   }
 
@@ -62,21 +69,33 @@ public class MainController {
       model.addAttribute("alreadyExistingUser", "With this name already exists a fox. Choose other name!");
       return "create";
     } else {
-      foxService.createFox(name, filename);
-      return "redirect:/?name=" + name;
+      try {
+        foxService.createFox(name, filename);
+        return "redirect:/?name=" + name;
+      }catch (IllegalArgumentException e) {
+        return "redirect:/error";
+      }
     }
   }
 
   @GetMapping("/nutritionStore")
   public String feedFox(@RequestParam String name, Model model){
     Fox fox = foxService.findByName(name);
-    ArrayList<String> possibleFood = nutritionService.findAllFood(name);
-    ArrayList<String> possibleDrink = nutritionService.findAllDrink(name);
-
     model.addAttribute("fox", fox);
-    model.addAttribute("possibleFood", possibleFood);
-    model.addAttribute("possibleDrink", possibleDrink);
-    return "nutrition-store";
+    String foxName = fox.getName();
+
+    if (fox.isAlive()) {
+      ArrayList<String> possibleFood = nutritionService.findAllFood(name);
+      ArrayList<String> possibleDrink = nutritionService.findAllDrink(name);
+      model.addAttribute("possibleFood", possibleFood);
+      model.addAttribute("possibleDrink", possibleDrink);
+      return "nutrition-store";
+
+    } else {
+      foxService.findAll().remove(name);
+      model.addAttribute("foxName", foxName);
+      return "dead-fox";
+    }
   }
 
   @PostMapping("/nutritionStore")
@@ -90,11 +109,18 @@ public class MainController {
   @GetMapping("/trickCenter")
   public String renderTrickCenter(@RequestParam String name, Model model) {
     Fox fox = foxService.findByName(name);
-    ArrayList<String> tricksToLearn = trickService.findTricksToLearn(name);
-
     model.addAttribute("fox", fox);
-    model.addAttribute("tricksToLearn", tricksToLearn);
-    return "trick-center";
+    String foxName = fox.getName();
+
+    if (fox.isAlive()) {
+      ArrayList<String> tricksToLearn = trickService.findTricksToLearn(name);
+      model.addAttribute("tricksToLearn", tricksToLearn);
+      return "trick-center";
+    } else {
+      foxService.findAll().remove(name);
+      model.addAttribute("foxName", foxName);
+      return "dead-fox";
+    }
   }
 
   @PostMapping("/trickCenter")
@@ -108,15 +134,30 @@ public class MainController {
   public String renderActionHistory(@RequestParam String name, Model model) {
     Fox fox = foxService.findByName(name);
     model.addAttribute("fox", fox);
+    String foxName = fox.getName();
 
-    return "action-history";
+    if (fox.isAlive()) {
+      return "action-history";
+    } else {
+      foxService.findAll().remove(name);
+      model.addAttribute("foxName", foxName);
+      return "dead-fox";
+    }
   }
 
   @GetMapping("/image")
   public String renderImageChangingPage(@RequestParam String name, Model model) {
     Fox fox = foxService.findByName(name);
     model.addAttribute("fox", fox);
-    return "change-image";
+    String foxName = fox.getName();
+
+    if (fox.isAlive()) {
+      return "change-image";
+    } else {
+      foxService.findAll().remove(name);
+      model.addAttribute("foxName", foxName);
+      return "dead-fox";
+    }
   }
 
   @PostMapping("/image")
@@ -124,5 +165,10 @@ public class MainController {
                             @ModelAttribute(value = "filename") String filename){
     foxService.changeImage(name, filename);
     return "redirect:/?name=" + name;
+  }
+
+  private void initFox(Model model, String name){
+    Fox fox = foxService.findByName(name);
+    model.addAttribute("fox", fox);
   }
 }

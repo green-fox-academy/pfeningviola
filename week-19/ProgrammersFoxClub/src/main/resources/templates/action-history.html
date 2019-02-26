@@ -58,6 +58,10 @@
         </div>
         <div class="col-sm-9">
             <br>
+            <div th:if="${fox.isHungry()}" class="alert alert-danger h4 text-center" role="alert" >
+                <span th:text="${fox.name} + ' is hungry. '"></span>
+                <a class="alert-link" th:href="'/nutritionStore?name=' + ${fox.name}">Feed him in the Nutrition Store!</a>
+            </div>
             <p class="h2">Action history:</p>
             <p th:if="${fox.findAllActionHistory().isEmpty()}" class="h4 text-secondary text-center mt-5">There was no action yet.</p>
             <ul th:unless="${fox.findAllActionHistory().isEmpty()}" class="mt-5">

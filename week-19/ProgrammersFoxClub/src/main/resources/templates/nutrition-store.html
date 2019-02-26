@@ -57,6 +57,10 @@
         </div>
         <div class="col-sm-9">
             <br>
+            <div th:if="${fox.isHungry()}" class="alert alert-danger h4 text-center" role="alert" >
+                <span th:text="${fox.name} + ' is hungry. '"></span>
+                <a class="alert-link" th:href="'/nutritionStore?name=' + ${fox.name}">Feed him in the Nutrition Store!</a>
+            </div>
             <p class="h2">Choose food and drink from the menu to your fox:</p>
             <form action="/nutritionStore" method="post">
                 <div class="form-group row mt-5">
