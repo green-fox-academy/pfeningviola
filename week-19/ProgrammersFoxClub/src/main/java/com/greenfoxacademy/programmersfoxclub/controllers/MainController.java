@@ -3,6 +3,7 @@ package com.greenfoxacademy.programmersfoxclub.controllers;
 import com.greenfoxacademy.programmersfoxclub.models.Fox;
 import com.greenfoxacademy.programmersfoxclub.repositories.ImageRepository;
 import com.greenfoxacademy.programmersfoxclub.services.FoxService;
+import com.greenfoxacademy.programmersfoxclub.services.ImageService;
 import com.greenfoxacademy.programmersfoxclub.services.NutritionService;
 import com.greenfoxacademy.programmersfoxclub.services.TrickService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,14 @@ public class MainController {
   private FoxService foxService;
   private NutritionService nutritionService;
   private TrickService trickService;
-  private ImageRepository imageRepository;
+  private ImageService imageService;
 
   @Autowired
-  public MainController(FoxService foxService, NutritionService nutritionService, TrickService trickService, ImageRepository imageRepository){
+  public MainController(FoxService foxService, NutritionService nutritionService, TrickService trickService, ImageService imageService){
     this.foxService = foxService;
     this.nutritionService = nutritionService;
     this.trickService = trickService;
-    this.imageRepository =imageRepository;
+    this.imageService = imageService;
   }
 
   @GetMapping("/")
@@ -43,7 +44,11 @@ public class MainController {
       } else if ((fox.isAlive()) && (!fox.isLearningState())) {
         return "index";
       } else {
-        return "redirect:/trickCenter?name=" + name;
+        if (foxService.findByName(name).findAllKnownTricks().size() > 0) {
+          String actualLearningTrick = foxService.findByName(name).findAllKnownTricks().get(foxService.findByName(name).findAllKnownTricks().size() - 1);
+          model.addAttribute("actualLearningTrick", actualLearningTrick);
+        }
+        return "learning";
       }
     }
   }
@@ -65,7 +70,7 @@ public class MainController {
 
   @GetMapping("/create")
   public String renderCreatePage(Model model){
-    ArrayList<String> foxImages = imageRepository.findAllFoxImages();
+    ArrayList<String> foxImages = imageService.findAllFoxImages();
     model.addAttribute("foxImages", foxImages);
     return "create";
   }
@@ -74,7 +79,7 @@ public class MainController {
   public String createFox(@ModelAttribute(value = "name") String name, @ModelAttribute(value = "filename") String filename, Model model){
     if (foxService.checkExistUser(name)){
       model.addAttribute("alreadyExistingUser", "With this name already exists a fox. Choose other name!");
-      ArrayList<String> foxImages = imageRepository.findAllFoxImages();
+      ArrayList<String> foxImages = imageService.findAllFoxImages();
       model.addAttribute("foxImages", foxImages);
       return "create";
     } else {
@@ -92,10 +97,8 @@ public class MainController {
     Fox fox = foxService.findByName(name);
     model.addAttribute("fox", fox);
 
-    if (!fox.isAlive()) {
+    if ((!fox.isAlive())   || (fox.isLearningState())) {
       return "redirect:/?name=" + name;
-    } else if (fox.isLearningState()){
-      return "redirect:/trickCenter?name=" + name;
     } else {
       ArrayList<String> possibleFood = nutritionService.findAllFood(name);
       ArrayList<String> possibleDrink = nutritionService.findAllDrink(name);
@@ -118,14 +121,8 @@ public class MainController {
     Fox fox = foxService.findByName(name);
     model.addAttribute("fox", fox);
 
-    if (!fox.isAlive()) {
+    if ((!fox.isAlive())  || (fox.isLearningState())) {
       return "redirect:/?name=" + name;
-    } else if (fox.isLearningState()){
-      if (foxService.findByName(name).findAllKnownTricks().size() > 0) {
-        String actualLearningTrick = foxService.findByName(name).findAllKnownTricks().get(foxService.findByName(name).findAllKnownTricks().size() - 1);
-        model.addAttribute("actualLearningTrick", actualLearningTrick);
-      }
-      return "learning";
     } else {
       ArrayList<String> tricksToLearn = trickService.findTricksToLearn(name);
       model.addAttribute("tricksToLearn", tricksToLearn);
@@ -138,11 +135,7 @@ public class MainController {
                            @ModelAttribute(value="trick") String trick){
     Fox fox = foxService.findByName(name);
     trickService.learnTrick(name, trick);
-    if (fox.isLearningState()){
-      return "redirect:/trickCenter?name=" + name;
-    } else {
-      return "redirect:/?name=" + name;
-    }
+    return "redirect:/?name=" + name;
   }
 
   @GetMapping("/actionHistory")
@@ -150,10 +143,8 @@ public class MainController {
     Fox fox = foxService.findByName(name);
     model.addAttribute("fox", fox);
 
-    if (!fox.isAlive()) {
+    if ((!fox.isAlive()) || (fox.isLearningState())) {
       return "redirect:/?name=" + name;
-    } else if (fox.isLearningState()){
-      return "redirect:/trickCenter?name=" + name;
     } else {
       return "action-history";
     }
@@ -162,14 +153,12 @@ public class MainController {
   @GetMapping("/image")
   public String renderImageChangingPage(@RequestParam String name, Model model) {
     Fox fox = foxService.findByName(name);
-    ArrayList<String> foxImages = imageRepository.findAllFoxImages();
+    ArrayList<String> foxImages = imageService.findAllFoxImages();
     model.addAttribute("foxImages", foxImages);
     model.addAttribute("fox", fox);
 
-    if (!fox.isAlive()) {
+    if ((!fox.isAlive())  || (fox.isLearningState())) {
       return "redirect:/?name=" + name;
-    } else if (fox.isLearningState()){
-      return "redirect:/trickCenter?name=" + name;
     } else {
       return "change-image";
     }

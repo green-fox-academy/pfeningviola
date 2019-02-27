@@ -22,13 +22,19 @@ public class TrickTimerService {
   public void learnTrickProcess(String name){
     Fox fox = foxRepository.findByName(name);
     Timer timer = new Timer();
-    fox.setLearningState(true);
+    fox.setRemainingLearningTime(30);
+    fox.setLearningProcessState(0);
 
     timer.schedule( new TimerTask() {
       public void run() {
-        fox.setLearningState(false);
-        timer.cancel();
+        if (fox.getRemainingLearningTime() > 0) {
+          fox.setRemainingLearningTime(fox.getRemainingLearningTime() - 5);
+          fox.setLearningProcessState(fox.getLearningProcessState() + (100 / 5));
+
+        } else {
+          timer.cancel();
+        }
       }
-    }, 30*1000);
+    }, 5*1000, 5*1000);
   }
 }

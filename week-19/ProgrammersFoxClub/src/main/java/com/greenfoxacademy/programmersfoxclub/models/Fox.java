@@ -17,6 +17,8 @@ public class Fox {
   private int foodLevel;
   private int maxFoodLevel;
   private boolean learningState;
+  private int remainingLearningTime;
+  private int learningProcessState;
 
   public Fox(String name, String filename) {
     this.name = name;
@@ -29,7 +31,8 @@ public class Fox {
     this.specialDrink = new ArrayList<>();
     this.foodLevel = 10;
     this.maxFoodLevel = 20;
-    this.learningState = false;
+    this.remainingLearningTime = 0;
+    this.learningProcessState = 0;
   }
 
   public boolean isAlive(){
@@ -140,10 +143,26 @@ public class Fox {
   }
 
   public boolean isLearningState() {
-    return learningState;
+    return remainingLearningTime > 0;
+  }
+
+  public int getRemainingLearningTime() {
+    return remainingLearningTime;
+  }
+
+  public void setRemainingLearningTime(int remainingLearningTime) {
+    this.remainingLearningTime = remainingLearningTime;
   }
 
   public void setLearningState(boolean learningState) {
     this.learningState = learningState;
+  }
+
+  public int getLearningProcessState() {
+    return learningProcessState;
+  }
+
+  public void setLearningProcessState(int learningProcessState) {
+    this.learningProcessState = learningProcessState;
   }
 }

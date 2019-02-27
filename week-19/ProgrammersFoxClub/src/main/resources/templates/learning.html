@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/costum.css}">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        function timedRefresh(timeoutPeriod) {
+            setTimeout("location.reload(true);",timeoutPeriod);
+        }
+        window.onload = timedRefresh(5000);
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -42,7 +49,7 @@
         </div>
     </div>
 </nav>
-<div class="container">
+<div class="container" style="margin-bottom:50px;">
     <div class="row mt-5">
         <div class="col-sm-3">
             <div class="w-75" >
@@ -65,6 +72,17 @@
                 <img src="../static/img/learning.jpg" th:src="@{/img/learning.jpg}" alt = "Fox is learning" style="height:200px; width:auto;" class="rounded mx-auto d-block"/>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            <br>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" role="progressbar" th:attr="'aria-valuenow'=${fox.learningProcessState}" aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${fox.learningProcessState} + '%'"></div>
+            </div>
+        </div>
+    </div>
+</div>
 <footer class="page-footer bg-dark text-white fixed-bottom">
     <div class="container">
         <div class="footer-copyright text-center ">
