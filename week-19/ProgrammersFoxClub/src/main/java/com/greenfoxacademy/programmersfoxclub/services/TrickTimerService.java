@@ -23,14 +23,11 @@ public class TrickTimerService {
     Fox fox = foxRepository.findByName(name);
     Timer timer = new Timer();
     fox.setRemainingLearningTime(30);
-    fox.setLearningProcessState(0);
 
     timer.schedule( new TimerTask() {
       public void run() {
         if (fox.getRemainingLearningTime() > 0) {
           fox.setRemainingLearningTime(fox.getRemainingLearningTime() - 5);
-          fox.setLearningProcessState(fox.getLearningProcessState() + (100 / 5));
-
         } else {
           timer.cancel();
         }

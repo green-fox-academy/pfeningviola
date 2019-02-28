@@ -78,7 +78,7 @@
         <div class="col-sm-9">
             <br>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" role="progressbar" th:attr="'aria-valuenow'=${fox.learningProcessState}" aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${fox.learningProcessState} + '%'"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" role="progressbar" th:attr="'aria-valuenow'=${((30 - fox.remainingLearningTime) / 5) * (100/5)}" aria-valuemin="0" aria-valuemax="100" th:style="'width:'+${((30 - fox.remainingLearningTime) / 5) * (100/5)} + '%'"></div>
             </div>
         </div>
     </div>
@@ -86,7 +86,7 @@
 <footer class="page-footer bg-dark text-white fixed-bottom">
     <div class="container">
         <div class="footer-copyright text-center ">
-            <span class="align-middle"><small >© 2018 Copyright: Viola Pfening</small></span>
+            <span class="align-middle"><small >© 2019 Copyright: Viola Pfening</small></span>
         </div>
     </div>
 </footer>

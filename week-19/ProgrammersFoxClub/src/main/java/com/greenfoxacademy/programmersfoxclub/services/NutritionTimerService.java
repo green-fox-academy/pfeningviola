@@ -31,6 +31,6 @@ public class NutritionTimerService {
           timer.cancel();
         }
       }
-    }, 60*60*1000, 60*60*1000);
+    }, 30*1000, 30*1000);
   }
 }
