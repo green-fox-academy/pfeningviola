@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Welcome in TODO</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/costum.css}">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="../static/images/todo.png" th:src="@{/images/todo.png}" alt = "Todo icon" style="height:50px; width:auto;"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span class="navbar-brand">TODO</span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="'/login'">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/register'">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container" style="margin-bottom:50px;">
+            <br>
+            <h1 class="text-center">Welcome in TODO!</h1>
+            <div>
+                <br>
+                <p class="h4 text-secondary text-center">Please give your username and password!</p>
+                <br>
+                <form action="#" method="post">
+                    <div class="form-group row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-2">
+                            <label for="name" class="h5">Username</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="name" name="name" type="text" required autofocus/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-2">
+                            <label for="password" class="h5">Password</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="password" name="password" type="password" required/>
+                        </div>
+                    </div>
+                    <div class="form-group row d-flex justify-content-center">
+                        <input type="submit" value="GO" class="btn btn-secondary px-5"/>
+                    </div>
+                </form>
+            </div>
+    <div class="row d-flex justify-content-center">
+            <div th:if="${noUser}">
+                <p class="text-center">
+                    <span class="text-danger" th:text="${noUser}"></span>
+                    <a href="/register" class="text-decoration-none text-secondary">Register here!</a>
+                </p>
+            </div>
+            <div th:if="${wrongPassword}">
+                <p class="text-center">
+                    <span class="text-danger" th:text="${wrongPassword}"></span>
+                </p>
+            </div>
+            <div th:if="${alreadyExistingUser}">
+                <p class="text-center">
+                    <span class="text-danger" th:text="${alreadyExistingUser}"></span>
+                    <a href="/login" class="text-decoration-none text-secondary">Or login with your username</a>
+                </p>
+            </div>
+        </div>
+</div>
+<footer class="page-footer fixed-bottom" style="background-color: #e3f2fd;">
+    <div class="container">
+        <div class="footer-copyright text-center ">
+            <span class="align-middle"><small >© 2019 Copyright: Viola Pfening</small></span>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

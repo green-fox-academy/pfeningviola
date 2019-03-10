@@ -17,8 +17,12 @@ public class User {
     this.todos = new ArrayList<>();
   }
 
-  public ArrayList<Todo> findAll(){
+  public ArrayList<Todo> findAllTodo(){
     return todos;
+  }
+
+  public Todo findByIndex(int index){
+    return todos.get(index);
   }
 
   public void save(Todo todo){
