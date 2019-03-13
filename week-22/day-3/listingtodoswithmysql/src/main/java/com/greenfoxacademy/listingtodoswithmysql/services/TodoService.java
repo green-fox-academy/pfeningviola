@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -40,5 +41,14 @@ public class TodoService {
 
   public void delete(long id){
     todoRepository.deleteById(id);
+  }
+
+  public Todo findById(long id){
+    Optional<Todo> todoInRepository = todoRepository.findById(id);
+    Todo todo = new Todo();
+    if(todoInRepository.isPresent()){
+      todo = todoInRepository.get();
+    }
+    return todo;
   }
 }

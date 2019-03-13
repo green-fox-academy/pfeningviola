@@ -54,4 +54,11 @@ public class TodoController {
     todoService.delete(id);
     return "redirect:/todo/";
   }
+
+  @GetMapping("/{id}/edit")
+  public String renderEditTodoPage(@PathVariable long id, Model model){
+    Todo todo = todoService.findById(id);
+    model.addAttribute("todo", todo);
+    return "edittodo";
+  }
 }

@@ -29,6 +29,9 @@
                 <button type="submit">delete</button>
             </form>
         </td>
+        <td>
+            <a th:href="'/todo/' + ${todo.id} + '/edit'">Edit</a>
+        </td>
     </tr>
     </tbody>
 </table>

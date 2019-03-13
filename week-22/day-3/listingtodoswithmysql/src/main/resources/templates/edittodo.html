@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add Todo</title>
+</head>
+<body>
+    <h1>Edit todo</h1>
+    <form th:action="'/todo/' + ${todo.id} + '/edit'" method="post">
+        <div>
+            <label for="title">Todo description</label>
+            <input id="title" th:field="${todo.title}" name="title" type="text" autofocus required/>
+        </div>
+        <div>
+            <label for="urgent">Urgent</label>
+            <input type="checkbox" id="urgent" th:field="${todo.urgent}" name="title"/>
+        </div>
+        <div>
+            <label for="done">Done</label>
+            <input type="checkbox" id="done" th:field="${todo.done}" name="title"/>
+        </div>
+        <div>
+            <input type="submit" value="Submit"/>
+            <a href="/todo/">Cancel</a>
+        </div>
+    </form>
+</body>
+</html>
