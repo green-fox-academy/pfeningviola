@@ -33,4 +33,8 @@ public class TodoService {
     }
     return undoneTodos;
   }
+
+  public void save(Todo todo){
+    todoRepository.save(todo);
+  }
 }
