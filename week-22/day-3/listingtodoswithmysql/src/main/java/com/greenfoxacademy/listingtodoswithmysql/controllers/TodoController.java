@@ -58,7 +58,18 @@ public class TodoController {
   @GetMapping("/{id}/edit")
   public String renderEditTodoPage(@PathVariable long id, Model model){
     Todo todo = todoService.findById(id);
-    model.addAttribute("todo", todo);
+    if (!todoService.checkIdExists((id))){
+      model.addAttribute("noTodo", "There is no todo with given id.");
+    } else {
+      model.addAttribute("todo", todo);
+    }
     return "edittodo";
   }
+
+  @PostMapping("/{id}/edit")
+  public String editTodo(@ModelAttribute Todo todo, @PathVariable long id){
+    todoService.save(todo);
+    return "redirect:/todo/";
+  }
+
 }

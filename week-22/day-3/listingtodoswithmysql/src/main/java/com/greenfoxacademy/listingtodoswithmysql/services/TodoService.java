@@ -51,4 +51,8 @@ public class TodoService {
     }
     return todo;
   }
+
+  public boolean checkIdExists(long id){
+    return todoRepository.existsById(id);
+  }
 }
