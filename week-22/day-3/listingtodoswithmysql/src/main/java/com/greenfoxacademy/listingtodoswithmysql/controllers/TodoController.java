@@ -2,6 +2,7 @@ package com.greenfoxacademy.listingtodoswithmysql.controllers;
 
 import com.greenfoxacademy.listingtodoswithmysql.models.Todo;
 import com.greenfoxacademy.listingtodoswithmysql.repositories.TodoRepository;
+import com.greenfoxacademy.listingtodoswithmysql.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,23 +15,22 @@ import java.util.ArrayList;
 @RequestMapping("/todo")
 public class TodoController {
 
-  private TodoRepository todoRepository;
+  private TodoService todoService;
 
   @Autowired
-  public TodoController(TodoRepository todoRepository){
-    this.todoRepository = todoRepository;
+  public TodoController(TodoService todoService){
+    this.todoService = todoService;
   }
 
-  @GetMapping("/list")
+  @GetMapping("/")
   public String list(Model model) {
-    ArrayList<Todo> todos = new ArrayList<>();
-    todoRepository.findAll().forEach(todos::add);
+    ArrayList<Todo> todos = todoService.findAllTodo();
     model.addAttribute("todos", todos);
     return "todolist";
   }
 
-  @GetMapping("/")
+  @GetMapping("/list")
   public String list2(){
-    return "redirect:/todo/list";
+    return "redirect:/todo/";
   }
 }
