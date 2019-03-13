@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -23,8 +24,13 @@ public class TodoController {
   }
 
   @GetMapping("/")
-  public String list(Model model) {
-    ArrayList<Todo> todos = todoService.findAllTodo();
+  public String list(Model model, @RequestParam(required = false) boolean isActive) {
+    ArrayList<Todo> todos;
+    if (isActive) {
+      todos = todoService.findUndoneTodos();
+    } else {
+      todos = todoService.findAllTodo();
+    }
     model.addAttribute("todos", todos);
     return "todolist";
   }
