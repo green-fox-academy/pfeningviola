@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Todo Details</title>
+</head>
+<body>
+    <p th:if="${noTodo}" th:text="${noTodo}">
+        <a href="/todo/">Back</a>
+    </p>
+    <div th:unless="${noTodo}">
+    <h1>Details:</h1>
+        <table>
+            <tr>
+                <td>ID:</td>
+                <td th:text="${todo.id}"></td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td th:text="${todo.title}"></td>
+            </tr>
+            <tr>
+                <td>Completed:</td>
+                <td th:text="${todo.done}"></td>
+            </tr>
+            <tr>
+                <td>Urgent:</td>
+                <td th:text="${todo.urgent}"></td>
+            </tr>
+    </table>
+        <a href="/todo/">Back</a>
+    </div>
+
+
+</body>
+</html>

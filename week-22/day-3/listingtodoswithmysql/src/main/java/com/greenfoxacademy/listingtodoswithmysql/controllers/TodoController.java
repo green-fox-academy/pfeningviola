@@ -57,12 +57,7 @@ public class TodoController {
 
   @GetMapping("/{id}/edit")
   public String renderEditTodoPage(@PathVariable long id, Model model){
-    Todo todo = todoService.findById(id);
-    if (!todoService.checkIdExists((id))){
-      model.addAttribute("noTodo", "There is no todo with given id.");
-    } else {
-      model.addAttribute("todo", todo);
-    }
+    findTodoAndAddToModel(id, model);
     return "edittodo";
   }
 
@@ -72,4 +67,18 @@ public class TodoController {
     return "redirect:/todo/";
   }
 
+  @GetMapping("/{id}/details")
+  public String renderTodoDetailsPage(@PathVariable long id, Model model){
+    findTodoAndAddToModel(id, model);
+    return "tododetails";
+  }
+
+  private void findTodoAndAddToModel(long id, Model model){
+    if (!todoService.checkIdExists((id))){
+      model.addAttribute("noTodo", "There is no todo with given id.");
+    } else {
+      Todo todo = todoService.findById(id);
+      model.addAttribute("todo", todo);
+    }
+  }
 }

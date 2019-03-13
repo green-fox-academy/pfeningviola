@@ -21,7 +21,7 @@
     <tbody>
     <tr th:each="todo : ${todos}">
         <td th:text="${todo.id}"></td>
-        <td th:text="${todo.title}"></td>
+        <td><a th:text="${todo.title}" th:href="'/todo/' + ${todo.id} + '/details'"></a></td>
         <td th:text="${todo.done}"></td>
         <td th:text="${todo.urgent}"></td>
         <td>
