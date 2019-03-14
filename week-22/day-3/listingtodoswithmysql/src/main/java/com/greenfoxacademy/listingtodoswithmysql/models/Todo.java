@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.Clock;
+import java.time.LocalDateTime;
 
 @Entity
 public class Todo {
@@ -12,14 +14,20 @@ public class Todo {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
   private String title;
-  private boolean urgent = false;
-  private boolean done = false;
+  private LocalDateTime createdAt;
+  private LocalDateTime completedAt;
+  private boolean urgent;
+  private boolean done;
 
-  public Todo(String title){
-    this.title = title;
-  }
+//  public Todo(String title){
+//    this.title = title;
+//    this.createdAt = LocalDateTime.now(Clock.systemUTC());
+//    this.urgent = false;
+//    this.done = false;
+//  }
 
   public Todo(){
+    this.createdAt = LocalDateTime.now(Clock.systemUTC());
   }
 
   public long getId() {
@@ -52,5 +60,21 @@ public class Todo {
 
   public void setDone(boolean done) {
     this.done = done;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public LocalDateTime getCompletedAt() {
+    return completedAt;
+  }
+
+  public void setCompletedAt(LocalDateTime completedAt) {
+    this.completedAt = completedAt;
   }
 }

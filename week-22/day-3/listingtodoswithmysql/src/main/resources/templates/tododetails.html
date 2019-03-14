@@ -28,10 +28,16 @@
                 <td>Urgent:</td>
                 <td th:text="${todo.urgent}"></td>
             </tr>
+            <tr>
+                <td>Date of creation:</td>
+                <td th:text="${#temporals.format(todo.createdAt, 'dd-MM-yyyy HH:mm')}"></td>
+            </tr>
+            <tr th:if="${todo.completedAt != null}">
+                <td>Date of completion:</td>
+                <td th:text="${#temporals.format(todo.completedAt, 'dd-MM-yyyy HH:mm')}"></td>
+            </tr>
     </table>
         <a href="/todo/">Back</a>
     </div>
-
-
 </body>
 </html>

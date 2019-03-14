@@ -15,6 +15,7 @@
         <th>Action</th>
         <th>Done</th>
         <th>Urgent</th>
+        <th>Date</th>
         <th></th>
     </tr>
     </thead>
@@ -24,6 +25,7 @@
         <td><a th:text="${todo.title}" th:href="'/todo/' + ${todo.id} + '/details'"></a></td>
         <td th:text="${todo.done}"></td>
         <td th:text="${todo.urgent}"></td>
+        <td th:text="${#temporals.format(todo.createdAt, 'dd-MM-yyyy HH:mm')}"></td>
         <td>
             <form th:action="'/todo/' + ${todo.id} + '/delete'" method="post">
                 <button type="submit">delete</button>
