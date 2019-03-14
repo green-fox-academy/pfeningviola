@@ -7,9 +7,10 @@
 </head>
 <body>
     <h1>Edit todo</h1>
-    <p th:if="${noTodo}" th:text="${noTodo}">
+    <div th:if="${noTodo}">
+        <p th:text="${noTodo}"></p>
         <a href="/todo/">Back</a>
-    </p>
+    </div>
     <div th:unless="${noTodo}">
     <form th:action="'/todo/' + ${todo.id} + '/edit'" method="post">
         <div>

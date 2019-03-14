@@ -6,9 +6,10 @@
     <title>Todo Details</title>
 </head>
 <body>
-    <p th:if="${noTodo}" th:text="${noTodo}">
+    <div th:if="${noTodo}">
+        <p th:text="${noTodo}"></p>
         <a href="/todo/">Back</a>
-    </p>
+    </div>
     <div th:unless="${noTodo}">
     <h1>Details:</h1>
         <table>
