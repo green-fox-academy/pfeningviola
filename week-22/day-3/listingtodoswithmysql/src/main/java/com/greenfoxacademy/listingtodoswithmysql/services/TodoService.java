@@ -5,6 +5,8 @@ import com.greenfoxacademy.listingtodoswithmysql.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -41,6 +43,18 @@ public class TodoService {
 
   public void delete(long id){
     todoRepository.deleteById(id);
+  }
+
+  public void complete(long id) {
+    Todo todo = findById(id);
+    if(todo.isDone()){
+      todo.setDone(false);
+      todo.setCompletedAt(null);
+    } else {
+      todo.setDone(true);
+      todo.setCompletedAt(LocalDateTime.now(Clock.systemUTC()));
+    }
+    save(todo);
   }
 
   public Todo findById(long id){

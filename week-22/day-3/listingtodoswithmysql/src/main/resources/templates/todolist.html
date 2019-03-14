@@ -32,6 +32,11 @@
             </form>
         </td>
         <td>
+            <form th:action="'/todo/' + ${todo.id} + '/complete'" method="post">
+                <button type="submit">done/undone</button>
+            </form>
+        </td>
+        <td>
             <a th:href="'/todo/' + ${todo.id} + '/edit'">Edit</a>
         </td>
     </tr>

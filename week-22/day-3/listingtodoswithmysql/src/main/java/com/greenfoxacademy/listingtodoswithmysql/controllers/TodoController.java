@@ -73,6 +73,12 @@ public class TodoController {
     return "tododetails";
   }
 
+  @PostMapping("/{id}/complete")
+  public String completeTodo(@PathVariable long id){
+    todoService.complete(id);
+    return "redirect:/todo/";
+  }
+
   private void findTodoAndAddToModel(long id, Model model){
     if (!todoService.checkIdExists((id))){
       model.addAttribute("noTodo", "There is no todo with given id.");
