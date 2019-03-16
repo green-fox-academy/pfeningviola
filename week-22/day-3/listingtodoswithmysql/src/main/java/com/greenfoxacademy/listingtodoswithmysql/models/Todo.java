@@ -18,6 +18,7 @@ public class Todo {
   private LocalDateTime completedAt;
   private boolean urgent;
   private boolean done;
+  private long userId;
 
 //  public Todo(String title){
 //    this.title = title;
@@ -76,5 +77,13 @@ public class Todo {
 
   public void setCompletedAt(LocalDateTime completedAt) {
     this.completedAt = completedAt;
+  }
+
+  public long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(long userId) {
+    this.userId = userId;
   }
 }

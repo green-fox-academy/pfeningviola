@@ -8,7 +8,7 @@
 <body>
     <div th:if="${noTodo}">
         <p th:text="${noTodo}"></p>
-        <a href="/todo/">Back</a>
+        <a th:href="'/' + ${userId} + '/todo/'">Back</a>
     </div>
     <div th:unless="${noTodo}">
     <h1>Details:</h1>
@@ -38,7 +38,7 @@
                 <td th:text="${#temporals.format(todo.completedAt, 'dd-MM-yyyy HH:mm')}"></td>
             </tr>
     </table>
-        <a href="/todo/">Back</a>
+        <a th:href="'/' + ${userId} + '/todo/'">Back</a>
     </div>
 </body>
 </html>

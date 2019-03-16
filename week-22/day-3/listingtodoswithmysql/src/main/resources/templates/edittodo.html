@@ -9,10 +9,10 @@
     <h1>Edit todo</h1>
     <div th:if="${noTodo}">
         <p th:text="${noTodo}"></p>
-        <a href="/todo/">Back</a>
+        <a th:href="'/' + ${userId} + '/todo/'">Back</a>
     </div>
     <div th:unless="${noTodo}">
-    <form th:action="'/todo/' + ${todo.id} + '/edit'" method="post">
+    <form th:action="'/' + ${todo.userId} + '/todo/' + ${todo.id} + '/edit'" method="post">
         <div>
             <label for="title">Todo description</label>
             <input id="title" th:field="${todo.title}" name="title" type="text" autofocus required/>
@@ -27,7 +27,7 @@
         </div>
         <div>
             <input type="submit" value="Submit"/>
-            <a href="/todo/">Cancel</a>
+            <a th:href="'/' + ${userId} + '/todo/'">Cancel</a>
         </div>
     </form>
     </div>

@@ -1,8 +1,10 @@
 package com.greenfoxacademy.listingtodoswithmysql.controllers;
 
 import com.greenfoxacademy.listingtodoswithmysql.models.Todo;
+import com.greenfoxacademy.listingtodoswithmysql.models.User;
 import com.greenfoxacademy.listingtodoswithmysql.repositories.TodoRepository;
 import com.greenfoxacademy.listingtodoswithmysql.services.TodoService;
+import com.greenfoxacademy.listingtodoswithmysql.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,75 +13,81 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/todo")
+@RequestMapping("/{userId}/todo")
 public class TodoController {
 
   private TodoService todoService;
+  private UserService userService;
 
   @Autowired
-  public TodoController(TodoService todoService){
+  public TodoController(TodoService todoService, UserService userService){
     this.todoService = todoService;
+    this.userService = userService;
   }
 
-  @GetMapping("/")
-  public String list(Model model, @RequestParam(required = false) boolean isActive) {
+  @GetMapping({"/", "/list", ""})
+  public String list(Model model, @PathVariable long userId, @RequestParam(required = false) boolean isActive) {
     ArrayList<Todo> todos;
+    User user = userService.findUserById(userId);
+    model.addAttribute("user", user);
     if (isActive) {
-      todos = todoService.findUndoneTodos();
+      todos = userService.findUndoneTodosByUserId(userId);
     } else {
-      todos = todoService.findAllTodo();
+      todos = userService.findAllTodoByUserId(userId);
     }
     model.addAttribute("todos", todos);
     return "todolist";
   }
 
-  @GetMapping("/list")
-  public String list2(){
-    return "redirect:/todo/";
-  }
+//  @GetMapping("/list")
+//  public String list2(){
+//    return "redirect:/todo/";
+//  }
 
   @GetMapping("/add")
-  public String renderAddNewTodoForm(){
+  public String renderAddNewTodoForm(@PathVariable long userId, Model model){
+    model.addAttribute("userId", userId);
     return "addtodo";
   }
 
   @PostMapping("/add")
-  public String addNewTodo(@ModelAttribute Todo newTodo){
+  public String addNewTodo(@PathVariable long userId, @ModelAttribute Todo newTodo){
     todoService.save(newTodo);
-    return "redirect:/todo/";
+    return "redirect:/" + userId + "/todo/";
   }
 
   @PostMapping("/{id}/delete")
-  public String deleteTodo(@PathVariable long id){
+  public String deleteTodo(@PathVariable long userId, @PathVariable long id){
     todoService.delete(id);
-    return "redirect:/todo/";
+    return "redirect:/" + userId + "/todo/";
   }
 
   @GetMapping("/{id}/edit")
-  public String renderEditTodoPage(@PathVariable long id, Model model){
-    findTodoAndAddToModel(id, model);
+  public String renderEditTodoPage(@PathVariable long userId, @PathVariable long id, Model model){
+    findTodoAndAddToModel(id, userId, model);
     return "edittodo";
   }
 
   @PostMapping("/{id}/edit")
-  public String editTodo(@ModelAttribute Todo todo, @PathVariable long id){
+  public String editTodo(@PathVariable long userId, @ModelAttribute Todo todo, @PathVariable long id){
     todoService.save(todo);
-    return "redirect:/todo/";
+    return "redirect:/" + userId + "/todo/";
   }
 
   @GetMapping("/{id}/details")
-  public String renderTodoDetailsPage(@PathVariable long id, Model model){
-    findTodoAndAddToModel(id, model);
+  public String renderTodoDetailsPage(@PathVariable long userId, @PathVariable long id, Model model){
+    findTodoAndAddToModel(id, userId, model);
     return "tododetails";
   }
 
   @PostMapping("/{id}/complete")
-  public String completeTodo(@PathVariable long id){
+  public String completeTodo(@PathVariable long userId, @PathVariable long id){
     todoService.complete(id);
-    return "redirect:/todo/";
+    return "redirect:/" + userId + "/todo/";
   }
 
-  private void findTodoAndAddToModel(long id, Model model){
+  private void findTodoAndAddToModel(long id, long userId, Model model){
+    model.addAttribute("userId", userId);
     if (!todoService.checkIdExists((id))){
       model.addAttribute("noTodo", "There is no todo with given id.");
     } else {
