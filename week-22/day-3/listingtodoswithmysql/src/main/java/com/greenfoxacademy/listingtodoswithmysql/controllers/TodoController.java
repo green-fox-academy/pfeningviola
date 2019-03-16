@@ -2,7 +2,6 @@ package com.greenfoxacademy.listingtodoswithmysql.controllers;
 
 import com.greenfoxacademy.listingtodoswithmysql.models.Todo;
 import com.greenfoxacademy.listingtodoswithmysql.models.User;
-import com.greenfoxacademy.listingtodoswithmysql.repositories.TodoRepository;
 import com.greenfoxacademy.listingtodoswithmysql.services.TodoService;
 import com.greenfoxacademy.listingtodoswithmysql.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +26,20 @@ public class TodoController {
 
   @GetMapping({"/", "/list", ""})
   public String list(Model model, @PathVariable long userId, @RequestParam(required = false) boolean isActive) {
-    ArrayList<Todo> todos;
-    User user = userService.findUserById(userId);
-    model.addAttribute("user", user);
-    if (isActive) {
-      todos = userService.findUndoneTodosByUserId(userId);
+    if (userService.checkExistUserById(userId)) {
+      ArrayList<Todo> todos;
+      User user = userService.findUserById(userId);
+      model.addAttribute("user", user);
+      if (isActive) {
+        todos = userService.findUndoneTodosByUserId(userId);
+      } else {
+        todos = userService.findAllTodoByUserId(userId);
+      }
+      model.addAttribute("todos", todos);
+      return "todolist";
     } else {
-      todos = userService.findAllTodoByUserId(userId);
+      return "error";
     }
-    model.addAttribute("todos", todos);
-    return "todolist";
   }
 
 //  @GetMapping("/list")
@@ -46,8 +49,12 @@ public class TodoController {
 
   @GetMapping("/add")
   public String renderAddNewTodoForm(@PathVariable long userId, Model model){
-    model.addAttribute("userId", userId);
-    return "addtodo";
+    if (userService.checkExistUserById(userId)) {
+      model.addAttribute("userId", userId);
+      return "addtodo";
+    } else {
+      return "error";
+    }
   }
 
   @PostMapping("/add")
@@ -64,8 +71,12 @@ public class TodoController {
 
   @GetMapping("/{id}/edit")
   public String renderEditTodoPage(@PathVariable long userId, @PathVariable long id, Model model){
-    findTodoAndAddToModel(id, userId, model);
-    return "edittodo";
+    if (userService.checkExistUserById(userId)) {
+      findTodoAndAddToModel(id, userId, model);
+      return "edittodo";
+    } else {
+      return "error";
+    }
   }
 
   @PostMapping("/{id}/edit")
@@ -76,8 +87,12 @@ public class TodoController {
 
   @GetMapping("/{id}/details")
   public String renderTodoDetailsPage(@PathVariable long userId, @PathVariable long id, Model model){
-    findTodoAndAddToModel(id, userId, model);
-    return "tododetails";
+    if (userService.checkExistUserById(userId)) {
+      findTodoAndAddToModel(id, userId, model);
+      return "tododetails";
+    } else {
+      return "error";
+    }
   }
 
   @PostMapping("/{id}/complete")

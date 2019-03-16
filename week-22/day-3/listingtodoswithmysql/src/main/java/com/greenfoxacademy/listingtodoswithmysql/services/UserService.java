@@ -60,7 +60,7 @@ public class UserService {
   }
 
 
-  public boolean checkExistUser(String name){
+  public boolean checkExistUserByName(String name){
     if (name != null) {
       ArrayList<User> users = findAllUser();
       for (User user : users) {
@@ -70,6 +70,10 @@ public class UserService {
       }
     }
     return false;
+  }
+
+  public boolean checkExistUserById(long userId){
+    return userRepository.existsById(userId);
   }
 
   public boolean checkCorrectPassword(User user){

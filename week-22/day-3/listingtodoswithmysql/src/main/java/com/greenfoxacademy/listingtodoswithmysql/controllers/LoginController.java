@@ -30,7 +30,7 @@ public class LoginController {
 
   @PostMapping("/login")
   public String login(@ModelAttribute User userFromForm, Model model){
-    if (userService.checkExistUser(userFromForm.getName())) {
+    if (userService.checkExistUserByName(userFromForm.getName())) {
       if(userService.checkCorrectPassword(userFromForm)) {
         User user = userService.findByName(userFromForm.getName());
         return "redirect:/" + user.getUserId() + "/todo/";
@@ -51,7 +51,7 @@ public class LoginController {
 
   @PostMapping("/register")
   public String register(Model model, @ModelAttribute User userFromForm){
-    if (userService.checkExistUser(userFromForm.getName())){
+    if (userService.checkExistUserByName(userFromForm.getName())){
       model.addAttribute("alreadyExistingUser", "This username is already used. Choose other name!");
       return "login";
     } else {
