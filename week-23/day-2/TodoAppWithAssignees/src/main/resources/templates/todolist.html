@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Todo List</title>
+</head>
+<body>
+<div>
+    <a href="/assignee">List of Assignees</a>
+</div>
+<div>
+    <a href="/todo/add">Add new todo</a>
+</div>
+<div>
+    <form action="/todo/" method="get">
+        <input type="text" placeholder="Todo" name="title" required/>
+        <input type="submit" value="Search"/>
+    </form>
+</div>
+<h1>Todos for today:</h1>
+<div th:if="${todos.isEmpty()}">
+    <p>No todos for today! :)</p>
+</div>
+<div th:unless="${todos.isEmpty()}">
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Action</th>
+        <th>Done</th>
+        <th>Urgent</th>
+        <th>Date</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="todo : ${todos}">
+        <td th:text="${todo.id}"></td>
+        <td><a th:text="${todo.title}" th:href="'/' + ${todo.userId} + '/todo/' + ${todo.id} + '/details'"></a></td>
+        <td th:text="${todo.done}"></td>
+        <td th:text="${todo.urgent}"></td>
+        <td th:text="${#temporals.format(todo.createdAt, 'dd-MM-yyyy HH:mm')}"></td>
+        <td>
+            <form th:action="'/todo/' + ${todo.id} + '/delete'" method="post">
+                <button type="submit">delete</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="'/todo/' + ${todo.id} + '/complete'" method="post">
+                <button type="submit">done/undone</button>
+            </form>
+        </td>
+        <td>
+            <a th:href="'/todo/' + ${todo.id} + '/edit'">Edit</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    <a href="/todo/?isActive=true">Show only undone tasks</a>
+</div>
+</body>
+</html>
