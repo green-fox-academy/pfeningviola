@@ -24,6 +24,7 @@
         <div>
             <label for="done">Done</label>
             <input type="checkbox" id="done" th:field="${todo.done}" name="title"/>
+            <input type="hidden" id="createdAt" th:field="${todo.createdAt}" name="createdAt"/>
         </div>
         <div>
             <input type="submit" value="Submit"/>
