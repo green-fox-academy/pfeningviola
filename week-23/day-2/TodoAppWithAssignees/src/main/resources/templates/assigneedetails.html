@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Details of Assignee</title>
+</head>
+<body>
+<div th:if="${noAssignee}">
+    <p th:text="${noAssignee}"></p>
+    <a href="/assignee/">Back</a>
+</div>
+<div th:unless="${noAssignee}">
+    <h1>Details:</h1>
+    <table>
+        <tr>
+            <td>ID:</td>
+            <td th:text="${assignee.id}"></td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td th:text="${assignee.name}"></td>
+        </tr>
+        <tr>
+            <td>E-mail:</td>
+            <td th:text="${assignee.email}"></td>
+        </tr>
+    </table>
+    <div>
+        <h2>Todos:</h2>
+        <p th:if="${assignee.todos.isEmpty()}" th:text="${assignee.name} + ' does not have any assigned todo yet'"></p>
+        <div th:unless="${assignee.todos.isEmpty()}">
+                <ul>
+                    <li th:each="todo : ${assignee.todos}"><a th:text="${todo.title}" th:href="'/assignee/' + ${assignee.id} + '/details' + ${todo.id}" ></a></li>
+                </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

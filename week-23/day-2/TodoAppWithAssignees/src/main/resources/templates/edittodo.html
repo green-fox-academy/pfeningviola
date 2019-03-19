@@ -9,7 +9,7 @@
     <h1>Edit todo</h1>
     <div th:if="${noTodo}">
         <p th:text="${noTodo}"></p>
-        <a th:href="'/' + ${userId} + '/todo/'">Back</a>
+        <a th:href="'/todo/'">Back</a>
     </div>
     <div th:unless="${noTodo}">
     <form th:action="'/todo/' + ${todo.id} + '/edit'" method="post">
@@ -19,12 +19,18 @@
         </div>
         <div>
             <label for="urgent">Urgent</label>
-            <input type="checkbox" id="urgent" th:field="${todo.urgent}" name="title"/>
+            <input type="checkbox" id="urgent" th:field="${todo.urgent}" name="urgent"/>
         </div>
         <div>
             <label for="done">Done</label>
-            <input type="checkbox" id="done" th:field="${todo.done}" name="title"/>
+            <input type="checkbox" id="done" th:field="${todo.done}" name="done"/>
             <input type="hidden" id="createdAt" th:field="${todo.createdAt}" name="createdAt"/>
+        </div>
+        <div>
+            <label for="assignee">Assigne to:</label>
+            <select id="assignee" name="assignee">
+                <option th:each="assignee : ${assignees}" th:text="${assignee.name}" th:value="${assignee.id}"></option>
+            </select>
         </div>
         <div>
             <input type="submit" value="Submit"/>

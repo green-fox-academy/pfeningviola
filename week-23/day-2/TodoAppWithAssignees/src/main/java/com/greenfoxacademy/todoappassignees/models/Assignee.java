@@ -1,9 +1,8 @@
 package com.greenfoxacademy.todoappassignees.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Assignee {
@@ -12,6 +11,10 @@ public class Assignee {
   private long id;
   private String name;
   private String email;
+
+  @OneToMany(cascade = CascadeType.PERSIST)
+  @JoinColumn(name = "assignee_id")
+  List<Todo> todos;
 
   public Assignee(){}
 
@@ -37,5 +40,13 @@ public class Assignee {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public List<Todo> getTodos() {
+    return todos;
+  }
+
+  public void setTodos(List<Todo> todos) {
+    this.todos = todos;
   }
 }

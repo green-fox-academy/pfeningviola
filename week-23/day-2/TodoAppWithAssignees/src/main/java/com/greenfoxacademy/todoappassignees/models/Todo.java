@@ -1,9 +1,6 @@
 package com.greenfoxacademy.todoappassignees.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.Clock;
 import java.time.LocalDateTime;
 
@@ -18,7 +15,10 @@ public class Todo {
   private LocalDateTime completedAt;
   private boolean urgent;
   private boolean done;
-  private long userId;
+
+  @ManyToOne
+  @JoinColumn(name="assignee_id")
+  private Assignee assignee;
 
 //  public Todo(String title){
 //    this.title = title;
@@ -79,11 +79,11 @@ public class Todo {
     this.completedAt = completedAt;
   }
 
-  public long getUserId() {
-    return userId;
+  public Assignee getAssignee() {
+    return assignee;
   }
 
-  public void setUserId(long userId) {
-    this.userId = userId;
+  public void setAssignee(Assignee assignee) {
+    this.assignee = assignee;
   }
 }

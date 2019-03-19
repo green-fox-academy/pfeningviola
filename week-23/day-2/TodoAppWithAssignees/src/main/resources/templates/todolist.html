@@ -28,6 +28,7 @@
     <tr>
         <th>ID</th>
         <th>Action</th>
+        <th>Assignee</th>
         <th>Done</th>
         <th>Urgent</th>
         <th>Date</th>
@@ -37,7 +38,9 @@
     <tbody>
     <tr th:each="todo : ${todos}">
         <td th:text="${todo.id}"></td>
-        <td><a th:text="${todo.title}" th:href="'/' + ${todo.userId} + '/todo/' + ${todo.id} + '/details'"></a></td>
+        <td><a th:text="${todo.title}" th:href="'/todo/' + ${todo.id} + '/details'"></a></td>
+        <td th:if="${todo.assignee == null}" th:text="''"></td>
+        <td th:unless="${todo.assignee == null}" th:text="${todo.assignee.name}"></td>
         <td th:text="${todo.done}"></td>
         <td th:text="${todo.urgent}"></td>
         <td th:text="${#temporals.format(todo.createdAt, 'dd-MM-yyyy HH:mm')}"></td>

@@ -40,6 +40,7 @@ public class TodoController {
 
   @GetMapping("/add")
   public String renderAddNewTodoForm(Model model){
+    model.addAttribute("assignees", assigneeService.findAll());
     return "addtodo";
   }
 
@@ -58,6 +59,7 @@ public class TodoController {
   @GetMapping("/{id}/edit")
   public String renderEditTodoPage(@PathVariable long id, Model model){
     findTodoAndAddToModel(id, model);
+    model.addAttribute("assignees", assigneeService.findAll());
     return "edittodo";
   }
 
