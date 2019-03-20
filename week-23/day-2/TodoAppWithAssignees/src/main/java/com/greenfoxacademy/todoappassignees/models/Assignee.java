@@ -8,7 +8,7 @@ import java.util.List;
 public class Assignee {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private Long id;
   private String name;
   private String email;
 
@@ -18,11 +18,11 @@ public class Assignee {
 
   public Assignee(){}
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

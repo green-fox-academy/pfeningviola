@@ -23,7 +23,8 @@
             </tr>
             <tr>
                 <td>Assignee:</td>
-                <td th:text="${todo.assignee.name}"></td>
+                <td th:if="${todo.assignee == null}" th:text="'This todo does not have any assignee yet.'"></td>
+                <td th:unless="${todo.assignee == null}"><a th:text="${todo.assignee.name}" th:href="'/assignee/' + ${todo.assignee.id} + '/details'"></a></td>
             </tr>
             <tr>
                 <td>Completed:</td>

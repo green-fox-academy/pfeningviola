@@ -18,8 +18,7 @@
             <input id="name" th:field="${assignee.name}" name="name" type="text" autofocus required/>
         </div>
         <div>
-            <label for="email">E-mail</label>
-            <input type="text" id="email" th:field="${assignee.email}" name="email"/>
+            <input type="hidden" th:field="${assignee.email}" name="email"/>
         </div>
         <div>
             <input type="submit" value="Submit"/>

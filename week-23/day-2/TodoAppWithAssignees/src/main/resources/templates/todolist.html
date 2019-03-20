@@ -40,7 +40,7 @@
         <td th:text="${todo.id}"></td>
         <td><a th:text="${todo.title}" th:href="'/todo/' + ${todo.id} + '/details'"></a></td>
         <td th:if="${todo.assignee == null}" th:text="''"></td>
-        <td th:unless="${todo.assignee == null}" th:text="${todo.assignee.name}"></td>
+        <td th:unless="${todo.assignee == null}"><a th:text="${todo.assignee.name}" th:href="'/assignee/' + ${todo.assignee.id} + '/details'"></a></td>
         <td th:text="${todo.done}"></td>
         <td th:text="${todo.urgent}"></td>
         <td th:text="${#temporals.format(todo.createdAt, 'dd-MM-yyyy HH:mm')}"></td>

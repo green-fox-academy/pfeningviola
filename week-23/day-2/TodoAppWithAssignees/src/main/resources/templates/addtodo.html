@@ -16,6 +16,7 @@
         <div>
             <label for="assignee">Assigne to:</label>
             <select id="assignee" name="assignee">
+                <option th:text="''" th:value="null"></option>
                 <option th:each="assignee : ${assignees}" th:text="${assignee.name}" th:value="${assignee.id}"></option>
             </select>
         </div>

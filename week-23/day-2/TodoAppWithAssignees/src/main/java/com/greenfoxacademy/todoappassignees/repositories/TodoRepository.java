@@ -1,5 +1,6 @@
 package com.greenfoxacademy.todoappassignees.repositories;
 
+import com.greenfoxacademy.todoappassignees.models.Assignee;
 import com.greenfoxacademy.todoappassignees.models.Todo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

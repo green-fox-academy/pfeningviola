@@ -26,9 +26,17 @@
             <input type="checkbox" id="done" th:field="${todo.done}" name="done"/>
             <input type="hidden" id="createdAt" th:field="${todo.createdAt}" name="createdAt"/>
         </div>
-        <div>
+        <div th:if="${todo.assignee != null}">
             <label for="assignee">Assigne to:</label>
             <select id="assignee" name="assignee">
+                <option th:text="''" th:value="null"></option>
+                <option th:each="assignee : ${assignees}" th:text="${assignee.name}" th:value="${assignee.id}" th:selected="${assignee.name.equals(todo.assignee.name)}"></option>
+            </select>
+        </div>
+        <div th:if="${todo.assignee == null}">
+            <label for="assignee2">Assigne to:</label>
+            <select id="assignee2" name="assignee">
+                <option th:text="''" th:value="null"></option>
                 <option th:each="assignee : ${assignees}" th:text="${assignee.name}" th:value="${assignee.id}"></option>
             </select>
         </div>

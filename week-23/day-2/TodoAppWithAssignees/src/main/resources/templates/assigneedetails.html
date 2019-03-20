@@ -31,7 +31,7 @@
         <p th:if="${assignee.todos.isEmpty()}" th:text="${assignee.name} + ' does not have any assigned todo yet'"></p>
         <div th:unless="${assignee.todos.isEmpty()}">
                 <ul>
-                    <li th:each="todo : ${assignee.todos}"><a th:text="${todo.title}" th:href="'/assignee/' + ${assignee.id} + '/details' + ${todo.id}" ></a></li>
+                    <li th:each="todo : ${assignee.todos}"><a th:text="${todo.title}" th:href="'/todo/' + ${todo.id} + '/details'" ></a></li>
                 </ul>
         </div>
     </div>
