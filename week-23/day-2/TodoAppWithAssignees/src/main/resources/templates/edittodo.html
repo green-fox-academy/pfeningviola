@@ -14,8 +14,12 @@
     <div th:unless="${noTodo}">
     <form th:action="'/todo/' + ${todo.id} + '/edit'" method="post">
         <div>
-            <label for="title">Todo description</label>
+            <label for="title">Todo description:</label>
             <input id="title" th:field="${todo.title}" name="title" type="text" autofocus required/>
+        </div>
+        <div>
+            <label for="dueDate">Deadline:</label>
+            <input name="dueDate" id="dueDate" type="datetime-local" th:field="${todo.dueDate}" required/>
         </div>
         <div>
             <label for="urgent">Urgent</label>
