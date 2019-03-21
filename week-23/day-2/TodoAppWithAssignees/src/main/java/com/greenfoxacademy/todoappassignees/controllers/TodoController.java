@@ -32,12 +32,14 @@ public class TodoController {
   }
 
   @GetMapping({"/", "/list", ""})
-  public String list(Model model, @RequestParam(required = false) boolean isActive, @RequestParam(required = false) String title) {
+  public String list(Model model, @RequestParam(required = false) boolean isActive,
+                     @RequestParam(required = false) String title,
+                     @RequestParam(required = false) String name) {
     ArrayList<Todo> todos;
     if (isActive) {
       todos = todoService.findUndoneTodos();
-    } else if ((title != null) && (!title.isEmpty())){
-      todos = todoService.findAllTodoWithSearchedTitle(title);
+    } else if ((title != null) && (!title.isEmpty()) || (name != null) && (!name.isEmpty())){
+      todos = todoService.findSearchedTodos(title, name);
     } else {
       todos = todoService.findAllTodo();
     }

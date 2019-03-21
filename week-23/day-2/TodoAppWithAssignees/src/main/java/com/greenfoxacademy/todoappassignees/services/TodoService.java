@@ -1,5 +1,6 @@
 package com.greenfoxacademy.todoappassignees.services;
 
+import com.greenfoxacademy.todoappassignees.models.Assignee;
 import com.greenfoxacademy.todoappassignees.models.Todo;
 import com.greenfoxacademy.todoappassignees.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,18 @@ public class TodoService {
     save(todo);
   }
 
+  public ArrayList<Todo> findSearchedTodos(String title, String name){
+    ArrayList<Todo> searchedTodos = new ArrayList<>();
+    if (((title != null) && (!title.isEmpty()) && ((name == null) || (name.isEmpty())))){
+      searchedTodos = findTodosByTitleContains(title);
+    } else if (((title == null) || (title.isEmpty()) && ((name != null) && (!name.isEmpty())))) {
+      searchedTodos = findTodosByAssigneeNameContains(name);
+    } else if (((title != null) && (!title.isEmpty()) && ((name != null) && (!name.isEmpty())))){
+      searchedTodos =findTodosByTitleContainsAndAssigneeNameContains(title, name);
+    }
+    return searchedTodos;
+  }
+
   public Todo findById(long id){
     Optional<Todo> todoInRepository = todoRepository.findById(id);
     Todo todo = new Todo();
@@ -79,5 +92,17 @@ public class TodoService {
 
   public boolean checkIdExists(long id){
     return todoRepository.existsById(id);
+  }
+
+  public ArrayList<Todo> findTodosByTitleContains(String title){
+    return todoRepository.findTodosByTitleContains(title);
+  }
+
+  public ArrayList<Todo> findTodosByAssigneeNameContains(String name){
+    return todoRepository.findTodosByAssigneeNameContains(name);
+  }
+
+  public ArrayList<Todo> findTodosByTitleContainsAndAssigneeNameContains(String title, String name){
+    return todoRepository.findTodosByTitleContainsAndAssigneeNameContains(title, name);
   }
 }
