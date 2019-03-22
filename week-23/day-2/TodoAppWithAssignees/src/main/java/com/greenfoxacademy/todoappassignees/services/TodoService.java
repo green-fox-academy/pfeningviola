@@ -1,12 +1,12 @@
 package com.greenfoxacademy.todoappassignees.services;
 
-import com.greenfoxacademy.todoappassignees.models.Assignee;
 import com.greenfoxacademy.todoappassignees.models.Todo;
 import com.greenfoxacademy.todoappassignees.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Clock;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -69,17 +69,61 @@ public class TodoService {
     save(todo);
   }
 
-  public ArrayList<Todo> findSearchedTodos(String title, String name){
+//  public ArrayList<Todo> findSearchedTodos(String title, String name, LocalDate dueDate){
+//    ArrayList<Todo> searchedTodos = new ArrayList<>();
+//    if (((title != null) && (!title.isEmpty()) && ((name == null) || (name.isEmpty())) && (dueDate == null))){
+//      searchedTodos = findTodosByTitleContains(title);
+//    } else if (((title == null) || (title.isEmpty()) && ((name != null) && (!name.isEmpty())) && (dueDate == null))) {
+//      searchedTodos = findTodosByAssigneeNameContains(name);
+//    } else if (((title != null) && (!title.isEmpty()) && ((name != null) && (!name.isEmpty())) && (dueDate == null))){
+//      searchedTodos = findTodosByTitleContainsAndAssigneeNameContains(title, name);
+//    } else if (((title.isEmpty())) && ((name == null) || (name.isEmpty()) && (dueDate != null))){
+//      searchedTodos = findTodosByDueDateContains(dueDate);
+//    }
+//    return searchedTodos;
+//  }
+
+  public ArrayList<Todo> findSearchedTodos(String title, String name, LocalDate dueDate) {
     ArrayList<Todo> searchedTodos = new ArrayList<>();
-    if (((title != null) && (!title.isEmpty()) && ((name == null) || (name.isEmpty())))){
+    if((title != null) && !title.isEmpty()) {
       searchedTodos = findTodosByTitleContains(title);
-    } else if (((title == null) || (title.isEmpty()) && ((name != null) && (!name.isEmpty())))) {
-      searchedTodos = findTodosByAssigneeNameContains(name);
-    } else if (((title != null) && (!title.isEmpty()) && ((name != null) && (!name.isEmpty())))){
-      searchedTodos =findTodosByTitleContainsAndAssigneeNameContains(title, name);
+    } else {
+      searchedTodos = findAllTodo();
     }
+    if((name != null) && (!name.isEmpty())) {
+      searchedTodos = findTodosByName(name, searchedTodos);
+    }
+    if (dueDate != null) {
+      searchedTodos = findTodosByDueDate(dueDate, searchedTodos);
+    }
+
     return searchedTodos;
   }
+
+  public ArrayList<Todo> findTodosByName (String name, ArrayList<Todo> filteredTodos) {
+    ArrayList<Todo> resultTodos = new ArrayList<>();
+    for (Todo todo : filteredTodos) {
+      if (todo.getAssignee() != null) {
+        if (todo.getAssignee().getName().toLowerCase().contains(name.toLowerCase())) {
+          resultTodos.add(todo);
+        }
+      }
+    }
+    return resultTodos;
+  }
+
+  public ArrayList<Todo> findTodosByDueDate(LocalDate dueDate, ArrayList<Todo> filteredTodos) {
+    ArrayList<Todo> resultTodos = new ArrayList<>();
+    for (Todo todo : filteredTodos) {
+      if(todo.getDueDate() != null) {
+        if (todo.getDueDate().equals(dueDate)) {
+          resultTodos.add(todo);
+        }
+      }
+    }
+    return resultTodos;
+  }
+
 
   public Todo findById(long id){
     Optional<Todo> todoInRepository = todoRepository.findById(id);
@@ -96,13 +140,5 @@ public class TodoService {
 
   public ArrayList<Todo> findTodosByTitleContains(String title){
     return todoRepository.findTodosByTitleContains(title);
-  }
-
-  public ArrayList<Todo> findTodosByAssigneeNameContains(String name){
-    return todoRepository.findTodosByAssigneeNameContains(name);
-  }
-
-  public ArrayList<Todo> findTodosByTitleContainsAndAssigneeNameContains(String title, String name){
-    return todoRepository.findTodosByTitleContainsAndAssigneeNameContains(title, name);
   }
 }

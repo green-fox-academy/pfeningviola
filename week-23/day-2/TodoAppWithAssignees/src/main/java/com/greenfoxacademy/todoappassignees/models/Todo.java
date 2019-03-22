@@ -2,6 +2,7 @@ package com.greenfoxacademy.todoappassignees.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,8 +14,8 @@ public class Todo {
   private String title;
   private LocalDateTime createdAt;
   private LocalDateTime completedAt;
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private LocalDateTime dueDate;
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+  private LocalDate dueDate;
   private boolean urgent;
   private boolean done;
 
@@ -89,11 +90,11 @@ public class Todo {
     this.assignee = assignee;
   }
 
-  public LocalDateTime getDueDate() {
+  public LocalDate getDueDate() {
     return dueDate;
   }
 
-  public void setDueDate(LocalDateTime dueDate) {
+  public void setDueDate(LocalDate dueDate) {
     this.dueDate = dueDate;
   }
 }

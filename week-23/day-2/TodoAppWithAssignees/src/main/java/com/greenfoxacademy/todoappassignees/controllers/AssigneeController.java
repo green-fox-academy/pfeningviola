@@ -1,7 +1,6 @@
 package com.greenfoxacademy.todoappassignees.controllers;
 
 import com.greenfoxacademy.todoappassignees.models.Assignee;
-import com.greenfoxacademy.todoappassignees.models.Todo;
 import com.greenfoxacademy.todoappassignees.services.AssigneeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

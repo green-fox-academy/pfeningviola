@@ -1,22 +1,16 @@
 package com.greenfoxacademy.todoappassignees.controllers;
 
-
 import com.greenfoxacademy.todoappassignees.models.Todo;
 import com.greenfoxacademy.todoappassignees.services.AssigneeService;
 import com.greenfoxacademy.todoappassignees.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/todo")
@@ -34,12 +28,19 @@ public class TodoController {
   @GetMapping({"/", "/list", ""})
   public String list(Model model, @RequestParam(required = false) boolean isActive,
                      @RequestParam(required = false) String title,
-                     @RequestParam(required = false) String name) {
+                     @RequestParam(required = false) String name,
+                     @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dueDate){
+//                     @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dueDate) {
     ArrayList<Todo> todos;
     if (isActive) {
       todos = todoService.findUndoneTodos();
-    } else if ((title != null) && (!title.isEmpty()) || (name != null) && (!name.isEmpty())){
-      todos = todoService.findSearchedTodos(title, name);
+    } else if (checkIfIsFilledFieldInTheForm(title, name, dueDate)){
+//      LocalDate localDate = null;
+//      if(dueDate != null && !dueDate.isEmpty()){
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        localDate = LocalDate.parse(dueDate, formatter);
+//      }
+      todos = todoService.findSearchedTodos(title.trim(), name.trim(), dueDate);
     } else {
       todos = todoService.findAllTodo();
     }
@@ -55,6 +56,9 @@ public class TodoController {
 
   @PostMapping("/add")
   public String addNewTodo(@ModelAttribute Todo newTodo){
+    if(newTodo.getDueDate() != null) {
+      newTodo.setDueDate(newTodo.getDueDate().plusDays(1));
+    }
     todoService.save(newTodo);
     return "redirect:/todo/";
   }
@@ -74,6 +78,9 @@ public class TodoController {
 
   @PostMapping("/{id}/edit")
   public String editTodo(@ModelAttribute Todo todo, @PathVariable long id){
+    if(todo.getDueDate() != null) {
+      todo.setDueDate(todo.getDueDate().plusDays(1));
+    }
     todoService.save(todo);
     return "redirect:/todo/";
   }
@@ -97,5 +104,9 @@ public class TodoController {
       Todo todo = todoService.findById(id);
       model.addAttribute("todo", todo);
     }
+  }
+
+  private boolean checkIfIsFilledFieldInTheForm(String title, String name, LocalDate dueDate){
+    return ((title != null) && (!title.isEmpty()) || ((name != null) && (!name.isEmpty())) || (dueDate != null));
   }
 }

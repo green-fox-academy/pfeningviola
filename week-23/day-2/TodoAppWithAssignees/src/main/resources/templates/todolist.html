@@ -16,6 +16,8 @@
     <form action="/todo/" method="get">
         <input type="text" placeholder="Todo" name="title"/>
         <input type="text" placeholder="Assignee" name="name"/>
+        <label for="dueDate">Deadline:</label>
+        <input id="dueDate" type="date" name="dueDate"/>
         <input type="submit" value="Search"/>
     </form>
 </div>
@@ -46,7 +48,7 @@
         <td th:text="${todo.done}"></td>
         <td th:text="${todo.urgent}"></td>
         <td th:text="${#temporals.format(todo.createdAt, 'dd-MM-yyyy HH:mm')}"></td>
-        <td th:text="${#temporals.format(todo.dueDate, 'dd-MM-yyyy HH:mm')}"></td>
+        <td th:text="${#temporals.format(todo.dueDate, 'dd-MM-yyyy')}"></td>
         <td>
             <form th:action="'/todo/' + ${todo.id} + '/delete'" method="post">
                 <button type="submit">delete</button>
