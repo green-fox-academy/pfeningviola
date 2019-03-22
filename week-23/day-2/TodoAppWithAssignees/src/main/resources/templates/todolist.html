@@ -3,39 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <title>Todo List</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+    <div class="container">
+        <a class="navbar-brand" href="/todo">
+            <img src="../static/images/todo.png" th:src="@{/images/todo.png}" alt = "Todo icon" style="height:50px; width:auto;"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <span class="navbar-brand">TODO</span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="'/todo'">Todos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="'/assignee'">Assignees</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+
 <div>
-    <a href="/assignee">List of Assignees</a>
-</div>
-<div>
-    <a href="/todo/add">Add new todo</a>
-</div>
-<div>
-    <form action="/todo/" method="get">
-        <input type="text" placeholder="Todo" name="title"/>
-        <input type="text" placeholder="Assignee" name="name"/>
-        <label for="dueDate">Deadline:</label>
-        <input id="dueDate" type="date" name="dueDate"/>
-        <input type="submit" value="Search"/>
+    <form class="form-inline mt-3" action="/todo/" method="get">
+        <input class="form-control mr-3" type="text" placeholder="Todo" name="title"/>
+        <input class="form-control mr-3" type="text" placeholder="Assignee" name="name"/>
+        <label for="dueDate" class="h5 mr-3">Deadline:</label>
+        <input class="form-control mr-3" id="dueDate" type="date" name="dueDate"/>
+        <input class="btn btn-secondary px-5 mr-3" type="submit" value="Search"/>
     </form>
 </div>
-<h1>Todos for today:</h1>
+    <div class="row my-3 justify-content-center">
+        <a class="btn btn-warning" href="/todo/add">Add new todo</a>
+    </div>
+<h1 class="mb-3">List of Todos:</h1>
 <div th:if="${todos.isEmpty()}">
-    <p>No todos for today! :)</p>
+    <p class="h2">No todos!</p>
 </div>
 <div th:unless="${todos.isEmpty()}">
-<table>
-    <thead>
+<table class="table table-hover text-center">
+    <thead class="thead-light" style="background-color: #e3f2fd;">
     <tr>
-        <th>ID</th>
-        <th>Action</th>
-        <th>Assignee</th>
-        <th>Done</th>
-        <th>Urgent</th>
-        <th>Date</th>
-        <th>Deadline</th>
+        <th scope="col">ID</th>
+        <th scope="col">Action</th>
+        <th scope="col">Assignee</th>
+        <th scope="col">Done</th>
+        <th scope="col">Urgent</th>
+        <th scope="col">Date</th>
+        <th scope="col">Deadline</th>
+        <th></th>
+        <th></th>
         <th></th>
     </tr>
     </thead>
@@ -45,27 +71,31 @@
         <td><a th:text="${todo.title}" th:href="'/todo/' + ${todo.id} + '/details'"></a></td>
         <td th:if="${todo.assignee == null}" th:text="''"></td>
         <td th:unless="${todo.assignee == null}"><a th:text="${todo.assignee.name}" th:href="'/assignee/' + ${todo.assignee.id} + '/details'"></a></td>
-        <td th:text="${todo.done}"></td>
-        <td th:text="${todo.urgent}"></td>
-        <td th:text="${#temporals.format(todo.createdAt, 'dd-MM-yyyy HH:mm')}"></td>
+        <!--<td><a th:text="${todo.assignee?.name}" th:href="'/assignee/' + ${todo.assignee?.id} + '/details'"></a></td>-->
+        <td th:if="${todo.done==true}" class="text-center"><i class="text-success fas fa-check"></i></td>
+        <td th:if="${todo.done==false}" class="text-center"><i class="text-danger fas fa-times"></i></td>
+        <td th:if="${todo.urgent==true}" class="text-center"><i class="text-success fas fa-check"></i></td>
+        <td th:if="${todo.urgent==false}" class="text-center"><i class="text-danger fas fa-times"></i></td>
+        <td th:text="${#temporals.format(todo.createdAt, 'dd-MM-yyyy')}"></td>
         <td th:text="${#temporals.format(todo.dueDate, 'dd-MM-yyyy')}"></td>
         <td>
             <form th:action="'/todo/' + ${todo.id} + '/delete'" method="post">
-                <button type="submit">delete</button>
+                <button class="btn btn-danger" type="submit">delete</button>
             </form>
         </td>
         <td>
             <form th:action="'/todo/' + ${todo.id} + '/complete'" method="post">
-                <button type="submit">done/undone</button>
+                <button class="btn btn-success" type="submit">done/undone</button>
             </form>
         </td>
         <td>
-            <a th:href="'/todo/' + ${todo.id} + '/edit'">Edit</a>
+            <a class="btn btn-info" th:href="'/todo/' + ${todo.id} + '/edit'">Edit</a>
         </td>
     </tr>
     </tbody>
 </table>
     <a href="/todo/?isActive=true">Show only undone tasks</a>
+</div>
 </div>
 </body>
 </html>
