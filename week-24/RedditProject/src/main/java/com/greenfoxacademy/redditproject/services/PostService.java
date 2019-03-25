@@ -21,4 +21,8 @@ public class PostService {
     postRepository.findAll().forEach(posts::add);
     return posts;
   }
+
+  public void save(Post post){
+    postRepository.save(post);
+  }
 }

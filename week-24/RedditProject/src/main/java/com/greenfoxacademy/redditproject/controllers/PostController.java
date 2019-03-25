@@ -7,9 +7,7 @@ import com.greenfoxacademy.redditproject.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -28,6 +26,7 @@ public class PostController {
   @GetMapping({"", "/"})
   public String renderUserPage(Model model, @PathVariable Long userId){
     if (!userService.checkExistUserById(userId)) {
+      model.addAttribute("noUserId", "User doesn't exist.");
       return "error";
     } else {
       ArrayList<Post> posts = postService.findAllPost();
@@ -41,6 +40,7 @@ public class PostController {
   @GetMapping("/addpost")
   public String renderAddPostPage(Model model, @PathVariable Long userId) {
     if (!userService.checkExistUserById(userId)) {
+      model.addAttribute("noUserId", "User doesn't exist.");
       return "error";
     } else {
       User user = userService.findUserById(userId);
@@ -48,4 +48,11 @@ public class PostController {
       return "addpost";
     }
   }
+
+  @PostMapping("/addpost")
+  public String addPost(@ModelAttribute Post post, @PathVariable Long userId){
+    postService.save(post);
+    return "redirect:/" + userId;
+  }
+
 }

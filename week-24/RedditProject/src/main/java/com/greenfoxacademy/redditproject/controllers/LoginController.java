@@ -67,7 +67,7 @@ public class LoginController {
         return "register";
       } else {
         userService.save(userFromForm);
-        return "redirect:/" + userFromForm.getUserId() + "/";
+        return "redirect:/" + userFromForm.getUserId();
       }
     }
   }

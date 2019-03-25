@@ -11,6 +11,7 @@ public class Post {
   private String title;
   private String url;
   private LocalDateTime createdAt;
+  private int score;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
@@ -18,6 +19,7 @@ public class Post {
 
   public Post(){
     this.createdAt = LocalDateTime.now();
+    this.score = 0;
   }
 
   public Long getId() {
@@ -58,5 +60,13 @@ public class Post {
 
   public void setCreatedAt(LocalDateTime createdAt) {
     this.createdAt = createdAt;
+  }
+
+  public int getScore() {
+    return score;
+  }
+
+  public void setScore(int score) {
+    this.score = score;
   }
 }
