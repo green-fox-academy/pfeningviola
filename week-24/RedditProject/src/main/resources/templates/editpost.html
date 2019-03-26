@@ -6,7 +6,6 @@
     <title>Sign up to Reddit</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" th:href="@{/css/costum.css}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
@@ -38,29 +37,27 @@
         </div>
     </div>
 </nav>
-<div class="container" style="margin-bottom:50px;">
-    <div class="row">
-        <p class="h4 mt-5">My posts</p>
-        <table class="table">
-            <tr th:each="post : ${user.posts}">
-                <td class="justify-content-center">
-                    <div th:text="${post.score}" class="text-center"></div>
-                </td>
-                <td>
-                    <div><small th:text="'posted by ' + ${post.user.name}"></small></div>
-                    <div><a th:href="${post.url}" th:text="${post.title}" class="h4 text-secondary"></a></div>
-                </td>
-                <td>
-                    <form th:action="'/' + ${user.userId} + '/delete/' + ${post.id}" method="post">
-                        <button class="btn btn-danger" style="background-color: #b30000;" type="submit">Delete</button>
-                    </form>
-                </td>
-                <td>
-                    <a class="btn btn-secondary" th:href="'/' + ${user.userId} + '/edit/' + ${post.id}">Edit</a>
-                </td>
-            </tr>
-        </table>
-    </div>
+<div class="container mt-5" style="margin-bottom:50px;">
+    <h1 class="mb-3">Edit post:</h1>
+    <form th:action="'/' + ${user.userId} + '/edit/' + ${post.id}" method="post" th:field>
+        <input type="hidden" name="user" th:field="${user.userId}"/>
+        <input type="hidden" name="createdAt" th:field="${post.createdAt}"/>
+        <div class="form-group row">
+            <label for="title" class="h5 col-sm-3 col-form-label">Title</label>
+            <div class="col-sm-9">
+                <input class="form-control" id="title" th:field="${post.title}" name="title" type="text" required autofocus/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="url" class="h5 col-sm-3 col-form-label">URL link</label>
+            <div class="col-sm-9">
+                <input class="form-control" id="url" th:field="${post.url}" name="url" type="url" required/>
+            </div>
+        </div>
+        <div class="form-group row d-flex justify-content-center">
+            <input type="submit" value="POST" class="btn btn-secondary px-5" style="background-color: #b30000;"/>
+        </div>
+    </form>
 </div>
 <footer class="page-footer fixed-bottom" style="background-color: #b30000; color: white">
     <div class="container">

@@ -13,12 +13,12 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/{userId}")
-public class UserController {
+public class PostController {
   private UserService userService;
   private PostService postService;
 
   @Autowired
-  public UserController(UserService userService, PostService postService){
+  public PostController(UserService userService, PostService postService){
     this.userService = userService;
     this.postService = postService;
   }
@@ -68,7 +68,43 @@ public class UserController {
   }
 
   @GetMapping("/myposts")
-  public String renderOnlyUsersPosts(@PathVariable Long userId){
-    return "myposts";
+  public String renderOnlyUsersPosts(Model model, @PathVariable Long userId) {
+    if (!userService.checkExistUserById(userId)) {
+      model.addAttribute("noUserId", "User doesn't exist.");
+      return "error";
+    } else {
+      User user = userService.findUserById(userId);
+      model.addAttribute("user", user);
+      return "myposts";
+    }
+  }
+
+  @PostMapping("/delete/{id}")
+  public String deletePost(Model model, @PathVariable Long userId, @PathVariable Long id){
+    if (!userService.checkExistUserById(userId)) {
+      model.addAttribute("noUserId", "User doesn't exist.");
+      return "error";
+    } else {
+      postService.delete(id);
+      return "redirect:/" + userId + "/myposts";
+    }
+  }
+
+  @GetMapping("/edit/{id}")
+  public String renderEditPostPage(Model model, @PathVariable Long userId, @PathVariable Long id){
+    if (!userService.checkExistUserById(userId)) {
+      model.addAttribute("noUserId", "User doesn't exist.");
+      return "error";
+    } else {
+      model.addAttribute("post", postService.findPostById(id));
+      model.addAttribute("user", userService.findUserById(userId));
+      return "editpost";
+    }
+  }
+
+  @PostMapping("/edit/{id}")
+  public String editPost(@ModelAttribute Post post, @PathVariable Long userId, @PathVariable Long id){
+    postService.save(post);
+    return "redirect:/" + userId + "/myposts";
   }
 }

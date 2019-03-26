@@ -28,6 +28,10 @@ public class PostService {
     postRepository.save(post);
   }
 
+  public void delete(Long id) {
+    postRepository.delete(findPostById(id));
+  }
+
   public void upvotePost(Long id){
     Post post = findPostById(id);
     post.setScore(post.getScore() + 1);
