@@ -39,6 +39,7 @@
     </div>
 </nav>
 <div class="container" style="margin-bottom:50px;">
+    <div th:if="${ownPost}" class="alert alert-warning h4 mt-3 text-center" role="alert">You can not vote on your own post!</div>
     <div class="row">
         <p class="h4 mt-5">Most popular posts</p>
         <table class="table">

@@ -39,6 +39,9 @@
     </div>
 </nav>
 <div class="container" style="margin-bottom:50px;">
+    <div class="row mt-5 justify-content-center">
+        <a th:href="'/' + ${user.userId} + '/addpost'" class="btn btn-warning px-3" role="button">Add new post</a>
+    </div>
     <div class="row">
         <p class="h4 mt-5">My posts</p>
         <table class="table">

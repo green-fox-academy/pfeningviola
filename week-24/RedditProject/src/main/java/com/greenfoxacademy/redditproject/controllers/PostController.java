@@ -56,15 +56,29 @@ public class PostController {
   }
 
   @PostMapping("/upvote/{id}")
-  public String upvotePost(@PathVariable Long userId, @PathVariable Long id){
-    postService.upvotePost(id);
-    return "redirect:/" + userId;
+  public String upvotePost(Model model, @PathVariable Long userId, @PathVariable Long id){
+    if(postService.checkIfUsersPost(userId, id)) {
+      model.addAttribute("ownPost", "");
+      model.addAttribute("user", userService.findUserById(userId));
+      model.addAttribute("posts", postService.findAllPost());
+      return "usermainpage";
+    } else {
+      postService.upvotePost(id);
+      return "redirect:/" + userId;
+    }
   }
 
   @PostMapping("/downvote/{id}")
-  public String downvotePost(@PathVariable Long userId, @PathVariable Long id){
-    postService.downvotePost(id);
-    return "redirect:/" + userId;
+  public String downvotePost(Model model, @PathVariable Long userId, @PathVariable Long id){
+    if(postService.checkIfUsersPost(userId, id)) {
+      model.addAttribute("ownPost", "");
+      model.addAttribute("user", userService.findUserById(userId));
+      model.addAttribute("posts", postService.findAllPost());
+      return "usermainpage";
+    } else {
+      postService.downvotePost(id);
+      return "redirect:/" + userId;
+    }
   }
 
   @GetMapping("/myposts")

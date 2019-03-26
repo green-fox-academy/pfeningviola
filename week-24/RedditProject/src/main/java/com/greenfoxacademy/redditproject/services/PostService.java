@@ -1,6 +1,7 @@
 package com.greenfoxacademy.redditproject.services;
 
 import com.greenfoxacademy.redditproject.models.Post;
+import com.greenfoxacademy.redditproject.models.User;
 import com.greenfoxacademy.redditproject.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -12,10 +13,12 @@ import java.util.Optional;
 @Service
 public class PostService {
   private PostRepository postRepository;
+  private UserService userService;
 
   @Autowired
-  public PostService(PostRepository postRepository){
+  public PostService(PostRepository postRepository, UserService userService){
     this.postRepository = postRepository;
+    this.userService = userService;
   }
 
   public ArrayList<Post> findAllPost(){
@@ -50,5 +53,11 @@ public class PostService {
     if(postOptional.isPresent()) {
       post = postOptional.get();    }
     return post;
+  }
+
+  public boolean checkIfUsersPost(Long userId, Long id){
+    User user = userService.findUserById(userId);
+    Post post = findPostById(id);
+    return user.getPosts().contains(post);
   }
 }
