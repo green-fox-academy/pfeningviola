@@ -36,7 +36,8 @@
 </nav>
 <div class="container mt-5" style="margin-bottom:50px;">
     <h1 class="mb-3">Add new post:</h1>
-    <form th:action="'/' + ${user.userId} + '/addpost'" method="post">
+    <form action="#" method="post">
+        <input type="hidden" name="user" th:value="${user.userId}"/>
         <div class="form-group row">
             <label for="title" class="h5 col-sm-3 col-form-label">Title</label>
             <div class="col-sm-9">

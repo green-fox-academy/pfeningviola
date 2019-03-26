@@ -15,7 +15,7 @@ public class Post {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  User user;
+  private User user;
 
   public Post(){
     this.createdAt = LocalDateTime.now();
