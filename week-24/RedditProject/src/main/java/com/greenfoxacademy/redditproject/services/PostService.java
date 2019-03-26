@@ -3,9 +3,11 @@ package com.greenfoxacademy.redditproject.services;
 import com.greenfoxacademy.redditproject.models.Post;
 import com.greenfoxacademy.redditproject.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -24,5 +26,25 @@ public class PostService {
 
   public void save(Post post){
     postRepository.save(post);
+  }
+
+  public void upvotePost(Long id){
+    Post post = findPostById(id);
+    post.setScore(post.getScore() + 1);
+    postRepository.save(post);
+  }
+
+  public void downvotePost(Long id){
+    Post post = findPostById(id);
+    post.setScore(post.getScore() - 1);
+    postRepository.save(post);
+  }
+
+  public Post findPostById(Long id){
+    Optional<Post> postOptional = postRepository.findById(id);
+    Post post = new Post();
+    if(postOptional.isPresent()) {
+      post = postOptional.get();    }
+    return post;
   }
 }

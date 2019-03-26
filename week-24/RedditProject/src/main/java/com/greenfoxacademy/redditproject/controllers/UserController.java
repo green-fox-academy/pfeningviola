@@ -13,12 +13,12 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/{userId}")
-public class PostController {
+public class UserController {
   private UserService userService;
   private PostService postService;
 
   @Autowired
-  public PostController(UserService userService, PostService postService){
+  public UserController(UserService userService, PostService postService){
     this.userService = userService;
     this.postService = postService;
   }
@@ -55,4 +55,20 @@ public class PostController {
     return "redirect:/" + userId;
   }
 
+  @PostMapping("/upvote/{id}")
+  public String upvotePost(@PathVariable Long userId, @PathVariable Long id){
+    postService.upvotePost(id);
+    return "redirect:/" + userId;
+  }
+
+  @PostMapping("/downvote/{id}")
+  public String downvotePost(@PathVariable Long userId, @PathVariable Long id){
+    postService.downvotePost(id);
+    return "redirect:/" + userId;
+  }
+
+  @GetMapping("/myposts")
+  public String renderOnlyUsersPosts(@PathVariable Long userId){
+    return "myposts";
+  }
 }

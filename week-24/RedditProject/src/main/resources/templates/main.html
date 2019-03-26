@@ -42,12 +42,15 @@
     <div class="row mt-3 justify-content-center">
         <a href="/register" class="btn btn-secondary px-3" style="background-color: #b30000;" role="button">Become a Redditor</a>
     </div>
+    <div th:if="${voteWithoutLogin}" class="alert alert-warning h4 mt-3 text-center" role="alert">
+        You are not logged in, please <a href="/login" class="alert-link">log in</a> or <a href="/register" class="alert-link">sign up</a> to vote.
+    </div>
     <div class="row">
         <p class="h4">Most popular posts</p>
         <table class="table">
             <tr th:each="post : ${posts}">
                 <td class="justify-content-center">
-                    <div class="justify-contentc-center">
+                    <div class="justify-content-center">
                         <form action="/vote" method="post">
                             <button type="submit" class="btn btn-outline-danger"><i class="fas fa-caret-up"></i></button>
                         </form>

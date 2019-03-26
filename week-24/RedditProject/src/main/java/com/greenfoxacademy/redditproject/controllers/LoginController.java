@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
   private UserService userService;
   private PostService postService;
+  private Boolean voteWithoutLogin;
 
   @Autowired
   public LoginController(UserService userService, PostService postService) {
@@ -25,6 +26,8 @@ public class LoginController {
   @GetMapping("/")
   public String renderMainPage(Model model) {
     model.addAttribute("posts", postService.findAllPost());
+    model.addAttribute("voteWithoutLogin", voteWithoutLogin);
+    voteWithoutLogin = false;
     return "main";
   }
 
@@ -70,6 +73,12 @@ public class LoginController {
         return "redirect:/" + userFromForm.getUserId();
       }
     }
+  }
+
+  @PostMapping("/vote")
+  public String voteWithoutLogin() {
+    voteWithoutLogin = true;
+    return "redirect:/";
   }
 }
 
