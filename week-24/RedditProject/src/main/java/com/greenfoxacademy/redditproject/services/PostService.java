@@ -27,6 +27,10 @@ public class PostService {
     return posts;
   }
 
+  public ArrayList<Post> findAllPostByScoreOrderDesc(){
+    return postRepository.findAllByOrderByScoreDesc();
+  }
+
   public void save(Post post){
     postRepository.save(post);
   }

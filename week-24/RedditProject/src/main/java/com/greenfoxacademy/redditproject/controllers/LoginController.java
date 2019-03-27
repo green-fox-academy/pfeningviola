@@ -25,7 +25,7 @@ public class LoginController {
 
   @GetMapping("/")
   public String renderMainPage(Model model) {
-    model.addAttribute("posts", postService.findAllPost());
+    model.addAttribute("posts", postService.findAllPostByScoreOrderDesc());
     model.addAttribute("voteWithoutLogin", voteWithoutLogin);
     voteWithoutLogin = false;
     return "main";

@@ -29,7 +29,7 @@ public class PostController {
       model.addAttribute("noUserId", "User doesn't exist.");
       return "error";
     } else {
-      ArrayList<Post> posts = postService.findAllPost();
+      ArrayList<Post> posts = postService.findAllPostByScoreOrderDesc();
       User user = userService.findUserById(userId);
       model.addAttribute("user", user);
       model.addAttribute("posts", posts);

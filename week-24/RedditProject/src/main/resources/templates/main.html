@@ -63,7 +63,7 @@
                     </div>
                 </td>
                 <td>
-                    <div><small th:text="'posted by ' + ${post.user.name}"></small></div>
+                    <div><small th:text="'posted by ' + ${post.user.name} + ' ' + ${post.timeFromCreation()} + ' ago'"></small></div>
                     <div><a th:href="${post.url}" th:text="${post.title}" class="h4 text-secondary"></a></div>
                 </td>
             </tr>

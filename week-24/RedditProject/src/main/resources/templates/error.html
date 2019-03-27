@@ -13,6 +13,9 @@
 <div th:if="${noUserId}">
     <p class="h2 mt-5 text-center" style="color: #b30000;">User doesn't exist. <a href="/">Back to the main page.</a></p>
 </div>
+<div class="justify-content-center">
     <p class="h2 mt-5 text-center" style="color: #b30000;">Something went wrong. <a href="/">Back to the main page.</a></p>
+    <img src="../static/images/error.png" th:src="@{/images/error.png}" alt = "Error image" style="height:150px; width:auto;"/>
+</div>
 </body>
 </html>
