@@ -58,4 +58,25 @@ public class UserService {
     user.setVotedPosts(votedPosts);
     userRepository.save(user);
   }
+
+  public void removeVotedPost(Long votingUserId, Long id) {
+    User user = findUserById(votingUserId);
+    ArrayList<VotedPost> votedPosts = user.getVotedPosts();
+    VotedPost votedPost = findVotedPostById(votingUserId, id);
+    votedPosts.remove(votedPost);
+    save(user);
+  }
+
+  public VotedPost findVotedPostById (Long userId, Long id){
+    User user = findUserById(userId);
+    ArrayList<VotedPost> votedPosts = user.getVotedPosts();
+    if(!votedPosts.isEmpty()) {
+      for (VotedPost votedPost : votedPosts) {
+        if (votedPost.getId().equals(id)) {
+          return votedPost;
+        }
+      }
+    }
+    return null;
+  }
 }

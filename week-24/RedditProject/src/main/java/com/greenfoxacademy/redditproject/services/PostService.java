@@ -44,14 +44,24 @@ public class PostService {
     Post post = findPostById(id);
     post.setScore(post.getScore() + 1);
     postRepository.save(post);
-    userService.addVotedPost(votingUserId, post, true);
+
+    if (checkIfPostVotedByGivenUser(votingUserId, id)){
+      userService.removeVotedPost(votingUserId, id);
+    } else {
+      userService.addVotedPost(votingUserId, post, true);
+    }
   }
 
   public void downvotePost(Long votingUserId, Long id){
     Post post = findPostById(id);
     post.setScore(post.getScore() - 1);
     postRepository.save(post);
-    userService.addVotedPost(votingUserId, post, false);
+
+    if (checkIfPostVotedByGivenUser(votingUserId, id)){
+      userService.removeVotedPost(votingUserId, id);
+    } else {
+      userService.addVotedPost(votingUserId, post, false);
+    }
   }
 
   public Post findPostById(Long id){
@@ -68,7 +78,22 @@ public class PostService {
     return user.getPosts().contains(post);
   }
 
-  public boolean checkIfAlreadyVoted(Long userId, Long id) {
+  public boolean checkIfAlreadyVoted(Long userId, Long id, boolean upvoted, boolean downvoted) {
+    User user = userService.findUserById(userId);
+    ArrayList<VotedPost> votedPosts = user.getVotedPosts();
+    if(!votedPosts.isEmpty()) {
+      for (VotedPost votedPost : votedPosts) {
+        if (votedPost.getId().equals(id)) {
+          if((votedPost.isUpvoted() == upvoted) || (votedPost.isDownvoted() == downvoted)) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  public boolean checkIfPostVotedByGivenUser(Long userId, Long id){
     User user = userService.findUserById(userId);
     ArrayList<VotedPost> votedPosts = user.getVotedPosts();
     if(!votedPosts.isEmpty()) {

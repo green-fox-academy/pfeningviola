@@ -63,7 +63,7 @@ public class PostController {
     if(postService.checkIfUsersPost(userId, id)) {
       model.addAttribute("ownPost", "");
       return "usermainpage";
-    } else if (postService.checkIfAlreadyVoted(userId, id)){
+    } else if (postService.checkIfAlreadyVoted(userId, id, true, false)){
       model.addAttribute("alreadyVoted", "");
       return "usermainpage";
     } else {
@@ -80,7 +80,7 @@ public class PostController {
     if(postService.checkIfUsersPost(userId, id)) {
       model.addAttribute("ownPost", "");
       return "usermainpage";
-    } else if (postService.checkIfAlreadyVoted(userId, id)){
+    } else if (postService.checkIfAlreadyVoted(userId, id, false, true)){
       model.addAttribute("alreadyVoted", "");
       return "usermainpage";
     } else {
