@@ -1,10 +1,13 @@
 package com.greenfoxacademy.redditproject.services;
 
+import com.greenfoxacademy.redditproject.models.Post;
 import com.greenfoxacademy.redditproject.models.User;
+import com.greenfoxacademy.redditproject.models.VotedPost;
 import com.greenfoxacademy.redditproject.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -45,5 +48,14 @@ public class UserService {
     String passwordFromLoginForm = user.getPassword();
     String passwordSavedInRepository = findUserByName(user.getName()).getPassword();
     return passwordFromLoginForm.equals(passwordSavedInRepository);
+  }
+
+  public void addVotedPost(Long userId, Post post, boolean upvoted){
+    User user = findUserById(userId);
+    VotedPost votedPost = new VotedPost(post, upvoted);
+    ArrayList<VotedPost> votedPosts = user.getVotedPosts();
+    votedPosts.add(votedPost);
+    user.setVotedPosts(votedPosts);
+    userRepository.save(user);
   }
 }

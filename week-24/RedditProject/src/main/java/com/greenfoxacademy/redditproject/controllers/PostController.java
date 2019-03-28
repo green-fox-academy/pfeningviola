@@ -57,26 +57,34 @@ public class PostController {
 
   @PostMapping("/upvote/{id}")
   public String upvotePost(Model model, @PathVariable Long userId, @PathVariable Long id){
+    model.addAttribute("user", userService.findUserById(userId));
+    model.addAttribute("posts", postService.findAllPostByScoreOrderDesc());
+
     if(postService.checkIfUsersPost(userId, id)) {
       model.addAttribute("ownPost", "");
-      model.addAttribute("user", userService.findUserById(userId));
-      model.addAttribute("posts", postService.findAllPost());
+      return "usermainpage";
+    } else if (postService.checkIfAlreadyVoted(userId, id)){
+      model.addAttribute("alreadyVoted", "");
       return "usermainpage";
     } else {
-      postService.upvotePost(id);
+      postService.upvotePost(userId, id);
       return "redirect:/" + userId;
     }
   }
 
   @PostMapping("/downvote/{id}")
   public String downvotePost(Model model, @PathVariable Long userId, @PathVariable Long id){
+    model.addAttribute("user", userService.findUserById(userId));
+    model.addAttribute("posts", postService.findAllPost());
+
     if(postService.checkIfUsersPost(userId, id)) {
       model.addAttribute("ownPost", "");
-      model.addAttribute("user", userService.findUserById(userId));
-      model.addAttribute("posts", postService.findAllPost());
+      return "usermainpage";
+    } else if (postService.checkIfAlreadyVoted(userId, id)){
+      model.addAttribute("alreadyVoted", "");
       return "usermainpage";
     } else {
-      postService.downvotePost(id);
+      postService.downvotePost(userId, id);
       return "redirect:/" + userId;
     }
   }

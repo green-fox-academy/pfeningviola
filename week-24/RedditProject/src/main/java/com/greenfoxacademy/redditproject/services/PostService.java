@@ -2,6 +2,7 @@ package com.greenfoxacademy.redditproject.services;
 
 import com.greenfoxacademy.redditproject.models.Post;
 import com.greenfoxacademy.redditproject.models.User;
+import com.greenfoxacademy.redditproject.models.VotedPost;
 import com.greenfoxacademy.redditproject.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -39,16 +40,18 @@ public class PostService {
     postRepository.delete(findPostById(id));
   }
 
-  public void upvotePost(Long id){
+  public void upvotePost(Long votingUserId, Long id){
     Post post = findPostById(id);
     post.setScore(post.getScore() + 1);
     postRepository.save(post);
+    userService.addVotedPost(votingUserId, post, true);
   }
 
-  public void downvotePost(Long id){
+  public void downvotePost(Long votingUserId, Long id){
     Post post = findPostById(id);
     post.setScore(post.getScore() - 1);
     postRepository.save(post);
+    userService.addVotedPost(votingUserId, post, false);
   }
 
   public Post findPostById(Long id){
@@ -63,5 +66,18 @@ public class PostService {
     User user = userService.findUserById(userId);
     Post post = findPostById(id);
     return user.getPosts().contains(post);
+  }
+
+  public boolean checkIfAlreadyVoted(Long userId, Long id) {
+    User user = userService.findUserById(userId);
+    ArrayList<VotedPost> votedPosts = user.getVotedPosts();
+    if(!votedPosts.isEmpty()) {
+      for (VotedPost votedPost : votedPosts) {
+        if (votedPost.getId().equals(id)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

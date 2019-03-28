@@ -1,11 +1,12 @@
 package com.greenfoxacademy.redditproject.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
-public class Post {
+public class Post implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
