@@ -5,7 +5,6 @@ import com.greenfoxacademy.redditproject.models.User;
 import com.greenfoxacademy.redditproject.models.VotedPost;
 import com.greenfoxacademy.redditproject.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -104,5 +103,49 @@ public class PostService {
       }
     }
     return false;
+  }
+
+  public ArrayList<Integer> findNumberOfPages(){
+    int numberOfPages = calculateNumberPage();
+
+    ArrayList<Integer> pages = new ArrayList<>();
+    for(int i = 0; i < numberOfPages; i++){
+      pages.add(i + 1);
+    }
+    return pages;
+  }
+
+  public int calculateNumberPage(){
+    int numberOfPages = 0;
+    if(findAllPostByScoreOrderDesc().isEmpty()){
+      numberOfPages = 1;
+    } else if ((findAllPostByScoreOrderDesc().size() % 10) > 0){
+      numberOfPages = (findAllPostByScoreOrderDesc().size() / 10) + 1;
+    } else {
+      numberOfPages = findAllPostByScoreOrderDesc().size() / 10;
+    }
+    return numberOfPages;
+  }
+
+  public ArrayList<Post> findPostsToList(Integer pageNumber){
+    ArrayList<Post> allPosts = findAllPostByScoreOrderDesc();
+    ArrayList<Post> searchedPosts = new ArrayList<>();
+    int indexOfFirstPost = (pageNumber - 1) * 10;
+    int indexOfLastPost = 0;
+
+    if ((pageNumber < calculateNumberPage()) || ((findAllPostByScoreOrderDesc().size() % 10) == 0)){
+      indexOfLastPost = indexOfFirstPost + 9;
+      for (int i = indexOfFirstPost; i <= indexOfLastPost; i++){
+        searchedPosts.add(allPosts.get(i));
+      }
+    }
+
+    if ((pageNumber == calculateNumberPage()) && ((findAllPostByScoreOrderDesc().size() % 10) > 0)){
+      indexOfLastPost = indexOfFirstPost + (findAllPostByScoreOrderDesc().size() % 10);
+      for (int i = indexOfFirstPost; i < indexOfLastPost; i++){
+        searchedPosts.add(allPosts.get(i));
+      }
+    }
+    return searchedPosts;
   }
 }

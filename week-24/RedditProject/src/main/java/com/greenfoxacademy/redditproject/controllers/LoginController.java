@@ -24,8 +24,13 @@ public class LoginController {
   }
 
   @GetMapping("/")
-  public String renderMainPage(Model model) {
-    model.addAttribute("posts", postService.findAllPostByScoreOrderDesc());
+  public String renderMainPage(Model model, @RequestParam(required = false) Integer pageNumber) {
+    if (pageNumber == null){
+      pageNumber = 1;
+    }
+    model.addAttribute("numberOfPages", postService.findNumberOfPages());
+    model.addAttribute("actualPage", pageNumber);
+    model.addAttribute("posts", postService.findPostsToList(pageNumber));
     model.addAttribute("voteWithoutLogin", voteWithoutLogin);
     voteWithoutLogin = false;
     return "main";
