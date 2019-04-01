@@ -1,14 +1,16 @@
 package com.greenfoxacademy.rest.controllers;
 
+import com.greenfoxacademy.rest.models.AppendA;
 import com.greenfoxacademy.rest.models.Doubling;
 import com.greenfoxacademy.rest.models.Error;
 import com.greenfoxacademy.rest.models.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class DoublingController {
+public class RestControllers {
 
   @GetMapping("/doubling")
   public Object renderDoublingPage(@RequestParam(name = "input", required = false) Integer received) {
@@ -31,5 +33,13 @@ public class DoublingController {
     } else {
       return new Greeting(name, title);
     }
+  }
+
+  @GetMapping("/appenda/{appendable}")
+  public Object appendA(@PathVariable String appendable){
+    if (appendable == null){
+      return "redirect:/404";
+    }
+    return new AppendA(appendable);
   }
 }
