@@ -1,13 +1,11 @@
 package com.greenfoxacademy.rest.controllers;
 
-import com.greenfoxacademy.rest.models.AppendA;
-import com.greenfoxacademy.rest.models.Doubling;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.greenfoxacademy.rest.models.*;
 import com.greenfoxacademy.rest.models.Error;
-import com.greenfoxacademy.rest.models.Greeting;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class RestControllers {
@@ -41,5 +39,14 @@ public class RestControllers {
       return "redirect:/404";
     }
     return new AppendA(appendable);
+  }
+
+  @PostMapping("/dountil/{action}")
+  public Object doUntil(@PathVariable String action, @RequestBody Until jsonUntil ){
+
+    if (jsonUntil == null){
+      return new Error("a number");
+    }
+    return new DoUntil(action, jsonUntil.getUntil());
   }
 }
