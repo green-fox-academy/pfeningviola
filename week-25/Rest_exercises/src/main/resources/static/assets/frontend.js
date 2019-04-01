@@ -72,12 +72,12 @@ class Updoot {
     async onGreeterClick() {
         // expecting error with prompt to provide and error and title
         await this.request('get', '/greeter', {}, errorData => {
-            return errorData.error === 'Please provide a name and title';
+            return errorData.error === 'Please provide a name and a title!';
     });
 
         // expecting error with prompt to provide a title
         await this.request('get', '/greeter', { name: 'petike' }, errorData => {
-            return errorData.error = 'Please provide a title';
+            return errorData.error = 'Please provide a title!';
     });
 
         // expected success with specific response
