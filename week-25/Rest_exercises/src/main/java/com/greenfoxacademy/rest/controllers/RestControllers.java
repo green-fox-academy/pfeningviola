@@ -4,11 +4,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.greenfoxacademy.rest.models.*;
 import com.greenfoxacademy.rest.models.Error;
+import com.greenfoxacademy.rest.services.ArrayCalculating;
 import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class RestControllers {
+  private ArrayCalculating arrayCalculating;
+
+  @Autowired
+  public RestControllers(ArrayCalculating arrayCalculating){
+    this.arrayCalculating = arrayCalculating;
+  }
 
   @GetMapping("/doubling")
   public Object renderDoublingPage(@RequestParam(name = "input", required = false) Integer received) {
@@ -42,11 +52,36 @@ public class RestControllers {
   }
 
   @PostMapping("/dountil/{action}")
-  public Object doUntil(@PathVariable String action, @RequestBody Until jsonUntil ){
-
-    if (jsonUntil == null){
-      return new Error("a number");
+  public Object doUntil(@PathVariable String action, @RequestBody(required = false) Until jsonUntil ) {
+    if ((action.equals("sum")) || (action.equals("factor"))) {
+      if (jsonUntil != null) {
+        return new DoUntil(action, jsonUntil.getUntil());
+      } else {
+        return new Error("a number");
+      }
     }
-    return new DoUntil(action, jsonUntil.getUntil());
+    return new Error("the correct method");
+  }
+
+  @PostMapping("/arrays")
+  public ResponseEntity<Object> calculateFromArray(@RequestBody(required = false) Array calculateArray){
+    if (calculateArray != null){
+      if((calculateArray.getWhat() != null) && (calculateArray.getNumbers() != null)) {
+        if (calculateArray.getWhat().equals("sum")) {
+          Result result = new Result(arrayCalculating.summarize(calculateArray.getNumbers()));
+          return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+        if (calculateArray.getWhat().equals("multiply")) {
+          Result result = new Result(arrayCalculating.multiply(calculateArray.getNumbers()));
+          return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+        if (calculateArray.getWhat().equals("double")) {
+          ResultArray result = new ResultArray(arrayCalculating.doubleTheNumbers(calculateArray.getNumbers()));
+          return ResponseEntity.status(HttpStatus.OK).body(result);
+        }
+      }
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error("what to do with the numbers"));
+    }
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error("what to do with the numbers"));
   }
 }
