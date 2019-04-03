@@ -4,6 +4,7 @@ import com.greenfoxacademy.rest.models.*;
 import com.greenfoxacademy.rest.models.Error;
 import com.greenfoxacademy.rest.services.ArrayCalculating;
 import com.greenfoxacademy.rest.services.LogService;
+import com.greenfoxacademy.rest.services.SithReverserService;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.*;
 public class RestControllers {
   private ArrayCalculating arrayCalculating;
   private LogService logService;
+  private SithReverserService sithReverserService;
 
   @Autowired
-  public RestControllers(ArrayCalculating arrayCalculating, LogService logService){
+  public RestControllers(ArrayCalculating arrayCalculating, LogService logService, SithReverserService sithReverserService){
     this.arrayCalculating = arrayCalculating;
     this.logService = logService;
+    this.sithReverserService = sithReverserService;
   }
 
   @GetMapping("/doubling")
@@ -94,6 +97,16 @@ public class RestControllers {
   @GetMapping("/log")
   public LogList listTheLogs(){
     return logService.createLogList();
+  }
+
+  @PostMapping("/sith")
+  public ResponseEntity<Object> reverseTextToSith(@RequestBody InputText text){
+    if ((text == null) || (text.getText().equals(""))){
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new SithError());
+    } else {
+      String sithText = sithReverserService.reverseTextToSith(text.getText());
+      return ResponseEntity.status(HttpStatus.OK).body(new SithText(sithText));
+    }
   }
 
 
