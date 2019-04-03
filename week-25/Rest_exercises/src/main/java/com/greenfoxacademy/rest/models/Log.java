@@ -15,6 +15,8 @@ public class Log {
   private String endpoint;
   private String data;
 
+  public Log(){}
+
   public Log(String endpoint, String data){
     this.endpoint = endpoint;
     this.data = data;

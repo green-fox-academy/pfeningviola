@@ -23,4 +23,12 @@ public class Array {
   public void setNumbers(List<Integer> numbers) {
     this.numbers = numbers;
   }
+
+  @Override
+  public String toString() {
+    return "Array{" +
+        "what='" + what + '\'' +
+        ", numbers=" + numbers +
+        '}';
+  }
 }

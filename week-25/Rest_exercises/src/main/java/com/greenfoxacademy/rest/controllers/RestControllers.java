@@ -1,10 +1,9 @@
 package com.greenfoxacademy.rest.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.greenfoxacademy.rest.models.*;
 import com.greenfoxacademy.rest.models.Error;
 import com.greenfoxacademy.rest.services.ArrayCalculating;
+import com.greenfoxacademy.rest.services.LogService;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,14 +13,17 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class RestControllers {
   private ArrayCalculating arrayCalculating;
+  private LogService logService;
 
   @Autowired
-  public RestControllers(ArrayCalculating arrayCalculating){
+  public RestControllers(ArrayCalculating arrayCalculating, LogService logService){
     this.arrayCalculating = arrayCalculating;
+    this.logService = logService;
   }
 
   @GetMapping("/doubling")
   public Object renderDoublingPage(@RequestParam(name = "input", required = false) Integer received) {
+    logService.save(new Log("/doubling", "input=" + received));
     if (received == null) {
       return new Error("an input");
     } else {
@@ -32,6 +34,7 @@ public class RestControllers {
 
   @GetMapping("/greeter")
   public Object greet(@RequestParam(name = "name", required = false) String name, @RequestParam(name = "title", required = false) String title){
+    logService.save(new Log("/greeter", "name=" + name + "&title=" + title));
     if ((name == null) && (title == null)){
       return new Error("a name and a title");
     } else if (name == null) {
@@ -45,6 +48,7 @@ public class RestControllers {
 
   @GetMapping("/appenda/{appendable}")
   public Object appendA(@PathVariable String appendable){
+    logService.save(new Log("/appenda/{appendable}", "appendable=" + appendable));
     if (appendable == null){
       return "redirect:/404";
     }
@@ -53,6 +57,7 @@ public class RestControllers {
 
   @PostMapping("/dountil/{action}")
   public Object doUntil(@PathVariable String action, @RequestBody(required = false) Until jsonUntil ) {
+    logService.save(new Log("/dountil/{action}", "action=" + action + "&json=" + jsonToString(jsonUntil)));
     if ((action.equals("sum")) || (action.equals("factor"))) {
       if (jsonUntil != null) {
         return new DoUntil(action, jsonUntil.getUntil());
@@ -65,6 +70,7 @@ public class RestControllers {
 
   @PostMapping("/arrays")
   public ResponseEntity<Object> calculateFromArray(@RequestBody(required = false) Array calculateArray){
+    logService.save(new Log("/arrays", "json=" + jsonToString(calculateArray)));
     if (calculateArray != null){
       if((calculateArray.getWhat() != null) && (calculateArray.getNumbers() != null)) {
         if (calculateArray.getWhat().equals("sum")) {
@@ -83,5 +89,20 @@ public class RestControllers {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error("what to do with the numbers"));
     }
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Error("what to do with the numbers"));
+  }
+
+  @GetMapping("/log")
+  public LogList listTheLogs(){
+    return logService.createLogList();
+  }
+
+
+
+  public String jsonToString(Object object){
+    if (object == null){
+      return "null";
+    } else {
+      return object.toString();
+    }
   }
 }
