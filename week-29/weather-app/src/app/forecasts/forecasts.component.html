@@ -1,0 +1,9 @@
+<ul class="forecasts">
+  <li *ngFor="let forecast of forecasts"
+      (click)="onSelect(forecast)">
+      <div class="city">{{forecast.city}}</div>
+      <div class="country">{{forecast.country}}</div>
+      <div class="temperature">{{forecast.temperature}}</div>
+      <img class="weather-icon" [src]="forecast.weatherIconLink"/>        
+  </li>
+</ul>
