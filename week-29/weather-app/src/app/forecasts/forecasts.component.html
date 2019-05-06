@@ -1,9 +1,17 @@
-<ul class="forecasts">
-  <li *ngFor="let forecast of forecasts"
-      (click)="onSelect(forecast)">
-      <div class="city">{{forecast.city}}</div>
-      <div class="country">{{forecast.country}}</div>
-      <div class="temperature">{{forecast.temperature}}</div>
-      <img class="weather-icon" [src]="forecast.weatherIconLink"/>        
-  </li>
-</ul>
+
+  <ul class="forecasts">
+    <li *ngFor="let forecast of forecasts"
+        (click)="onSelect(forecast)"
+        class="row align-items-center">
+          <div class="col-6">
+            <div class="city h2">{{forecast.city}}</div>
+            <div class="country">{{forecast.country}}</div>
+          </div>
+          <div class="col-3">
+            <div class="temperature text-center h3">{{forecast.temperature}}<span><sup>o</sup>C</span></div>
+          </div>
+          <div class="col-3 justify-content-end">
+            <img class="weather-icon" [src]="forecast.weatherIconLink"/>
+          </div>         
+    </li>
+  </ul>

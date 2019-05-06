@@ -4,7 +4,7 @@ h1 {
     font-size: 250%;
   }
   h2, h3 {
-    color: #444;
+    color: rgb(48, 48, 48);
     font-family: 'Lato', sans-serif;
     font-weight: lighter;
   }
@@ -12,7 +12,7 @@ h1 {
     margin: 2em;
   }
   body, input[type="text"], button {
-    color: #888;
+    color: rgb(100, 100, 100);
     font-family: 'Lato', sans-serif;
   }
   /* everywhere else */
