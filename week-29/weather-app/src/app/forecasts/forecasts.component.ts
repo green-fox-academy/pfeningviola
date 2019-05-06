@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Forecast } from '../forecast';
-import { FORECASTS } from '../mock-forecasts';
+import { ForecastService } from '../forecast.service';
 
 @Component({
   selector: 'app-forecasts',
@@ -8,11 +8,16 @@ import { FORECASTS } from '../mock-forecasts';
   styleUrls: ['./forecasts.component.css']
 })
 export class ForecastsComponent implements OnInit {
-  forecasts = FORECASTS;
+  forecasts: Forecast[];
 
-  constructor() { }
+  constructor(private forecastService: ForecastService) { }
+
+  getForecasts(): void {
+    this.forecasts = this.forecastService.getForecasts();
+  }
 
   ngOnInit() {
+    this.getForecasts();
   }
 
 }
