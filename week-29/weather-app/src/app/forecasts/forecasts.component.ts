@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Forecast } from '../forecast';
-import { ForecastService } from '../forecast.service';
 
 @Component({
   selector: 'app-forecasts',
@@ -8,16 +6,10 @@ import { ForecastService } from '../forecast.service';
   styleUrls: ['./forecasts.component.css']
 })
 export class ForecastsComponent implements OnInit {
-  forecasts: Forecast[];
+  private cities: string[] = ['Barcelona', 'Budapest', 'London', 'Washington', 'Londrina'];
 
-  constructor(private forecastService: ForecastService) { }
-
-  getForecasts(): void {
-    this.forecasts = this.forecastService.getForecasts();
-  }
+  constructor() { }
 
   ngOnInit() {
-    this.getForecasts();
   }
-
 }
