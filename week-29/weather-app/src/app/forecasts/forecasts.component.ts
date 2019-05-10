@@ -12,4 +12,8 @@ export class ForecastsComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  getTopCities(): string[]{
+    return this.cities;
+  }
 }

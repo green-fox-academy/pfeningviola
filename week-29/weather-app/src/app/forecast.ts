@@ -1,4 +1,3 @@
-import {WeatherIcon} from './weather-icon';
 
 export class Forecast{
     city: string;

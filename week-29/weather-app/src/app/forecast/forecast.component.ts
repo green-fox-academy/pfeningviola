@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Forecast } from '../forecast';
 import { ForecastService } from '../forecast.service';
+import { locateHostElement } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-forecast',
@@ -18,6 +19,8 @@ export class ForecastComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem('Viola', 'hello');
+    localStorage.getItem('Viola');
     this.loadForecast();
   }
 }

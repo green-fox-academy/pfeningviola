@@ -1,6 +1,6 @@
 <div class="forecastlist">
 <app-forecast *ngFor="let city of cities" [city] = "city"
-        (click)="onSelect(forecast)"
-        class="row align-items-center forecast">
+        class="row align-items-center forecast"
+        a routerLink="/details/{{city}}">
 </app-forecast>      
 </div>

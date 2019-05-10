@@ -1,0 +1,11 @@
+<h3>Serch for current weather of all cities in the world!</h3>
+
+<h3>Most popular cities:</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let city of cities" class="col-1-4"
+    routerLink="/details/{{city}}">
+    <div class="module hero">
+      <h4>{{city}}</h4>
+    </div>
+  </a>
+</div>
